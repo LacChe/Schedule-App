@@ -12,7 +12,7 @@ const Profile = () => {
   return (
     <>
         {auth.isAuthenticated && (
-        <div>
+        <div style={{'backgroundColor' : `#add8e6 `}}>
             <img src={auth.user.picture} alt={auth.user.name} />
             <h2>{auth.user.name}</h2>
             <p>{auth.user.email}</p>
@@ -34,11 +34,7 @@ const Profile = () => {
               {categories?.map((item) => (
               <div key={item._id}>
                 <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${item.color.hex}`, 'color' : `white`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.lightImage)} alt='category' />
-                  <p>{item.name}</p>
-                </div>
-                <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${item.color.hex}`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.darkImage)} alt='category' />
+                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.image)} alt='category' />
                   <p>{item.name}</p>
                 </div>
               </div>))}
@@ -50,11 +46,7 @@ const Profile = () => {
               <div key={item._id}>
                 <p>{item.unit}</p>
                 <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${categories?.filter((cat) => cat._id === item.category._id)[0].color.hex}`, 'color' : `white`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.lightImage)} alt='category' />
-                  <p>{item.name}</p>
-                </div>
-                <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${categories?.filter((cat) => cat._id === item.category._id)[0].color.hex}`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.darkImage)} alt='category' />
+                  <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(item.icon.image)} alt='category' />
                   <p>{item.name}</p>
                 </div>
               </div>))}

@@ -16,8 +16,7 @@ export const userQuery = (userId) => {
         icon->{
             _id,
             name,
-            darkImage,
-            lightImage
+            image
         }
     }`;
     return query;
@@ -34,8 +33,7 @@ export const userQuery = (userId) => {
       icon->{
         _id,
         name,
-        darkImage,
-        lightImage
+        image
       }
     }`;
     return query;

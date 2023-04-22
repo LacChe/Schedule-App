@@ -9,16 +9,8 @@ export default {
             type: 'string'
         },
         {
-            name: 'darkImage',
-            title: 'Dark Image',
-            type: 'image',
-            options: {
-                hotspot: true
-            }
-        },
-        {
-            name: 'lightImage',
-            title: 'Light Image',
+            name: 'image',
+            title: 'Image',
             type: 'image',
             options: {
                 hotspot: true
