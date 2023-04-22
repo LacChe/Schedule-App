@@ -11,12 +11,16 @@ export const userQuery = (userId) => {
   export const categoryQuery = (userId) => {
     const query = `*[_type == "category" && (user._ref == '${userId}' || user._ref == '${process.env.REACT_APP_SANITY_SYSTEM_USER_ID}')]{
         _id,
+        _type,
         color,
         name,
         icon->{
             _id,
             name,
             image
+        },
+        user->{
+            _id
         }
     }`;
     return query;
@@ -25,6 +29,7 @@ export const userQuery = (userId) => {
   export const taskTypeQuery = (userId) => {
     const query = `*[_type == "taskType" && (user._ref == '${userId}' || user._ref == '${process.env.REACT_APP_SANITY_SYSTEM_USER_ID}')]{
       _id,
+      _type,
       unit,
       name,
       category->{
@@ -34,6 +39,9 @@ export const userQuery = (userId) => {
         _id,
         name,
         image
+      },
+      user->{
+          _id
       }
     }`;
     return query;
@@ -47,7 +55,14 @@ export const userQuery = (userId) => {
         notes,
         taskType->{
           _id
+        },
+        user->{
+            _id
         }
     }`;
     return query;
   };
+
+  export const iconQuery = () => {
+    return '*[_type == "iconImage"]';
+  }

@@ -29,7 +29,6 @@ export const StateContext = ({ children }) => {
         }
         client.createIfNotExists(doc);
       }
-    
     }, [auth])
 
     // fetch user data
@@ -86,6 +85,7 @@ export const StateContext = ({ children }) => {
                 auth,
                 userData,
                 categories,
+                setCategories,
                 taskTypes,
                 tasks,
                 showNavbar,

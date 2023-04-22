@@ -1,11 +1,10 @@
 import React from 'react'
-import LogoutButton from '../components/LogoutButton.js';
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../utils/stateContext.js';
 
 const Navbar = () => {
-    const { setShowNavbar, showNavbar, setStartDate, setEndDate } = useStateContext();
-    const navigate = useNavigate()
+    const { setShowNavbar, showNavbar, setStartDate, setEndDate, auth } = useStateContext();
+    const navigate = useNavigate();
     const today = new Date();
 
     return (
@@ -45,7 +44,9 @@ const Navbar = () => {
                     setShowNavbar(false);
                     navigate('/profile');
                 }}>Profile</button>
-                <LogoutButton />
+                <button onClick={() => auth.logout({ logoutParams: { returnTo: window.location.origin } })}>
+                    Log Out
+                </button>
             </div> : <></>}
         </div>
     )
