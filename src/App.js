@@ -1,11 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
 import LoginButton from './components/LoginButton.js';
-import LogoutButton from './components/LogoutButton.js';
-import Profile from './components/Profile.js';
+import Home from './pages/Home.js';
+import Profile from './pages/Profile.js';
+import SetRange from './pages/SetRange.js';
 import { useStateContext } from './utils/stateContext';
+import Navbar from './components/Navbar.js';
 
 function App() {
 
-  const { auth } = useStateContext();
+  const { auth, showNavbar } = useStateContext();
+
+  if (auth.isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
     <div className="App">
@@ -13,8 +20,14 @@ function App() {
           <LoginButton /> 
           ): (
           <div>
-            <LogoutButton />
-            <Profile />
+            <Navbar />
+            {!showNavbar &&
+              <Routes>
+                <Route path='/' element={<Home />}/>
+                <Route path='/profile' element={<Profile />}/>
+                <Route path='/set-range' element={<SetRange />}/>
+              </Routes>
+            }
           </div>
         )}
     </div>

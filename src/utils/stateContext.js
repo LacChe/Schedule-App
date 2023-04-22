@@ -13,6 +13,9 @@ export const StateContext = ({ children }) => {
     const [categories, setCategories] = useState();
     const [taskTypes, setTaskTypes] = useState();
     const [tasks, setTasks] = useState();
+    const [showNavbar, setShowNavbar] = useState(false);
+    const [startDate, setStartDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(new Date());
 
     // create user if does not exist
     useEffect(() => {
@@ -84,7 +87,13 @@ export const StateContext = ({ children }) => {
                 userData,
                 categories,
                 taskTypes,
-                tasks
+                tasks,
+                showNavbar,
+                setShowNavbar,
+                startDate,
+                setStartDate,
+                endDate,
+                setEndDate
             }}
         >
             { children }

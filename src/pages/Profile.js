@@ -5,10 +5,6 @@ import { urlFor } from '../utils/client.js';
 const Profile = () => {
   const { auth, userData, categories, taskTypes, tasks } = useStateContext();
 
-  if (auth.isLoading) {
-    return <div>Loading ...</div>;
-  }
-
   return (
     <>
         {auth.isAuthenticated && (
