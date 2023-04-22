@@ -30,14 +30,6 @@ export const userQuery = (userId) => {
       name,
       category->{
         _id,
-        color,
-        name,
-        icon->{
-            _id,
-            name,
-            darkImage,
-            lightImage
-        }
       },
       icon->{
         _id,
@@ -50,33 +42,14 @@ export const userQuery = (userId) => {
   };
 
   export const taskQuery = (userId) => {
-    const query = `*[_type == "task" && (user._ref == '${userId}' || user._ref == '${process.env.REACT_APP_SANITY_SYSTEM_USER_ID}')]{
+    const query = `*[_type == "task" && (user._ref == '${userId}')]{
         _id,
         date,
         amount,
         notes,
         taskType->{
-        _id,
-        unit,
-        name,
-        category->{
-            _id,
-            color,
-            name,
-            icon->{
-                _id,
-                name,
-                darkImage,
-                lightImage
-            }
-        },
-        icon->{
-            _id,
-            name,
-            darkImage,
-            lightImage
+          _id
         }
-      }
     }`;
     return query;
   };
