@@ -13,7 +13,7 @@ const CreateCategory = () => {
 
     const [categoryName, setCategoryName] = useState(name);
     const [categoryColor, setCategoryColor] = useState(`#${hex}`);
-    const [categoryIcon, setCategoryIcon] = useState(iconData.filter((item) => item._id===iconref)[0]);
+    const [categoryIcon, setCategoryIcon] = useState(iconData?.filter((item) => item._id===iconref)[0]);
 
     const [errorText, setErrorText] = useState('');
 

@@ -99,7 +99,7 @@ const CreateTaskType = () => {
             </button>
         )}
         <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${taskCategory?.color.hex}`, 'color' : `white`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-            {taskCategory && <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(taskIcon ? taskIcon.image.asset._ref : taskCategory.icon.image.asset._ref)} alt='task' />}
+            {taskCategory && <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(taskIcon ? taskIcon?.image?.asset?._ref : taskCategory?.icon?.image?.asset?._ref)} alt='task' />}
             <p>{taskName ? taskName : 'Name'} ({taskUnit ? taskUnit : 'Unit'})</p>
         </div>
         <button type='button' onClick={submit}>Confirm</button>
