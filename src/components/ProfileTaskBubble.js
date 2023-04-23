@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { urlFor, client } from '../utils/client.js';
 import { useStateContext } from '../utils/stateContext';
@@ -9,9 +9,12 @@ const ProfileTaskBubble = ({task}) => {
     const { categories, setTaskTypes } = useStateContext();
     const [deleteStatus, setDeleteStatus] = useState('none')
     const [errorMsg, setErrorMsg] = useState('msg')
+    const [color, setColor] = useState('#666666');
 
-    const [color, setColor] = useState(categories?.filter((item) => item._id === task.category._id)[0]?.color.hex);
-
+    useEffect(() => {
+      setColor(categories?.filter((item) => item._id === task.category._id)[0]?.color.hex);
+    }, [categories, task.category._id])
+    
     const deleteItem = () => {
         client.delete(task._id)
         .then((res) => {
@@ -53,7 +56,7 @@ const ProfileTaskBubble = ({task}) => {
     <div>
       {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => onDelete()}>-</button>}
       <div>
-        <img  style={{'width' : '32px', 'backgroundColor' : color?color:'#666666'}}src={urlFor(task.icon.image)} alt='loading' />
+        <img  style={{'width' : '32px', 'backgroundColor' : color}}src={urlFor(task.icon.image)} alt='loading' />
         <p>{task.name} ({task.unit})</p>
       </div>
       {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => {
