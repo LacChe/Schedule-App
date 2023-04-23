@@ -14,12 +14,10 @@ const Profile = () => {
 
   return (
     <div>
-
       <div>
           <img src={userData[0]?.imageUrl} alt='user-avatar' />
           <h1>{userData[0]?.userName}</h1>
       </div>
-
       <div>
         <h1>Task</h1>
         {taskTypes?.length === 0 ? <div>No Tasks</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
@@ -27,7 +25,6 @@ const Profile = () => {
           navigate('/task');
         }}>New Task Type</button>
       </div>
-      
       <div>
         <h1>Categories</h1>
         {categories?.map((item) => <ProfileCategoryBubble key={item._id} cat={item}/>)}
@@ -35,7 +32,6 @@ const Profile = () => {
           navigate('/category');
         }}>New Category</button>
       </div>
-
     </div>
   );
 };
