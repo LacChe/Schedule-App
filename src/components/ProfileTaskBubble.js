@@ -41,22 +41,21 @@ const ProfileTaskBubble = ({task}) => {
 
     if(deleteStatus === 'confirm'){
         return (
-          <div>
+          <div className='profile-item-bubble'>
             <button type='button' onClick={() => {setDeleteStatus('none')}}>B</button>
-            <div>
+            <div className='profile-item-delete' >
               <p>Delete?</p>
             </div>
             <button type='button' onClick={() => onDelete()}>-</button>
-            {errorMsg}
           </div>
       )
     }
 
   return (
-    <div>
+    <div className='profile-item-bubble'>
       {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => onDelete()}>-</button>}
-      <div>
-        <img  style={{'width' : '32px', 'backgroundColor' : color}}src={urlFor(task.icon.image)} alt='loading' />
+      <div className='profile-item-bubble-inner' style={{'backgroundColor' : color}}>
+        <img className='icon-image' src={urlFor(task.icon.image)} alt='loading' />
         <p>{task.name} ({task.unit})</p>
       </div>
       {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => {

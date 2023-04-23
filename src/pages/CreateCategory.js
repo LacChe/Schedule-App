@@ -79,20 +79,29 @@ const CreateCategory = () => {
     }
     
   return (
-    <div>
+    <div className='create-item-main'>
         <h1>Create a Category</h1>
-        <input type='text' value={categoryName} onChange={(e) => setCategoryName(e.target.value)}></input>
-        <input type='color' value={categoryColor} onChange={(e) => setCategoryColor(e.target.value)}></input>
-        {iconData?.map((item) => 
-            <button key={item._id} type='button' onClick={() => {setCategoryIcon(item)}}>
-                <img style={{'width': '32px', 'backgroundColor' : `${categoryColor}`}} src={urlFor(item.image)} alt='icon' />
-            </button>
-        )}
-        <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${categoryColor}`, 'color' : `white`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-        {categoryIcon && <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(categoryIcon.image.asset._ref)} alt='category' />}
+        <div className='create-item-text-input'>
+            <p>Name:</p>
+            <input type='text' value={categoryName} onChange={(e) => setCategoryName(e.target.value)}></input>
+        </div>
+        <div className='create-item-color-input'>
+            <p>Choose a Color:</p>
+            <input type='color' value={categoryColor} onChange={(e) => setCategoryColor(e.target.value)}></input>
+        </div>
+        <p>Choose a Default Icon:</p>
+        <div className='create-item-icon-list'>
+            {iconData?.map((item) => 
+                <button style={{'backgroundColor' : `${categoryColor}`}} key={item._id} type='button' onClick={() => {setCategoryIcon(item)}}>
+                    <img className='icon-image' src={urlFor(item.image)} alt='icon' />
+                </button>
+            )}
+        </div>
+        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${categoryColor}`}}>
+            {categoryIcon && <img className='icon-image' src={urlFor(categoryIcon.image.asset._ref)} alt='category' />}
             <p>{categoryName}</p>
         </div>
-        <button type='button' onClick={submit}>Confirm</button>
+        <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
         <p>{errorText}</p>
     </div>
   )

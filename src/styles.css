@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.nav-main {
+    background-color: #ecffe9;
+    position: fixed;
+    display: flex;
+    border-bottom-right-radius: 15px;
+}
+
+.nav-show {
+    transition: width 0.05s, height 0.1s;
+    width: 200px;
+    height: 100%;
+}
+
+.nav-hide {
+    transition: width 0.1s, height 0.05s;
+    width: 30px;
+    height: 30px;
+}
+
+.nav-toggle-button {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-bottom-right-radius: 15px;
+    border-style: none;
+}
+
+.nav-button-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+}
+
+.nav-button-list > button {
+    width: 60%;
+    min-height: 50px;
+    margin: 10px;
+    border-style: none;
+    border-radius: 15px;
+}
+
+.set-range-main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    align-items: center;
+}
+
+.set-range-main > h1 {
+    margin-bottom: 20px;
+}
+
+.set-range-main > button {
+    width: 150px;
+    height: 30px;
+    margin-top: 20px;
+    border-style: none;
+    border-radius: 15px;
+}
+
+.set-range-input {
+    display: flex;
+    margin: 5px;
+}
+
+.set-range-input > p {
+    margin-right: 5px;
+}
+
+.profile-main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    align-items: center;
+}
+
+.profile-heading {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.icon-image {
+    width: 32px;
+    height: 32px;
+}
+
+.profile-item-list {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-new-item-button {
+    margin: 10px;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    border-style: none;
+}
+
+.profile-item-bubble {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 280px;
+    height: 70px;
+    margin: 5px;
+    color: white;
+}
+
+.profile-item-bubble > button {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border-style: none;
+}
+
+.profile-item-bubble-inner {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 70px;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    margin: 5px;
+}
+
+.profile-item-bubble-inner > img {
+    margin: 15px;
+}
+
+.profile-item-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 70px;
+    border-radius: 15px;
+    background-color: red;
+}
+.create-item-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-item-button-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.create-item-icon-list {
+    margin: 10px;
+}
+
+.create-item-icon-list > button {
+    margin: 2px;
+    border-style: none;
+    border-radius: 5px;
+}
+
+.create-item-text-input {
+    display: flex;
+    margin: 5px;
+}
+
+.create-item-color-input {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.create-item-text-input > p {
+    margin-right: 5px;
+}
+
+.create-item-color-input > p {
+    margin-right: 5px;
+}
+
+.create-confirm-button {
+    margin: 10px;
+    width: 150px;
+    height: 30px;
+    border-radius: 15px;
+    border-style: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .nav-show {
+        width: 100%;
+        height: 100%;
+    }
+}

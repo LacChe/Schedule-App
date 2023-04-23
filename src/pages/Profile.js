@@ -13,22 +13,22 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      <div>
+    <div className='profile-main'>
+      <div className='profile-heading'>
           <img src={userData[0]?.imageUrl} alt='user-avatar' />
           <h1>{userData[0]?.userName}</h1>
       </div>
-      <div>
-        <h1>Task</h1>
+      <div className='profile-item-list'>
+        <h1>Tasks</h1>
         {taskTypes?.length === 0 ? <div>No Tasks</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
-        <button type='button' onClick={()=> {
+        <button className='profile-new-item-button' type='button' onClick={()=> {
           navigate('/task');
-        }}>New Task Type</button>
+        }}>New Task</button>
       </div>
-      <div>
+      <div className='profile-item-list'>
         <h1>Categories</h1>
         {categories?.map((item) => <ProfileCategoryBubble key={item._id} cat={item}/>)}
-        <button type='button' onClick={()=> {
+        <button className='profile-new-item-button' type='button' onClick={()=> {
           navigate('/category');
         }}>New Category</button>
       </div>

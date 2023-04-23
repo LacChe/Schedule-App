@@ -9,10 +9,14 @@ const SetRange = () => {
     const [tempEndDate, setTempEndDate] = useState();
 
     return (
-        <div>
-            <p>Start: </p><input id='startDateInput' type='date' onChange={(e) => setTempStartDate(e.target.value)}/>
-            <p>End: </p><input id='endDateInput' type='date' onChange={(e) => setTempEndDate(e.target.value)}/>
-            <br/>
+        <div className='set-range-main'>
+            <h1>Set a Date Range</h1>
+            <div className='set-range-input'>
+                <p>Start:</p><input id='startDateInput' type='date' onChange={(e) => setTempStartDate(e.target.value)}/>
+            </div>
+            <div className='set-range-input'>
+                <p>End:</p><input id='endDateInput' type='date' onChange={(e) => setTempEndDate(e.target.value)}/>
+            </div>
             <button type='button' onClick={() => {
                 if(tempStartDate && tempEndDate && tempEndDate>=tempStartDate){
                     setStartDate(new Date(tempStartDate));

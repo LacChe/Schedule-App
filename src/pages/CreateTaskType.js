@@ -83,26 +83,38 @@ const CreateTaskType = () => {
     }
     
   return (
-    <div>
+    <div className='create-item-main'>
         <h1>Create a Task</h1>
-        <input type='text' value={taskName} onChange={(e) => setTaskName(e.target.value)}></input>
-        <input type='text' value={taskUnit} onChange={(e) => setTaskUnit(e.target.value)}></input>
-        {categories?.map((item) => 
-            <button key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
-              <img style={{'width': '32px', 'backgroundColor' : `${item.color.hex}`}} src={urlFor(item.icon.image)} alt='icon' />
-              <p>{item.name}</p>
-            </button>
-        )}
-        {iconData?.map((item) => 
-            <button key={item._id} type='button' onClick={() => {setTaskIcon(item)}}>
-                <img style={{'width': '32px', 'backgroundColor' : taskCategory?`${taskCategory.color.hex}`:'#000000'}} src={urlFor(item.image)} alt='icon' />
-            </button>
-        )}
-        <div style={{'display' : 'flex', 'alignItems' : 'center', 'borderRadius': '20px', 'backgroundColor' : `${taskCategory?.color.hex}`, 'color' : `white`, 'padding': '5px', 'margin': '5px', 'width': 'fit-content', 'height': '40px'}}>
-            {taskCategory && <img style={{'marginRight': '5px', "height" : '32px', "width" : '32px'}} src={urlFor(taskIcon ? taskIcon?.image?.asset?._ref : taskCategory?.icon?.image?.asset?._ref)} alt='task' />}
+        <div className='create-item-text-input'>
+            <p>Name:</p>
+            <input type='text' value={taskName} onChange={(e) => setTaskName(e.target.value)}></input>
+        </div>
+        <div className='create-item-text-input'>
+            <p>Unit:</p>
+            <input type='text' value={taskUnit} onChange={(e) => setTaskUnit(e.target.value)}></input>
+        </div>
+        <div className='create-item-button-list'>
+            <p>Choose a Category:</p>
+            {categories?.map((item) => 
+                <button className='profile-item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
+                    <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
+                    <p>{item.name}</p>
+                </button>
+            )}
+        </div>
+        <p>Use a Different Icon?</p>
+        <div className='create-item-icon-list'>
+            {iconData?.map((item) => 
+                <button style={{'backgroundColor' : `${taskCategory?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskIcon(item)}}>
+                    <img className='icon-image' src={urlFor(item.image)} alt='icon' />
+                </button>
+            )}
+        </div>
+        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${taskCategory?.color?.hex}`}}>
+            {taskCategory && <img className='icon-image' src={urlFor(taskIcon ? taskIcon?.image?.asset?._ref : taskCategory?.icon?.image?.asset?._ref)} alt='task' />}
             <p>{taskName ? taskName : 'Name'} ({taskUnit ? taskUnit : 'Unit'})</p>
         </div>
-        <button type='button' onClick={submit}>Confirm</button>
+        <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
         <p>{errorText}</p>
     </div>
   )

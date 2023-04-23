@@ -37,28 +37,26 @@ const ProfileCategoryBubble = ({ cat }) => {
 
     if(deleteStatus === 'confirm'){
         return (
-          <div>
+          <div className='profile-item-bubble'>
             <button type='button' onClick={() => {setDeleteStatus('none')}}>B</button>
-            <div>
+            <div className='profile-item-delete' >
               <p>Delete?</p>
             </div>
             <button type='button' onClick={() => onDelete()}>-</button>
-            {errorMsg}
           </div>
       )
     }
 
   return (
-      <div>
+      <div className='profile-item-bubble'>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => onDelete()}>-</button>}
-        <div>
-          <img  style={{'width' : '32px', 'backgroundColor' : `${cat?.color?.hex}`}} src={urlFor(cat?.icon?.image)} alt='loading' />
+        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
+          <img className='icon-image' src={urlFor(cat?.icon?.image)} alt='loading' />
           <p>{cat?.name}</p>
         </div>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => {
           navigate(`/category/${cat?._id}/${cat?.name}/${cat?.color?.hex?.substring(1)}/${cat?.icon?._id}`);
         }}>+</button>}
-        {errorMsg}
       </div>
   )
 }
