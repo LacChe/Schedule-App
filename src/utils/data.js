@@ -27,7 +27,7 @@ export const userQuery = (userId) => {
   };
 
   export const taskTypeQuery = (userId) => {
-    const query = `*[_type == "taskType" && (user._ref == '${userId}' || user._ref == '${process.env.REACT_APP_SANITY_SYSTEM_USER_ID}')]{
+    const query = `*[_type == "taskType" && user._ref == '${userId}']{
       _id,
       _type,
       unit,

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { userQuery, categoryQuery, taskTypeQuery, taskQuery } from '../utils/data.js';
+import { userQuery, categoryQuery, taskTypeQuery, taskQuery, iconQuery } from '../utils/data.js';
 import { client } from '../utils/client.js';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -10,6 +10,7 @@ export const StateContext = ({ children }) => {
     const auth = useAuth0();
 
     const [userData, setUserData] = useState();
+    const [iconData, setIconData] = useState();
     const [categories, setCategories] = useState();
     const [taskTypes, setTaskTypes] = useState();
     const [tasks, setTasks] = useState();
@@ -77,16 +78,29 @@ export const StateContext = ({ children }) => {
             setTasks(data);
           })
         }
-      }, [auth])
+      }, [auth])    
+      
+      // fetch icon data
+      useEffect(() => {
+        const query = iconQuery();
+        client.fetch(query)
+        .then((data) => {
+          // console.log('iconQuery', JSON.stringify(data))
+          setIconData(data);
+        })
+      }, [])
 
     return (
         <Context.Provider
             value={{
                 auth,
                 userData,
+                iconData,
+                setIconData,
                 categories,
                 setCategories,
                 taskTypes,
+                setTaskTypes,
                 tasks,
                 showNavbar,
                 setShowNavbar,

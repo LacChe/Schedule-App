@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
-import { iconQuery } from '../utils/data.js';
 import { client, urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const CreateCategory = () => {
-
     const navigate = useNavigate();
 
-    const { userData, categories, setCategories } = useStateContext();
-    const [iconData, setIconData] = useState();
+    const { id, name, hex, iconref } = useParams();
 
-    const [categoryName, setCategoryName] = useState('');
-    const [categoryColor, setCategoryColor] = useState('#000000');
-    const [categoryIcon, setCategoryIcon] = useState('');
+    const { userData, setCategories, iconData } = useStateContext();
+
+    const [categoryName, setCategoryName] = useState(name);
+    const [categoryColor, setCategoryColor] = useState(`#${hex}`);
+    const [categoryIcon, setCategoryIcon] = useState(iconData.filter((item) => item._id===iconref)[0]);
 
     const [errorText, setErrorText] = useState('');
-
-    // fetch icon data
-    useEffect(() => {
-      const query = iconQuery();
-      client.fetch(query)
-      .then((data) => {
-        // console.log('iconQuery', JSON.stringify(data))
-        setIconData(data);
-      })
-    }, [userData])
 
     const submit = () => {
         if(!categoryName){
@@ -40,7 +30,8 @@ const CreateCategory = () => {
             setErrorText('Please choose an icon.');
             return;
         }
-        const doc = {
+        if(!id){
+          const doc = {
             _type: 'category',
             name: categoryName,
             user: {
@@ -59,16 +50,39 @@ const CreateCategory = () => {
           client.create(doc)
           .then((res) => {
             setCategories((prev) => [res].concat(prev));
-            console.log(JSON.stringify(categories))
             navigate('/profile');
           })
+        } else {
+            const doc = {
+              _id: id,
+              _type: 'category',
+              name: categoryName,
+              user: {
+                  _type: 'reference',
+                  _ref: `${userData[0]._id}`
+              },
+              color: {
+                  _type: "color",
+                  hex: `${categoryColor}`
+              },
+              icon: {
+                  _type: 'reference',
+                  _ref: `${categoryIcon._id}`
+                }
+            }
+            client.createOrReplace(doc)
+            .then((res) => {
+              setCategories((prev) => prev.map((item) => item._id === res._id ? res : item));
+              navigate('/profile');
+            })
+        }
     }
     
   return (
     <div>
         <h1>Create a Category</h1>
-        <input type='text' onChange={(e) => setCategoryName(e.target.value)}></input>
-        <input type='color' onChange={(e) => setCategoryColor(e.target.value)}></input>
+        <input type='text' value={categoryName} onChange={(e) => setCategoryName(e.target.value)}></input>
+        <input type='color' value={categoryColor} onChange={(e) => setCategoryColor(e.target.value)}></input>
         {iconData?.map((item) => 
             <button key={item._id} type='button' onClick={() => {setCategoryIcon(item)}}>
                 <img style={{'width': '32px', 'backgroundColor' : `${categoryColor}`}} src={urlFor(item.image)} alt='icon' />

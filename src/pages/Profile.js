@@ -1,27 +1,12 @@
 import React from "react";
 import { useStateContext } from '../utils/stateContext';
 import { useNavigate } from 'react-router-dom';
-import { urlFor } from '../utils/client.js';
+import ProfileTaskBubble from '../components/ProfileTaskBubble.js'
+import ProfileCategoryBubble from '../components/ProfileCategoryBubble.js'
 
 const Profile = () => {
   const { userData, categories, taskTypes } = useStateContext();
   const navigate = useNavigate();
-
-  const userTaskTypes = taskTypes?.filter((item) => item.user._id === userData[0]._id);
-  const userCategories = categories?.filter((item) => item.user._id === userData[0]._id);
-
-  const itemBubble = (item) => {
-    return (
-      <div key={item._id}>
-        <button type='button'>-</button>
-        <div>
-          <img src={urlFor(/*item.icon.image*/)} alt='loading' />
-          <p>{item.name}</p>
-        </div>
-        <button type='button'>+</button>
-      </div>
-    )
-  }
 
   if (!userData) {
     return <div>Loading ...</div>;
@@ -37,7 +22,7 @@ const Profile = () => {
 
       <div>
         <h1>Task</h1>
-        {userTaskTypes?.length === 0 ? <div>No Tasks</div> : userTaskTypes?.map((item) => (itemBubble(item)))}
+        {taskTypes?.length === 0 ? <div>No Tasks</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
         <button type='button' onClick={()=> {
           navigate('/task');
         }}>New Task Type</button>
@@ -45,7 +30,7 @@ const Profile = () => {
       
       <div>
         <h1>Categories</h1>
-        {userCategories?.length === 0 ? <div>No Categories</div> : userCategories?.map((item) => (itemBubble(item)))}
+        {categories?.map((item) => <ProfileCategoryBubble key={item._id} cat={item}/>)}
         <button type='button' onClick={()=> {
           navigate('/category');
         }}>New Category</button>
