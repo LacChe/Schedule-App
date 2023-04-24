@@ -10,12 +10,12 @@ const CreateTaskType = () => {
 
     const { id, name, unit, categoryref, iconref } = useParams();
 
-    const { userData, categories, setTaskTypes, iconData } = useStateContext();
+    const { userData, categories, systemCategories, setTaskTypes, iconData } = useStateContext();
 
     const [taskName, setTaskName] = useState(name);
     const [taskUnit, setTaskUnit] = useState(unit);
-    const [taskCategory, setTaskCategory] = useState(categories?.filter((item) => item._id===categoryref)[0]);
-    const [taskIcon, setTaskIcon] = useState(iconData?.filter((item) => item._id===iconref)[0]);
+    const [taskCategory, setTaskCategory] = useState(categories?.concat(systemCategories)?.filter((item) => item?._id===categoryref)[0]);
+    const [taskIcon, setTaskIcon] = useState(iconData?.filter((item) => item?._id===iconref)[0]);
 
     const [errorText, setErrorText] = useState('');
 
@@ -101,9 +101,15 @@ const CreateTaskType = () => {
                     <p>{item.name}</p>
                 </button>
             )}
+            {systemCategories?.map((item) => 
+                <button className='profile-item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
+                    <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
+                    <p>{item.name}</p>
+                </button>
+            )}
         </div>
-        <p>Use a Different Icon?</p>
         <div className='create-item-icon-list'>
+            <p>Use a Different Icon?</p>
             {iconData?.map((item) => 
                 <button style={{'backgroundColor' : `${taskCategory?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskIcon(item)}}>
                     <img className='icon-image' src={urlFor(item.image)} alt='icon' />

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { userQuery, categoryQuery, taskTypeQuery, taskQuery, iconQuery } from '../utils/data.js';
+import { userQuery, categoryQuery, systemCategoryQuery, taskTypeQuery, taskQuery, iconQuery } from '../utils/data.js';
 import { client } from '../utils/client.js';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -12,6 +12,7 @@ export const StateContext = ({ children }) => {
     const [userData, setUserData] = useState();
     const [iconData, setIconData] = useState();
     const [categories, setCategories] = useState();
+    const [systemCategories, setSystemCategories] = useState();
     const [taskTypes, setTaskTypes] = useState();
     const [tasks, setTasks] = useState();
     const [showNavbar, setShowNavbar] = useState(false);
@@ -56,6 +57,18 @@ export const StateContext = ({ children }) => {
         }
       }, [auth])
     
+      // fetch system category data
+        useEffect(() => {
+          if(auth.user){
+            const query = systemCategoryQuery();
+            client.fetch(query)
+            .then((data) => {
+              //console.log('categoryQuery', JSON.stringify(data))
+              setSystemCategories(data);
+            })
+          }
+        }, [auth])
+    
     // fetch tasktype data
       useEffect(() => {
         if(auth.user){
@@ -99,6 +112,8 @@ export const StateContext = ({ children }) => {
                 setIconData,
                 categories,
                 setCategories,
+                systemCategories,
+                setSystemCategories,
                 taskTypes,
                 setTaskTypes,
                 tasks,

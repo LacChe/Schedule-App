@@ -12,7 +12,7 @@ const CreateCategory = () => {
     const { userData, setCategories, iconData } = useStateContext();
 
     const [categoryName, setCategoryName] = useState(name);
-    const [categoryColor, setCategoryColor] = useState(`#${hex}`);
+    const [categoryColor, setCategoryColor] = useState(hex ? `#${hex}` : '#888888');
     const [categoryIcon, setCategoryIcon] = useState(iconData?.filter((item) => item._id===iconref)[0]);
 
     const [errorText, setErrorText] = useState('');
@@ -89,8 +89,8 @@ const CreateCategory = () => {
             <p>Choose a Color:</p>
             <input type='color' value={categoryColor} onChange={(e) => setCategoryColor(e.target.value)}></input>
         </div>
-        <p>Choose a Default Icon:</p>
         <div className='create-item-icon-list'>
+            <p>Choose a Default Icon:</p>
             {iconData?.map((item) => 
                 <button style={{'backgroundColor' : `${categoryColor}`}} key={item._id} type='button' onClick={() => {setCategoryIcon(item)}}>
                     <img className='icon-image' src={urlFor(item.image)} alt='icon' />

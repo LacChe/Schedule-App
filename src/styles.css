@@ -2,10 +2,50 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: serif;
+    font-size: 1.1rem;
+}
+
+body{
+    background-color: #F9F5EB;
+}
+
+button {
+    background-color: #002B5B;
+    color: white;
+}
+
+button:hover{
+    opacity: 90%;
+}
+
+button:active{
+    box-shadow: inset 2px 2px 0px 1px rgba(0,0,0,0.70);
+    padding-top: 2px;
+    padding-left: 2px;
+}
+
+.button-edit > * {
+    margin-top: 2px;
+}
+
+.button-delete > * {
+    margin-top: 3px;
+    margin-left: 2px;
+}
+
+.button-delete-back > * {
+    margin-top: 3px;
+    margin-left: -3px;
+}
+
+.button-delete-confirm > * {
+    margin-top: 3px;
+    margin-left: 2px;
 }
 
 .nav-main {
-    background-color: #ecffe9;
+    background-color: #E4DCCF;
     position: fixed;
     display: flex;
     border-bottom-right-radius: 15px;
@@ -36,8 +76,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-x: scroll;
+    overflow-x: auto;
     scrollbar-width: thin;
+    padding-top: 20px;
 }
 
 .nav-button-list > button {
@@ -89,6 +130,10 @@
     flex-direction: column;
 }
 
+.profile-heading > img{
+    border-radius: 50%;
+}
+
 .icon-image {
     width: 32px;
     height: 32px;
@@ -99,6 +144,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 }
 
 .profile-new-item-button {
@@ -148,39 +194,64 @@
     width: 200px;
     height: 70px;
     border-radius: 15px;
-    background-color: red;
+    background-color: #EA5455;
 }
+
 .create-item-main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+.create-item-main > h1{
+    margin: 20px;
+    font-size: 1.3rem;
+}
+
 .create-item-button-list {
+    margin-top: 10px;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
+.create-item-button-list > button {
+    height: 35px;
+}
+
 .create-item-icon-list {
     margin: 10px;
+    text-align: center;
 }
 
 .create-item-icon-list > button {
     margin: 2px;
     border-style: none;
     border-radius: 5px;
+    padding: 2px;
 }
 
-.create-item-text-input {
+.create-item-icon-list > button:active{
+    box-shadow: inset 2px 2px 0px 1px rgba(0,0,0,0.70);
+    padding-top: 0px;
+    padding-left: 0px;
+    overflow: hidden;
+    padding: 2px;
+}
+
+.create-item-icon-list > button:active > img{
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+.create-item-text-input, .create-item-color-input {
     display: flex;
     margin: 5px;
 }
 
 .create-item-color-input {
-    display: flex;
     align-items: center;
-    margin: 5px;
 }
 
 .create-item-text-input > p {

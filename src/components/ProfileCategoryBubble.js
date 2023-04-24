@@ -2,6 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { client, urlFor } from '../utils/client.js';
 import { useStateContext } from '../utils/stateContext.js';
+import { AiOutlineEdit, AiOutlineDelete, AiFillDelete,AiOutlineWarning } from 'react-icons/ai';
+import { BsBackspaceFill } from 'react-icons/bs'; 
+import { toast } from 'react-hot-toast';
+ 
 
 const ProfileCategoryBubble = ({ cat }) => {
 
@@ -9,7 +13,6 @@ const ProfileCategoryBubble = ({ cat }) => {
     const { setCategories } = useStateContext();
 
     const [deleteStatus, setDeleteStatus] = useState('none')
-    const [errorMsg, setErrorMsg] = useState('msg')
 
     const deleteItem = () => {
         client.delete(cat._id)
@@ -17,7 +20,9 @@ const ProfileCategoryBubble = ({ cat }) => {
           console.log(JSON.stringify(res))
           setCategories((prev) => prev.filter((item) => item._id !== cat._id));
         })
-        .catch(setErrorMsg('Make sure this Category isn\'t used anywhere.'))
+        .catch(() => {
+          toast('Make sure this Category isn\'t used anywhere.');
+        })
     }
 
     const onDelete = () => {
@@ -38,26 +43,32 @@ const ProfileCategoryBubble = ({ cat }) => {
     if(deleteStatus === 'confirm'){
         return (
           <div className='profile-item-bubble'>
-            <button type='button' onClick={() => {setDeleteStatus('none')}}>B</button>
+            <button className='button-delete-back' type='button' onClick={() => {setDeleteStatus('none')}}><BsBackspaceFill /></button>
             <div className='profile-item-delete' >
               <p>Delete?</p>
             </div>
-            <button type='button' onClick={() => onDelete()}>-</button>
+            <button className='button-delete-confirm' type='button' onClick={() => onDelete()}><AiFillDelete /></button>
           </div>
       )
     }
 
   return (
+    <div>
       <div className='profile-item-bubble'>
-        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => onDelete()}>-</button>}
+        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
+        <AiOutlineDelete /></button>}
         <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
-          <img className='icon-image' src={urlFor(cat?.icon?.image)} alt='loading' />
+          {urlFor(cat?.icon?.image)!=='' ? 
+            <img className='icon-image' src={urlFor(cat?.icon?.image)} alt='loading' /> : 
+            <AiOutlineWarning />
+          }
           <p>{cat?.name}</p>
         </div>
-        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button type='button' onClick={() => {
+        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {
           navigate(`/category/${cat?._id}/${cat?.name}/${cat?.color?.hex?.substring(1)}/${cat?.icon?._id}`);
-        }}>+</button>}
+        }}><AiOutlineEdit /></button>}
       </div>
+    </div>
   )
 }
 

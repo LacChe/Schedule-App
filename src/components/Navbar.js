@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../utils/stateContext.js';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 const Navbar = () => {
     const { setShowNavbar, showNavbar, setStartDate, setEndDate, auth } = useStateContext();
@@ -10,7 +11,9 @@ const Navbar = () => {
     return (
         <div>
             <div className={showNavbar?'nav-main nav-show':'nav-main nav-hide'}>
-                <button className='nav-toggle-button' type='button' onClick={() => setShowNavbar((prev) => !prev)}>Nav</button>
+                <button className='nav-toggle-button' type='button' onClick={() => setShowNavbar((prev) => !prev)}>
+                    <AiOutlineMenu color='white' />
+                </button>
                 {showNavbar ? 
                 <div className='nav-button-list'>
                     <button type='button' onClick={() =>  {

@@ -5,7 +5,7 @@ import ProfileTaskBubble from '../components/ProfileTaskBubble.js'
 import ProfileCategoryBubble from '../components/ProfileCategoryBubble.js'
 
 const Profile = () => {
-  const { userData, categories, taskTypes } = useStateContext();
+  const { userData, categories, systemCategories, taskTypes } = useStateContext();
   const navigate = useNavigate();
 
   if (!userData) {
@@ -28,6 +28,7 @@ const Profile = () => {
       <div className='profile-item-list'>
         <h1>Categories</h1>
         {categories?.map((item) => <ProfileCategoryBubble key={item._id} cat={item}/>)}
+        {systemCategories?.map((item) => <ProfileCategoryBubble key={item._id} cat={item}/>)}
         <button className='profile-new-item-button' type='button' onClick={()=> {
           navigate('/category');
         }}>New Category</button>
