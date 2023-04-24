@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { urlFor, client } from '../utils/client.js';
 import { useStateContext } from '../utils/stateContext';
@@ -11,11 +11,6 @@ const ProfileTaskBubble = ({task}) => {
     const navigate = useNavigate();
     const { categories, systemCategories, setTaskTypes } = useStateContext();
     const [deleteStatus, setDeleteStatus] = useState('none')
-    const [color, setColor] = useState('#666666');
-
-    useEffect(() => {
-      setColor(categories?.concat(systemCategories)?.filter((item) => item?._id === task?.category?._id)[0]?.color.hex);
-    }, [categories, systemCategories, task.category._id])
     
     const deleteItem = () => {
         client.delete(task._id)
@@ -60,7 +55,7 @@ const ProfileTaskBubble = ({task}) => {
       <div className='profile-item-bubble'>
         {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
           <AiOutlineDelete /></button>}
-        <div className='profile-item-bubble-inner' style={{'backgroundColor' : color}}>
+        <div className='profile-item-bubble-inner' style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((item) => item?._id === task?.category?._id)[0]?.color.hex}}>
           {urlFor(task.icon.image)!=='' ? 
             <img className='icon-image' src={urlFor(task.icon.image)} alt='loading' /> : 
             <AiOutlineWarning />

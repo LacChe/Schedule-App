@@ -7,7 +7,6 @@ import Week from '../components/Day';
 import Month from '../components/Month';
 import Year from '../components/Year';
 import Range from '../components/Range';
-import Search from '../components/Search';
 import Filter from '../components/Filter';
 import { useStateContext } from '../utils/stateContext.js';
 
@@ -29,9 +28,9 @@ const displayComponent = (param) => {
 }
 
 const Home = () => {
-    const { showTools, setShowTools, showSearch, setShowSearch } = useStateContext();
+    const { showTools, setShowTools, showSearch, setShowSearch, searchTerm, setSearchTerm } = useStateContext();
     const { param } = useParams();
-    const [display, setDisplay] = useState('')
+    const [display, setDisplay] = useState('');
 
     if(display === 'filter') return (<Filter setDisplay={setDisplay} />);
 
@@ -40,6 +39,7 @@ const Home = () => {
             {displayComponent(param)}
             <div className={showSearch?'tools-search search-show':'tools-search search-hide'}>
                 <div className='search-bar-icon'><AiOutlineSearch /></div>
+                <input className='search-input' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
             </div>
             <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}><IoMdAddCircleOutline /></button>
             <div className={showTools?'tools-container tools-show':'tools-container tools-hide'}>

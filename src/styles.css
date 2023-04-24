@@ -134,6 +134,11 @@ button:active{
     overflow: hidden;
 }
 
+.search-input {
+    margin-left: 10px;
+    width: 70%;
+}
+
 .search-bar-icon > *{
     margin-top: 5px;
     margin-left: 10px;
@@ -149,6 +154,33 @@ button:active{
 .search-hide {
     transition: width 0.1s;
     width: 50px;
+}
+
+.filter-main {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.filter-item-list {
+    margin-top: 20px;
+}
+
+.filter-choice {
+    border-style: none;
+    border-radius: 25px;
+}
+
+.filter-item-bubble-inner {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 70px;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
 }
 
 .nav-main {
@@ -389,6 +421,11 @@ button:active{
     border-radius: 15px;
     border-style: none;
     margin-bottom: 50px;
+}
+
+.filtered {
+    border: 3px dashed #F9F5EB;
+    opacity: 30%;
 }
 
 @media only screen and (max-width: 600px) {

@@ -20,6 +20,8 @@ export const StateContext = ({ children }) => {
     const [showSearch, setShowSearch] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [searchTerm, setSearchTerm] = useState();
+    const [idFilters, setIdFilters] = useState([]);
 
     // create user if does not exist
     useEffect(() => {
@@ -128,7 +130,11 @@ export const StateContext = ({ children }) => {
                 startDate,
                 setStartDate,
                 endDate,
-                setEndDate
+                setEndDate,
+                searchTerm,
+                setSearchTerm,
+                idFilters,
+                setIdFilters
             }}
         >
             { children }
