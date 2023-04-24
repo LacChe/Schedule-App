@@ -17,6 +17,7 @@ export const StateContext = ({ children }) => {
     const [tasks, setTasks] = useState();
     const [showNavbar, setShowNavbar] = useState(false);
     const [showTools, setShowTools] = useState(false);
+    const [showSearch, setShowSearch] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
@@ -122,6 +123,8 @@ export const StateContext = ({ children }) => {
                 setShowNavbar,
                 showTools,
                 setShowTools,
+                showSearch,
+                setShowSearch,
                 startDate,
                 setStartDate,
                 endDate,

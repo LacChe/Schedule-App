@@ -29,21 +29,23 @@ const displayComponent = (param) => {
 }
 
 const Home = () => {
-    const { showTools, setShowTools } = useStateContext();
+    const { showTools, setShowTools, showSearch, setShowSearch } = useStateContext();
     const { param } = useParams();
     const [display, setDisplay] = useState('')
 
-    if(display === 'search') return (<Search setDisplay={setDisplay}/>);
     if(display === 'filter') return (<Filter setDisplay={setDisplay} />);
 
     return (
         <div className='home-main'>
             {displayComponent(param)}
+            <div className={showSearch?'tools-search search-show':'tools-search search-hide'}>
+                <div className='search-bar-icon'><AiOutlineSearch /></div>
+            </div>
             <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}><IoMdAddCircleOutline /></button>
             <div className={showTools?'tools-container tools-show':'tools-container tools-hide'}>
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
-                    setDisplay('search');
+                    setShowSearch((prev) => !prev);
                 }}><AiOutlineSearch /></button>
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
