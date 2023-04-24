@@ -22,7 +22,7 @@ const SetRange = () => {
                     setStartDate(new Date(tempStartDate));
                     setEndDate(new Date(tempEndDate));
                     setShowNavbar(false);
-                    navigate('/');
+                    navigate('/home/range');
                 } 
             }}>Confirm</button>
             {

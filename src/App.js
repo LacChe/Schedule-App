@@ -50,7 +50,7 @@ function App() {
       </div>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />}/>
+        <Route path='/home/:param?' element={<Home />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/set-range' element={<SetRange />}/>
         <Route path='/category/:id?/:name?/:hex?/:iconref?' element={<CreateCategory />}/>
