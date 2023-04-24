@@ -24,7 +24,7 @@ const ProfileTaskBubble = ({task}) => {
           setTaskTypes((prev) => prev.filter((item) => item._id !== task._id));
         })
         .catch(() => {
-          toast('Make sure this Category isn\'t used anywhere.');
+          toast.error('Make sure this isn\'t used anywhere.');
         })
     }
 

@@ -20,7 +20,7 @@ const Profile = () => {
       </div>
       <div className='profile-item-list'>
         <h1>Tasks</h1>
-        {taskTypes?.length === 0 ? <div>No Tasks</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
+        {taskTypes?.length === 0 ? <div className='profile-empty'>Empty</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
         <button className='profile-new-item-button' type='button' onClick={()=> {
           navigate('/task');
         }}>New Task</button>

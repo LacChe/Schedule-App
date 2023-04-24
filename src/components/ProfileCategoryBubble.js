@@ -21,7 +21,7 @@ const ProfileCategoryBubble = ({ cat }) => {
           setCategories((prev) => prev.filter((item) => item._id !== cat._id));
         })
         .catch(() => {
-          toast('Make sure this Category isn\'t used anywhere.');
+          toast.error('Make sure this isn\'t used anywhere.');
         })
     }
 

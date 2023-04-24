@@ -3,6 +3,7 @@ import { useStateContext } from '../utils/stateContext.js';
 import { client, urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const CreateTaskType = () => {
 
@@ -17,21 +18,20 @@ const CreateTaskType = () => {
     const [taskCategory, setTaskCategory] = useState(categories?.concat(systemCategories)?.filter((item) => item?._id===categoryref)[0]);
     const [taskIcon, setTaskIcon] = useState(iconData?.filter((item) => item?._id===iconref)[0]);
 
-    const [errorText, setErrorText] = useState('');
-
     const submit = () => {
         if(!taskName){
-            setErrorText('Please input a name.');
+            toast.error('Please input a name.');
             return;
         }
         if(!taskUnit){
-            setErrorText('Please input a unit type.');
+            toast.error('Please input a unit type.');
             return;
         }
         if(!taskCategory){
-            setErrorText('Please choose a category.');
+            toast.error('Please choose a category.');
             return;
         }
+        toast.success('Success!');
         if(!id){
           const doc = {
               _type: 'taskType',
@@ -53,7 +53,6 @@ const CreateTaskType = () => {
             client.create(doc)
             .then((res) => {
               setTaskTypes((prev) => [res].concat(prev));
-              navigate('/profile');
             })
         } else {
           const doc = {
@@ -77,9 +76,9 @@ const CreateTaskType = () => {
           client.createOrReplace(doc)
           .then((res) => {
             setTaskTypes((prev) => prev.map((item) => item._id === res._id ? res : item));
-            navigate('/profile');
           })
         }
+        navigate('/profile');
     }
     
   return (
@@ -121,7 +120,6 @@ const CreateTaskType = () => {
             <p>{taskName ? taskName : 'Name'} ({taskUnit ? taskUnit : 'Unit'})</p>
         </div>
         <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
-        <p>{errorText}</p>
     </div>
   )
 }

@@ -14,13 +14,40 @@ function App() {
 
   if (!auth.isAuthenticated && !auth.isLoading) {
     return (
-      <button onClick={() => auth.loginWithRedirect()}>Log In</button>
+      <div className='login' >
+        <button onClick={() => auth.loginWithRedirect()}>Log In</button>
+      </div>
     )
   }
 
   return (
     <div>
-      <div><Toaster position="top-center"/></div>
+      <div>
+        <Toaster position="top-center"
+          toastOptions={{
+            success: {
+              style: {
+                background: '#367E18',
+                color: 'white',
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: '#367E18',
+              }
+            },
+            error: {
+              style: {
+                background: '#EA5455',
+                color: 'white',
+              },
+              iconTheme: {
+                primary: 'white',
+                secondary: '#EA5455',
+              }
+            },
+          }}
+        />
+      </div>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />}/>

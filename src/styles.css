@@ -25,6 +25,21 @@ button:active{
     padding-left: 2px;
 }
 
+.login {
+    height: 100%;
+    width: 100%;
+    padding-top: 25%;
+    text-align: center;
+}
+
+.login > button{
+    margin: 10px;
+    width: 240px;
+    height: 60px;
+    border-radius: 15px;
+    border-style: none;
+}
+
 .button-edit > * {
     margin-top: 2px;
 }
@@ -59,14 +74,14 @@ button:active{
 
 .nav-hide {
     transition: width 0.1s, height 0.05s;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
 }
 
 .nav-toggle-button {
     position: fixed;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-bottom-right-radius: 15px;
     border-style: none;
 }
@@ -150,7 +165,7 @@ button:active{
 .profile-new-item-button {
     margin: 10px;
     width: 150px;
-    height: 30px;
+    height: 50px;
     border-radius: 15px;
     border-style: none;
 }
@@ -195,6 +210,18 @@ button:active{
     height: 70px;
     border-radius: 15px;
     background-color: #EA5455;
+}
+
+.profile-empty {
+    margin-top: 10px;
+    padding-top: 20px;
+    text-align: center;
+    width: 200px;
+    height: 70px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #E4DCCF;
 }
 
 .create-item-main {
@@ -265,9 +292,10 @@ button:active{
 .create-confirm-button {
     margin: 10px;
     width: 150px;
-    height: 30px;
+    height: 50px;
     border-radius: 15px;
     border-style: none;
+    margin-bottom: 50px;
 }
 
 @media only screen and (max-width: 600px) {

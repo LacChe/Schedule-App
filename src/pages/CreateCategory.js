@@ -3,6 +3,7 @@ import { useStateContext } from '../utils/stateContext.js';
 import { client, urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 const CreateCategory = () => {
     const navigate = useNavigate();
@@ -15,21 +16,20 @@ const CreateCategory = () => {
     const [categoryColor, setCategoryColor] = useState(hex ? `#${hex}` : '#888888');
     const [categoryIcon, setCategoryIcon] = useState(iconData?.filter((item) => item._id===iconref)[0]);
 
-    const [errorText, setErrorText] = useState('');
-
     const submit = () => {
         if(!categoryName){
-            setErrorText('Please input a name.');
+            toast.error('Please input a name.');
             return;
         }
         if(!categoryColor){
-            setErrorText('Please choose a color.');
+            toast.error('Please choose a color.');
             return;
         }
         if(!categoryIcon){
-            setErrorText('Please choose an icon.');
+            toast.error('Please choose an icon.');
             return;
         }
+        toast.success('Success!');
         if(!id){
           const doc = {
             _type: 'category',
@@ -50,7 +50,6 @@ const CreateCategory = () => {
           client.create(doc)
           .then((res) => {
             setCategories((prev) => [res].concat(prev));
-            navigate('/profile');
           })
         } else {
             const doc = {
@@ -73,9 +72,9 @@ const CreateCategory = () => {
             client.createOrReplace(doc)
             .then((res) => {
               setCategories((prev) => prev.map((item) => item._id === res._id ? res : item));
-              navigate('/profile');
             })
         }
+        navigate('/profile');
     }
     
   return (
@@ -102,7 +101,6 @@ const CreateCategory = () => {
             <p>{categoryName}</p>
         </div>
         <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
-        <p>{errorText}</p>
     </div>
   )
 }
