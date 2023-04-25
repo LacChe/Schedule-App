@@ -95,13 +95,13 @@ const CreateTaskType = () => {
         <div className='create-item-button-list'>
             <p>Choose a Category:</p>
             {categories?.map((item) => 
-                <button className='profile-item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
+                <button className='item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
                     <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
                     <p>{item.name}</p>
                 </button>
             )}
             {systemCategories?.map((item) => 
-                <button className='profile-item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
+                <button className='item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
                     <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
                     <p>{item.name}</p>
                 </button>
@@ -115,7 +115,7 @@ const CreateTaskType = () => {
                 </button>
             )}
         </div>
-        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${taskCategory?.color?.hex}`}}>
+        <div className='item-bubble-inner' style={{'backgroundColor' : taskCategory ? `${taskCategory?.color?.hex}` : '#666666'}}>
             {taskCategory && <img className='icon-image' src={urlFor(taskIcon ? taskIcon?.image?.asset?._ref : taskCategory?.icon?.image?.asset?._ref)} alt='task' />}
             <p>{taskName ? taskName : 'Name'} ({taskUnit ? taskUnit : 'Unit'})</p>
         </div>

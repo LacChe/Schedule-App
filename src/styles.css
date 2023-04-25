@@ -19,6 +19,10 @@ button:hover{
     background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
 }
 
+.button-alt-color {
+    background-color: #EA5455;
+}
+
 button:active{
     box-shadow: inset 2px 2px 1px 1px rgba(0,0,0,0.70);
     padding-top: 2px;
@@ -111,7 +115,7 @@ button:active{
     bottom: 20px;
     right: 20px;
     width: 50px;
-    height: 150px;
+    height: 200px;
 }
 
 .tools-hide {
@@ -136,7 +140,7 @@ button:active{
 
 .search-input {
     margin-left: 10px;
-    width: 70%;
+    width: 100%;
 }
 
 .search-bar-icon > *{
@@ -148,7 +152,7 @@ button:active{
 
 .search-show {
     transition: width 0.1s;
-    width: 80%;
+    width: 70%;
 }
 
 .search-hide {
@@ -176,7 +180,7 @@ button:active{
 .filter-item-bubble-inner {
     display: flex;
     align-items: center;
-    width: 200px;
+    width: 280px;
     height: 70px;
     border-style: none;
     border-radius: 15px;
@@ -218,7 +222,7 @@ button:active{
     align-items: center;
     overflow-x: auto;
     scrollbar-width: thin;
-    padding-top: 20px;
+    padding-top: 45px;
 }
 
 .nav-button-list > button {
@@ -299,7 +303,6 @@ button:active{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 280px;
     height: 70px;
     margin: 5px;
     color: white;
@@ -312,10 +315,10 @@ button:active{
     border-style: none;
 }
 
-.profile-item-bubble-inner {
+.item-bubble-inner {
     display: flex;
     align-items: center;
-    width: 200px;
+    width: 280px;
     height: 70px;
     border-style: none;
     border-radius: 15px;
@@ -323,21 +326,22 @@ button:active{
     margin: 5px;
 }
 
-.profile-item-bubble-inner > img {
-    margin: 15px;
+.item-bubble-inner > * {
+    margin-left: 15px;
 }
 
 .profile-item-delete {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200px;
+    width: 280px;
     height: 70px;
     border-radius: 15px;
     background-color: #EA5455;
+    margin: 5px;
 }
 
-.profile-empty {
+.empty {
     margin-top: 10px;
     padding-top: 20px;
     text-align: center;
@@ -426,6 +430,10 @@ button:active{
 .filtered {
     border: 3px dashed #F9F5EB;
     opacity: 30%;
+}
+
+.amount-input > input{
+    width: 60px;
 }
 
 @media only screen and (max-width: 600px) {

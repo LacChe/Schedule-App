@@ -21,7 +21,8 @@ export default {
         {
             name: 'taskType',
             title: 'Task',
-            type: 'taskType'
+            type: 'reference',
+            to: [{type: 'taskType'}]
         },
         {
             name: 'user',

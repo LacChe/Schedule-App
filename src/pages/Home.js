@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { AiOutlineSearch, AiOutlineFilter } from 'react-icons/ai'
-import { useParams } from 'react-router-dom'
+import { FiPenTool } from 'react-icons/fi'
+import { useNavigate, useParams } from 'react-router-dom'
 import Day from '../components/Day';
-import Week from '../components/Day';
+import Week from '../components/Week';
 import Month from '../components/Month';
 import Year from '../components/Year';
 import Range from '../components/Range';
@@ -31,6 +32,7 @@ const Home = () => {
     const { showTools, setShowTools, showSearch, setShowSearch, searchTerm, setSearchTerm } = useStateContext();
     const { param } = useParams();
     const [display, setDisplay] = useState('');
+    const navigate = useNavigate();
 
     if(display === 'filter') return (<Filter setDisplay={setDisplay} />);
 
@@ -41,7 +43,7 @@ const Home = () => {
                 <div className='search-bar-icon'><AiOutlineSearch /></div>
                 <input className='search-input' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
             </div>
-            <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}><IoMdAddCircleOutline /></button>
+            <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}><FiPenTool /></button>
             <div className={showTools?'tools-container tools-show':'tools-container tools-hide'}>
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
@@ -51,9 +53,14 @@ const Home = () => {
                     setShowTools(false);
                     setDisplay('filter');
                 }}><AiOutlineFilter /></button>
+                <button type='button' className='button-tool' onClick={()=>{
+                    setShowTools(false);
+                    navigate(`/add`);
+                    // navigate(`/add/${param}/${task._id}/${task.date}/${task.taskType}/${task.amount}/${task.notes}`);
+                }}><IoMdAddCircleOutline /></button>
             </div>
         </div>
-  )
+    )
 }
 
 export default Home

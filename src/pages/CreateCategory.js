@@ -96,7 +96,7 @@ const CreateCategory = () => {
                 </button>
             )}
         </div>
-        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${categoryColor}`}}>
+        <div className='item-bubble-inner' style={{'backgroundColor' : `${categoryColor}`}}>
             {categoryIcon && <img className='icon-image' src={urlFor(categoryIcon.image.asset._ref)} alt='category' />}
             <p>{categoryName}</p>
         </div>

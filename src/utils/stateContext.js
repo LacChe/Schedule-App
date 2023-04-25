@@ -121,6 +121,7 @@ export const StateContext = ({ children }) => {
                 taskTypes,
                 setTaskTypes,
                 tasks,
+                setTasks,
                 showNavbar,
                 setShowNavbar,
                 showTools,

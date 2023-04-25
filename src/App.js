@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { useStateContext } from './utils/stateContext';
 import Home from './pages/Home.js';
+import Add from './pages/AddPage.js';
 import Profile from './pages/Profile.js';
 import SetRange from './pages/SetRange.js';
 import Navbar from './components/Navbar.js';
@@ -50,7 +51,8 @@ function App() {
       </div>
       <Navbar />
       <Routes>
-        <Route path='/home/:param?' element={<Home />}/>
+        <Route path='/:param?' element={<Home />}/>
+        <Route path='/add/:returnPage?/:id?/:dateParam?/:taskParam?/:amountParam?/:notesParam?' element={<Add />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/set-range' element={<SetRange />}/>
         <Route path='/category/:id?/:name?/:hex?/:iconref?' element={<CreateCategory />}/>

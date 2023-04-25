@@ -57,7 +57,7 @@ const ProfileCategoryBubble = ({ cat }) => {
       <div className='profile-item-bubble'>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
         <AiOutlineDelete /></button>}
-        <div className='profile-item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
+        <div className='item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
           {urlFor(cat?.icon?.image)!=='' ? 
             <img className='icon-image' src={urlFor(cat?.icon?.image)} alt='loading' /> : 
             <AiOutlineWarning />
