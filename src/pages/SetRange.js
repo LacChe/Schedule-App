@@ -12,10 +12,10 @@ const SetRange = () => {
         <div className='set-range-main'>
             <h1>Set a Date Range</h1>
             <div className='set-range-input'>
-                <p>Start:</p><input id='startDateInput' value={tempStartDate?.toLocaleDateString('en-CA')} type='date' onChange={(e) => setTempStartDate(e.target.value)}/>
+                <p>Start:</p><input id='startDateInput' value={new Date(tempStartDate)?.toLocaleDateString('en-CA')} type='date' onChange={(e) => setTempStartDate(e.target.value)}/>
             </div>
             <div className='set-range-input'>
-                <p>End:</p><input id='endDateInput' value={tempStartDate?.toLocaleDateString('en-CA')} type='date' onChange={(e) => setTempEndDate(e.target.value)}/>
+                <p>End:</p><input id='endDateInput' value={new Date(tempEndDate)?.toLocaleDateString('en-CA')} type='date' onChange={(e) => setTempEndDate(e.target.value)}/>
             </div>
             <button type='button' onClick={() => {
                 if(tempStartDate && tempEndDate && tempEndDate>=tempStartDate){

@@ -33,6 +33,7 @@ const AddPage = () => {
         if(!id){
           const doc = {
               _type: 'task',
+              date: date.split('T')[0],
               amount: Number(amount),
               notes: notes,
               user: {
@@ -52,6 +53,7 @@ const AddPage = () => {
           const doc = {
             _id: id,
             _type: 'task',
+            date: date.split('T')[0],
             amount: Number(amount),
             notes: notes,
             user: {
@@ -76,7 +78,7 @@ const AddPage = () => {
             <h1>Add</h1>
             <div className='create-item-text-input'>
                 <p>Date:</p>
-                <input type='date' value={date?.toLocaleString('en-CA')} onChange={(e) => setDate(e.target.value)}></input>
+                <input type='date' value={new Date(date)?.toLocaleDateString('en-CA')} onChange={(e) => setDate(e.target.value)}></input>
             </div>
             <div className='create-item-text-input amount-input'>
                 <p>Amount:</p>

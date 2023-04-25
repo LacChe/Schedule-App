@@ -19,12 +19,12 @@ const Day = () => {
       {tasks?.length === 0 ? <div className='item-empty'>Empty</div> : tasks?.map((item) => 
         <button key={item._id} className='item-bubble-inner' onClick={()=>{
             navigate(`/add/day/${item._id}/${item.date}/${item.taskType._id}/${item.amount}/${item.notes}`)
-          }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes.filter((taskType) => taskType._id === item.taskType._id)[0]?.category?._id)[0]?.color.hex}}>
-          {urlFor(taskTypes.filter((taskType) => taskType._id === item.taskType._id)[0].icon.image)!=='' ? 
-            <img className='icon-image' src={urlFor(taskTypes.filter((taskType) => taskType._id === item.taskType._id)[0].icon.image)} alt='loading' /> : 
+          }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item.taskType._id)[0]?.category?._id)[0]?.color.hex}}>
+          {urlFor(taskTypes?.filter((taskType) => taskType._id === item.taskType._id)[0]?.icon.image)!=='' ? 
+            <img className='icon-image' src={urlFor(taskTypes?.filter((taskType) => taskType._id === item.taskType._id)[0].icon.image)} alt='loading' /> : 
             <AiOutlineWarning />
           }
-          <p>{taskTypes.filter((taskType) => taskType._id === item.taskType._id)[0].name} ({item.amount} {taskTypes.filter((taskType) => taskType._id === item.taskType._id)[0].unit})</p>
+          <p>{taskTypes?.filter((taskType) => taskType._id === item.taskType._id)[0]?.name} ({item.amount} {taskTypes?.filter((taskType) => taskType._id === item.taskType._id)[0]?.unit})</p>
         </button>
       )}
     </div>
