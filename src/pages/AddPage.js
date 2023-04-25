@@ -15,7 +15,6 @@ const AddPage = () => {
     const [notes, setNotes] = useState(notesParam);
 
     const navigate = useNavigate();
-    console.log(taskParam)
     
     const submit = () => {
         if(!date){
