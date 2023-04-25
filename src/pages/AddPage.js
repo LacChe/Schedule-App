@@ -4,13 +4,14 @@ import { client, urlFor } from '../utils/client.js';
 import { AiOutlineWarning } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
 const AddPage = () => {
-    const { userData, categories, systemCategories, taskTypes, setTasks} = useStateContext();
+    const { userData, categories, systemCategories, taskTypes, setTasks, tasks } = useStateContext();
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
     const [date, setDate] = useState(dateParam ? dateParam : new Date());
-    const [task, setTask] = useState(taskTypes?.filter((taskType) => taskType._id === taskParam)[0]);
+    const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : 1);
     const [notes, setNotes] = useState(notesParam);
 
@@ -21,7 +22,7 @@ const AddPage = () => {
             toast.error('Please input a Date.');
             return;
         }
-        if(!task){
+        if(!taskType){
             toast.error('Please choose a Task.');
             return;
         }
@@ -32,8 +33,9 @@ const AddPage = () => {
         toast.success('Success!');
         if(!id){
           const doc = {
+              _id: uuidv4(),
               _type: 'task',
-              date: date.split('T')[0],
+              date: JSON.stringify(date).split('T')[0].substring(1),
               amount: Number(amount),
               notes: notes,
               user: {
@@ -42,18 +44,17 @@ const AddPage = () => {
               },
               taskType: {
                   _type: 'reference',
-                  _ref: `${task._id}`
+                  _ref: `${taskType._id}`
               }
             }
             client.create(doc)
-            .then((res) => {
-                setTasks((prev) => [res].concat(prev));
-            })
+            localStorage.setItem('tasks', JSON.stringify([doc].concat(tasks)));
+            setTasks((prev) => [doc].concat(prev));
         } else {
           const doc = {
             _id: id,
             _type: 'task',
-            date: date.split('T')[0],
+            date: JSON.stringify(date).split('T')[0].substring(1),
             amount: Number(amount),
             notes: notes,
             user: {
@@ -62,13 +63,12 @@ const AddPage = () => {
             },
             taskType: {
                 _type: 'reference',
-                _ref: `${task._id}`
+                _ref: `${taskType._id}`
             }
           }
-          client.createOrReplace(doc)
-          .then((res) => {
-            setTasks((prev) => prev.map((item) => item._id === res._id ? res : item));
-          })
+          client.createOrReplace(doc);
+          localStorage.setItem('tasks', JSON.stringify(tasks.map((item) => item._id === doc._id ? doc : item)));
+          setTasks((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
         navigate(returnPage ? `/${returnPage}` : '/');
     }
@@ -86,8 +86,13 @@ const AddPage = () => {
             </div>
             <div className='create-item-button-list'>
                 <p>Choose a Task:</p>
-                {taskTypes?.map((item) => 
-                    <button className='item-bubble-inner' style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === item?.category?._id)[0]?.color.hex}} key={item._id} type='button' onClick={() => {setTask(item)}}>
+                {!taskTypes ? 
+                <div className='empty-tasks'> 
+                    <button className='create-task-redirect-button' type='button' onClick={() => navigate('/task')}>Nothing here.<br/>Create a Task.</button>
+                </div> 
+                : 
+                taskTypes?.map((item) => 
+                    <button className='item-bubble-inner' style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === item?.category?._id)[0]?.color.hex}} key={item._id} type='button' onClick={() => {setTaskType(item)}}>
                         {urlFor(item.icon.image)!=='' ? 
                             <img className='icon-image' src={urlFor(item.icon.image)} alt='loading' /> : 
                             <AiOutlineWarning />
@@ -100,9 +105,9 @@ const AddPage = () => {
                 <p>Notes:</p>
                 <textarea value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </div>
-            <div className='item-bubble-inner' style={{'backgroundColor' : task ? categories?.concat(systemCategories)?.filter((item) => item?._id === task?.category?._id)[0]?.color.hex : '#666666' }}>
-                {task && <img className='icon-image' src={urlFor(task?.icon?.image)} alt='task' />}
-                <p>{task ? task.name : 'Name'} ({amount} {task ? task.unit : 'Unit'})</p>
+            <div className='item-bubble-inner' style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter((item) => item?._id === taskType?.category?._id)[0]?.color.hex : '#666666' }}>
+                {taskType && <img className='icon-image' src={urlFor(taskType?.icon?.image)} alt='task' />}
+                <p>{taskType ? taskType.name : 'Name'} ({amount} {taskType ? taskType.unit : 'Unit'})</p>
             </div>
             <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
         </div>

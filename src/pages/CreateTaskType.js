@@ -4,6 +4,7 @@ import { client, urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateTaskType = () => {
 
@@ -11,7 +12,7 @@ const CreateTaskType = () => {
 
     const { id, name, unit, categoryref, iconref } = useParams();
 
-    const { userData, categories, systemCategories, setTaskTypes, iconData } = useStateContext();
+    const { userData, categories, systemCategories, setTaskTypes, taskTypes, iconData } = useStateContext();
 
     const [taskName, setTaskName] = useState(name);
     const [taskUnit, setTaskUnit] = useState(unit);
@@ -34,6 +35,7 @@ const CreateTaskType = () => {
         toast.success('Success!');
         if(!id){
           const doc = {
+              _id: uuidv4(),
               _type: 'taskType',
               name: taskName,
               unit: taskUnit,
@@ -51,9 +53,8 @@ const CreateTaskType = () => {
               }
             }
             client.create(doc)
-            .then((res) => {
-              setTaskTypes((prev) => [res].concat(prev));
-            })
+            localStorage.setItem('task-types', JSON.stringify([doc].concat(taskTypes)));
+            setTaskTypes((prev) => [doc].concat(prev));
         } else {
           const doc = {
             _id: id,
@@ -74,9 +75,8 @@ const CreateTaskType = () => {
             }
           }
           client.createOrReplace(doc)
-          .then((res) => {
-            setTaskTypes((prev) => prev.map((item) => item._id === res._id ? res : item));
-          })
+          localStorage.setItem('task-types', JSON.stringify(taskTypes.map((item) => item._id === doc._id ? doc : item)));
+          setTaskTypes((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
         navigate('/profile');
     }
@@ -96,13 +96,13 @@ const CreateTaskType = () => {
             <p>Choose a Category:</p>
             {categories?.map((item) => 
                 <button className='item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
-                    <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
+                    <img className='icon-image' src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='icon' />
                     <p>{item.name}</p>
                 </button>
             )}
             {systemCategories?.map((item) => 
                 <button className='item-bubble-inner' style={{'backgroundColor' : `${item?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskCategory(item)}}>
-                    <img className='icon-image' src={urlFor(item.icon.image)} alt='icon' />
+                    <img className='icon-image' src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='icon' />
                     <p>{item.name}</p>
                 </button>
             )}
@@ -111,12 +111,12 @@ const CreateTaskType = () => {
             <p>Use a Different Icon?</p>
             {iconData?.map((item) => 
                 <button style={{'backgroundColor' : `${taskCategory?.color?.hex}`}} key={item._id} type='button' onClick={() => {setTaskIcon(item)}}>
-                    <img className='icon-image' src={urlFor(item.image)} alt='icon' />
+                    <img className='icon-image' src={urlFor(item?.image)} alt='icon' />
                 </button>
             )}
         </div>
         <div className='item-bubble-inner' style={{'backgroundColor' : taskCategory ? `${taskCategory?.color?.hex}` : '#666666'}}>
-            {taskCategory && <img className='icon-image' src={urlFor(taskIcon ? taskIcon?.image?.asset?._ref : taskCategory?.icon?.image?.asset?._ref)} alt='task' />}
+            {taskCategory && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>(taskIcon ? taskIcon._id : taskCategory?.icon?._ref)===icon?._id)[0]?.image?.asset?._ref)} alt='task' />}
             <p>{taskName ? taskName : 'Name'} ({taskUnit ? taskUnit : 'Unit'})</p>
         </div>
         <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>

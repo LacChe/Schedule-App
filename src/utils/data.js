@@ -52,6 +52,7 @@ export const userQuery = (userId) => {
       name,
       category->{
         _id,
+        color
       },
       icon->{
         _id,
@@ -72,7 +73,18 @@ export const userQuery = (userId) => {
         amount,
         notes,
         taskType->{
-          _id
+          _id,
+          unit,
+          name,
+          category->{
+            _id,
+            color
+          },
+          icon->{
+            _id,
+            name,
+            image
+          },
         },
         user->{
             _id

@@ -30,14 +30,14 @@ button:active{
 }
 
 .login {
+    position: fixed;
     height: 100%;
     width: 100%;
-    padding-top: 25%;
+    top: 45%;
     text-align: center;
 }
 
 .login > button{
-    margin: 10px;
     width: 240px;
     height: 60px;
     border-radius: 15px;
@@ -353,6 +353,19 @@ button:active{
     background-color: #E4DCCF;
 }
 
+.empty-tasks {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    text-align: center;
+    width: 200px;
+    height: 110px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #E4DCCF;
+}
+
 .create-item-main {
     display: flex;
     flex-direction: column;
@@ -425,6 +438,16 @@ button:active{
     border-radius: 15px;
     border-style: none;
     margin-bottom: 50px;
+}
+
+.create-task-redirect-button {
+    margin: 10px;
+    width: 150px;
+    height: 50px;
+    border-radius: 15px;
+    border-style: none;
+    margin-bottom: 50px;
+    opacity: 70%;
 }
 
 .filtered {

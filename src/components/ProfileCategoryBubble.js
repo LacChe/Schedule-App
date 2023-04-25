@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { client, urlFor } from '../utils/client.js';
 import { useStateContext } from '../utils/stateContext.js';
-import { AiOutlineEdit, AiOutlineDelete, AiFillDelete,AiOutlineWarning } from 'react-icons/ai';
+import { AiOutlineEdit, AiOutlineDelete, AiFillDelete } from 'react-icons/ai';
 import { BsBackspaceFill } from 'react-icons/bs'; 
 import { toast } from 'react-hot-toast';
  
@@ -10,19 +10,17 @@ import { toast } from 'react-hot-toast';
 const ProfileCategoryBubble = ({ cat }) => {
 
     const navigate = useNavigate();
-    const { setCategories } = useStateContext();
+    const { setCategories, categories, iconData } = useStateContext();
 
     const [deleteStatus, setDeleteStatus] = useState('none')
 
     const deleteItem = () => {
         client.delete(cat._id)
-        .then((res) => {
-          console.log(JSON.stringify(res))
-          setCategories((prev) => prev.filter((item) => item._id !== cat._id));
-        })
         .catch(() => {
           toast.error('Make sure this isn\'t used anywhere.');
         })
+        localStorage.set('categories', JSON.stringify(categories.filter((item) => item._id !== cat._id)));
+        setCategories((prev) => prev.filter((item) => item._id !== cat._id));
     }
 
     const onDelete = () => {
@@ -58,10 +56,7 @@ const ProfileCategoryBubble = ({ cat }) => {
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
         <AiOutlineDelete /></button>}
         <div className='item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
-          {urlFor(cat?.icon?.image)!=='' ? 
-            <img className='icon-image' src={urlFor(cat?.icon?.image)} alt='loading' /> : 
-            <AiOutlineWarning />
-          }
+          <img className='icon-image' src={urlFor(iconData.filter((item)=>cat?.icon?._ref===item?._id)[0]?.image?.asset?._ref)} alt='loading' />
           <p>{cat?.name}</p>
         </div>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {

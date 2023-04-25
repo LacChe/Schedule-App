@@ -4,13 +4,14 @@ import { client, urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { v4 as uuidv4 } from 'uuid';
 
 const CreateCategory = () => {
     const navigate = useNavigate();
 
     const { id, name, hex, iconref } = useParams();
 
-    const { userData, setCategories, iconData } = useStateContext();
+    const { userData, setCategories, categories, iconData } = useStateContext();
 
     const [categoryName, setCategoryName] = useState(name);
     const [categoryColor, setCategoryColor] = useState(hex ? `#${hex}` : '#888888');
@@ -32,6 +33,7 @@ const CreateCategory = () => {
         toast.success('Success!');
         if(!id){
           const doc = {
+            _id: uuidv4(),
             _type: 'category',
             name: categoryName,
             user: {
@@ -48,9 +50,8 @@ const CreateCategory = () => {
               }
           }
           client.create(doc)
-          .then((res) => {
-            setCategories((prev) => [res].concat(prev));
-          })
+          localStorage.setItem('categories', JSON.stringify([doc].concat(categories)));
+          setCategories((prev) => [doc].concat(prev));
         } else {
             const doc = {
               _id: id,
@@ -70,9 +71,8 @@ const CreateCategory = () => {
                 }
             }
             client.createOrReplace(doc)
-            .then((res) => {
-              setCategories((prev) => prev.map((item) => item._id === res._id ? res : item));
-            })
+            localStorage.setItem('categories', JSON.stringify(categories.map((item) => item._id === doc._id ? doc : item)));
+            setCategories((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
         navigate('/profile');
     }
@@ -97,7 +97,7 @@ const CreateCategory = () => {
             )}
         </div>
         <div className='item-bubble-inner' style={{'backgroundColor' : `${categoryColor}`}}>
-            {categoryIcon && <img className='icon-image' src={urlFor(categoryIcon.image.asset._ref)} alt='category' />}
+            {categoryIcon && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>categoryIcon?._id===icon?._id)[0]?.image?.asset?._ref)} alt='category' />}
             <p>{categoryName}</p>
         </div>
         <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>

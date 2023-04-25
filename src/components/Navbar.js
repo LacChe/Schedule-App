@@ -48,7 +48,10 @@ const Navbar = () => {
                         setShowNavbar(false);
                         navigate('/profile');
                     }}>Profile</button>
-                    <button className='button-alt-color' onClick={() => auth.logout({ logoutParams: { returnTo: window.location.origin } })}>
+                    <button className='button-alt-color' onClick={() => {
+                            localStorage.clear();
+                            auth.logout({ logoutParams: { returnTo: window.location.origin } })
+                        }}>
                         Log Out
                     </button>
                 </div> : <></>}

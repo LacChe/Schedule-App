@@ -49,63 +49,90 @@ export const StateContext = ({ children }) => {
         }
     }, [auth])
     
-    // fetch category data
+    // fetch category data if not in local storage
       useEffect(() => {
-        if(auth.user){
-          const query = categoryQuery(auth?.user?.sub.split('|')[1]);
-          client.fetch(query)
-          .then((data) => {
-            //console.log('categoryQuery', JSON.stringify(data))
-            setCategories(data);
-          })
-        }
+          if(auth.user){
+            setCategories(JSON.parse(localStorage.getItem('categories')));
+            if(!localStorage.getItem('categories')){
+              const query = categoryQuery(auth?.user?.sub.split('|')[1]);
+              client.fetch(query)
+              .then((data) => {
+                //console.log('categoryQuery', JSON.stringify(data))
+                console.log('category', 'not found in storage, fetching from database')
+                setCategories(data);
+                localStorage.setItem('categories', JSON.stringify(data));
+              })
+            }
+          }
       }, [auth])
     
-      // fetch system category data
+      // fetch system category data if not in local storage
         useEffect(() => {
           if(auth.user){
-            const query = systemCategoryQuery();
-            client.fetch(query)
-            .then((data) => {
-              //console.log('categoryQuery', JSON.stringify(data))
-              setSystemCategories(data);
-            })
+            setSystemCategories(JSON.parse(localStorage.getItem('system-categories')));
+            if(!localStorage.getItem('system-categories')){
+              const query = systemCategoryQuery();
+              client.fetch(query)
+              .then((data) => {
+                //console.log('categoryQuery', JSON.stringify(data))
+              console.log('system category', 'not found in storage, fetching from database')
+                setSystemCategories(data);
+                localStorage.setItem('system-categories', JSON.stringify(data));
+              })
+            }
           }
         }, [auth])
     
-    // fetch tasktype data
+    // fetch tasktype data if not in local storage
       useEffect(() => {
         if(auth.user){
-          const query = taskTypeQuery(auth?.user?.sub.split('|')[1]);
-          client.fetch(query)
-          .then((data) => {
-            //console.log('taskTypeQuery', JSON.stringify(data))
-            setTaskTypes(data);
-          })
+          setTaskTypes(JSON.parse(localStorage.getItem('task-types')));
+          if(!localStorage.getItem('task-types')){
+            const query = taskTypeQuery(auth?.user?.sub.split('|')[1]);
+            client.fetch(query)
+            .then((data) => {
+              //console.log('taskTypeQuery', JSON.stringify(data))
+              console.log('task type', 'not found in storage, fetching from database')
+              setTaskTypes(data);
+              localStorage.setItem('task-types', JSON.stringify(data));
+            })
+          }
         }
       }, [auth])
     
-    // fetch task data
+    // fetch task data if not in local storage
       useEffect(() => {
         if(auth.user){
-          const query = taskQuery(auth?.user?.sub.split('|')[1]);
-          client.fetch(query)
-          .then((data) => {
-            //console.log('taskQuery', JSON.stringify(data))
-            setTasks(data);
-          })
+          setTasks(JSON.parse(localStorage.getItem('tasks')));
+          if(!localStorage.getItem('tasks')){
+            const query = taskQuery(auth?.user?.sub.split('|')[1]);
+            client.fetch(query)
+            .then((data) => {
+              //console.log('taskQuery', JSON.stringify(data))
+              console.log('task', 'not found in storage, fetching from database')
+              setTasks(data);
+              localStorage.setItem('tasks', JSON.stringify(data));
+            })
+          }
         }
       }, [auth])    
       
-      // fetch icon data
+      // fetch icon data if not in local storage
       useEffect(() => {
-        const query = iconQuery();
-        client.fetch(query)
-        .then((data) => {
-          // console.log('iconQuery', JSON.stringify(data))
-          setIconData(data);
-        })
-      }, [])
+        if(auth.user){
+          setIconData(JSON.parse(localStorage.getItem('icons')));
+          if(!localStorage.getItem('icons')){
+            const query = iconQuery();
+            client.fetch(query)
+            .then((data) => {
+              // console.log('iconQuery', JSON.stringify(data))
+              console.log('icon', 'not found in storage, fetching from database')
+              setIconData(data);
+              localStorage.setItem('icons', JSON.stringify(data));
+            })
+          }
+        }
+      }, [auth])
 
     return (
         <Context.Provider
