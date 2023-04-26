@@ -62,7 +62,7 @@ const ProfileCategoryBubble = ({ cat }) => {
           <p>{cat?.name}</p>
         </div>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {
-          navigate(`/category/${cat?._id}/${cat?.name}/${cat?.color?.hex?.substring(1)}/${cat?.icon?._id}`);
+          navigate(`/category/${cat?._id}/${cat?.name}/${cat?.color?.hex?.substring(1)}/${cat?.icon?._ref}`);
         }}><AiOutlineEdit /></button>}
       </div>
     </div>

@@ -57,13 +57,7 @@ export const userQuery = (userId) => {
         date,
         amount,
         notes,
-        taskType->{
-          _id,
-          unit,
-          name,
-          category,
-          icon
-        },
+        taskType,
         user->{
             _id
         }

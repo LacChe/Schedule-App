@@ -16,11 +16,10 @@ const AddPage = () => {
     const [amount, setAmount] = useState(amountParam ? amountParam : 1);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
     const [deleteStatus, setDeleteStatus] = useState('none')
-
+    
     const navigate = useNavigate();
     
     const submit = () => {
-        console.log(JSON.stringify(date).split('T')[0].substring(1))
         if(!date){
             toast.error('Please input a Date.');
             return;
@@ -34,11 +33,12 @@ const AddPage = () => {
             return;
         }
         toast.success('Success!');
+        const dateString = date.includes('T') ? JSON.stringify(date).split('T')[0].substring(1) : date;
         if(!id){
           const doc = {
               _id: uuidv4(),
               _type: 'task',
-              date: JSON.stringify(date).split('T')[0].substring(1),
+              date: dateString,
               amount: Number(amount),
               notes: notes,
               user: {
@@ -51,27 +51,13 @@ const AddPage = () => {
               }
             }
             client.create(doc)
-            doc.taskType = {
-                _type: 'taskType',
-                _id: taskType._id,
-                unit: taskType.unit,
-                name: taskType.name,
-                category: {
-                  _type: 'reference',
-                  _ref: taskType.category._ref,
-                },
-                icon: {
-                    _type: 'reference',
-                    _ref: taskType.icon._ref,
-                }
-            };
             localStorage.setItem('tasks', JSON.stringify([doc].concat(tasks)));
             setTasks((prev) => [doc].concat(prev));
         } else {
           const doc = {
             _id: id,
             _type: 'task',
-            date: JSON.stringify(date).split('T')[0].substring(1),
+            date: dateString,
             amount: Number(amount),
             notes: notes,
             user: {
@@ -84,20 +70,6 @@ const AddPage = () => {
             }
           }
           client.createOrReplace(doc);
-          doc.taskType = {
-              _type: 'taskType',
-              _id: taskType._id,
-              unit: taskType._id,
-              name: taskType._id,
-              category: {
-                _type: 'reference',
-                _ref: taskType.category._ref,
-              },
-              icon: {
-                  _type: 'reference',
-                  _ref: taskType.icon._ref,
-              }
-          };
           localStorage.setItem('tasks', JSON.stringify(tasks.map((item) => item._id === doc._id ? doc : item)));
           setTasks((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }

@@ -15,7 +15,7 @@ const Profile = () => {
   return (
     <div className='profile-main'>
       <div className='profile-heading'>
-          <img src={userData[0]?.imageUrl} alt='user-avatar' referrerpolicy="no-referrer"/>
+          <img src={userData[0]?.imageUrl} alt='user-avatar' referrerPolicy="no-referrer"/>
           <h1>{userData[0]?.userName}</h1>
       </div>
       <div className='profile-item-list'>

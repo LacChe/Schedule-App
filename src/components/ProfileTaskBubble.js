@@ -60,7 +60,7 @@ const ProfileTaskBubble = ({task}) => {
           <p>{task.name} ({task.unit})</p>
         </div>
         {task.user._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {
-          navigate(`/task/${task._id}/${task.name}/${task.unit}/${task.category._id}/${task.icon._id}`);
+          navigate(`/task/${task._id}/${task.name}/${task.unit}/${task.category._ref}/${task.icon._ref}`);
         }}><AiOutlineEdit /></button>}
       </div>
     </div>
