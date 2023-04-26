@@ -525,6 +525,32 @@ button:active{
     align-items: center;
 }
 
+.home-header {
+    background-color: #002B5B;
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    border-radius: 25px;
+}
+
+.home-header > button {
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    border-radius: 50%;
+}
+
+.home-header > button > * {
+    margin-top: 4px;
+    width: 30px;
+    height: 30px;
+}
+
+.home-header > h1 {
+    color: white;
+    margin: 10px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .nav-show {

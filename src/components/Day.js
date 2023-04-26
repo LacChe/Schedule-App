@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
+import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 
 const Day = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const Day = () => {
       const tempDate = new Date(item.date);
       const bool = date.getFullYear() === tempDate.getFullYear() &&
         date.getMonth() === tempDate.getMonth() &&
-        (date.getDate() >= tempDate.getDate() - 1 && date.getDate() <= tempDate.getDate() + 1);
+        date.getDate() === tempDate.getDate();
       return bool;
     })
 
@@ -41,7 +42,6 @@ const Day = () => {
         return bool;
       })
     }
-
     setDisplayedTasks(tempTasks);
   }
 
@@ -51,7 +51,7 @@ const Day = () => {
 
   const taskList = (arr) => {
     return(
-      arr?.length === 0 ? <div className='item-empty'>Empty</div> : arr?.map((item) => 
+      arr?.length === 0 ? <div className='empty'>Empty</div> : arr?.map((item) => 
         <button key={item._id} className='item-bubble-inner' onClick={()=>{
             navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
           }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.color.hex}}>
@@ -64,23 +64,19 @@ const Day = () => {
   
   return (
     <div className='day-main'>
-      <h1>{date.toLocaleDateString()}</h1>
-      <div className='day-slide'>
-        {taskList(displayedTasks?.filter((item) => {
-          const tempDate = new Date(item.date);
-          return date.getDate() - 1 === tempDate.getDate();
-        }))}
-        <br/>
-        {taskList(displayedTasks?.filter((item) => {
-          const tempDate = new Date(item.date);
-          return date.getDate() === tempDate.getDate();
-        }))}
-        <br/>
-        {taskList(displayedTasks?.filter((item) => {
-          const tempDate = new Date(item.date);
-          return date.getDate() + 1 === tempDate.getDate();
-        }))}
+      <div className='home-header'>
+        <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()-1))}}>
+          <BiSkipPrevious />
+        </button>
+        <h1>{date.toLocaleDateString()}</h1>
+        <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()+1))}}>
+          <BiSkipNext />
+        </button>
       </div>
+      {taskList(displayedTasks?.filter((item) => {
+        const tempDate = new Date(item.date);
+        return date.getDate() === tempDate.getDate();
+      }))}
     </div>
   )
 }
