@@ -14,11 +14,7 @@ export const userQuery = (userId) => {
         _type,
         color,
         name,
-        icon->{
-            _id,
-            name,
-            image
-        },
+        icon,
         user->{
             _id
         }
@@ -32,16 +28,12 @@ export const userQuery = (userId) => {
         _type,
         color,
         name,
-        icon->{
-            _id,
-            name,
-            image
-        },
+        icon,
         user->{
             _id
         }
     }`;
-    return query;
+    return query; //TODO: get icons as reference id
   };
 
   export const taskTypeQuery = (userId) => {
@@ -50,15 +42,8 @@ export const userQuery = (userId) => {
       _type,
       unit,
       name,
-      category->{
-        _id,
-        color
-      },
-      icon->{
-        _id,
-        name,
-        image
-      },
+      category,
+      icon,
       user->{
           _id
       }
@@ -76,15 +61,8 @@ export const userQuery = (userId) => {
           _id,
           unit,
           name,
-          category->{
-            _id,
-            color
-          },
-          icon->{
-            _id,
-            name,
-            image
-          },
+          category,
+          icon
         },
         user->{
             _id

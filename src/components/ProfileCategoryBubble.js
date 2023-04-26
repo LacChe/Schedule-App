@@ -19,7 +19,7 @@ const ProfileCategoryBubble = ({ cat }) => {
         .catch(() => {
           toast.error('Make sure this isn\'t used anywhere.');
         })
-        localStorage.set('categories', JSON.stringify(categories.filter((item) => item._id !== cat._id)));
+        localStorage.setItem('categories', JSON.stringify(categories.filter((item) => item._id !== cat._id)));
         setCategories((prev) => prev.filter((item) => item._id !== cat._id));
     }
 
@@ -56,7 +56,7 @@ const ProfileCategoryBubble = ({ cat }) => {
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
         <AiOutlineDelete /></button>}
         <div className='item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
-          <img className='icon-image' src={urlFor(iconData.filter((item)=>cat?.icon?._ref===item?._id)[0]?.image?.asset?._ref)} alt='loading' />
+          <img className='icon-image' src={urlFor(iconData?.filter((item)=>cat?.icon?._ref===item?._id)[0]?.image?.asset?._ref)} alt='loading' />
           <p>{cat?.name}</p>
         </div>
         {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {

@@ -1,13 +1,12 @@
 import React from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
-import { AiOutlineWarning } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
 const Day = () => {
   const navigate = useNavigate();
   
-  const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories } = useStateContext();
+  const { searchTerm, idFilters, tasks, categories, systemCategories, iconData } = useStateContext();
 
   return (
     <div>
@@ -18,13 +17,10 @@ const Day = () => {
       <h1>DAYDAYDAYDAY</h1>
       {tasks?.length === 0 ? <div className='item-empty'>Empty</div> : tasks?.map((item) => 
         <button key={item._id} className='item-bubble-inner' onClick={()=>{
-            navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
-          }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item.taskType._ref)[0]?.category?._id)[0]?.color.hex}}>
-          {urlFor(taskTypes?.filter((taskType) => taskType._id === item.taskType._ref)[0]?.icon.image)!=='' ? 
-            <img className='icon-image' src={urlFor(taskTypes?.filter((taskType) => taskType._id === item.taskType._ref)[0].icon.image)} alt='loading' /> : 
-            <AiOutlineWarning />
-          }
-          <p>{taskTypes?.filter((taskType) => taskType._id === item.taskType._ref)[0]?.name} ({item.amount} {taskTypes?.filter((taskType) => taskType._id === item.taskType._ref)[0]?.unit})</p>
+            navigate(`/add/day/${item._id}/${item.date}/${item.taskType._id}/${item.amount}/${item.notes}`)
+          }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === item.taskType?.category?._ref)[0]?.color.hex}}>
+          <img className='icon-image' src={urlFor(iconData?.filter((icon)=> item?.taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+          <p>{item.taskType?.name} ({item.amount} {item.taskType?.unit})</p>
         </button>
       )}
     </div>
@@ -32,3 +28,11 @@ const Day = () => {
 }
 
 export default Day
+
+
+/*
+<div className='item-bubble-inner' style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter((item) => item?._id === taskType?.category?._ref)[0]?.color.hex : '#666666'}}>
+  {taskType && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />}
+  <p>{taskType ? taskType.name : 'Name'} ({amount} {taskType ? taskType.unit : 'Unit'})</p>
+</div>
+*/
