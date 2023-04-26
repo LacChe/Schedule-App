@@ -28,11 +28,3 @@ const Day = () => {
 }
 
 export default Day
-
-
-/*
-<div className='item-bubble-inner' style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter((item) => item?._id === taskType?.category?._ref)[0]?.color.hex : '#666666'}}>
-  {taskType && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />}
-  <p>{taskType ? taskType.name : 'Name'} ({amount} {taskType ? taskType.unit : 'Unit'})</p>
-</div>
-*/

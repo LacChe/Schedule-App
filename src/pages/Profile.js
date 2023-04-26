@@ -5,7 +5,7 @@ import ProfileTaskBubble from '../components/ProfileTaskBubble.js'
 import ProfileCategoryBubble from '../components/ProfileCategoryBubble.js'
 
 const Profile = () => {
-  const { userData, categories, systemCategories, taskTypes } = useStateContext();
+  const { userData, categories, systemCategories, taskTypes, sync } = useStateContext();
   const navigate = useNavigate();
 
   if (!userData) {
@@ -33,6 +33,10 @@ const Profile = () => {
           navigate('/category');
         }}>New Category</button>
       </div>
+      <p className='sync-text'>Something not showing up?</p>
+      <button className='button-alt-color  sync-button' onClick={sync}>
+        Sync
+      </button>
     </div>
   );
 };

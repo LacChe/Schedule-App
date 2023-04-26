@@ -496,6 +496,29 @@ button:active{
     opacity: 0;
 }
 
+.nav-close-overlay-hide {
+    position: fixed;
+    width: 0%;
+    height: 0%;
+    opacity: 100;
+}
+
+.sync-text {
+    margin-top: 30px;
+    color: #EA5455;
+    opacity: 70%;
+}
+
+.sync-button {
+    margin: 10px;
+    width: 80px;
+    height: 40px;
+    border-radius: 15px;
+    border-style: none;
+    margin-bottom: 50px;
+    opacity: 70%;
+}
+
 @media only screen and (max-width: 600px) {
 
     .nav-show {
@@ -504,9 +527,10 @@ button:active{
     }
     
     .nav-close-overlay {
+        position: fixed;
         width: 0%;
         height: 0%;
         opacity: 100;
     }
-    
+
 }

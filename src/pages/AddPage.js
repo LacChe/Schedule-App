@@ -106,12 +106,14 @@ const AddPage = () => {
 
     const deleteItem = () => {
         client.delete(id)
+        .then(() => {
+            localStorage.setItem('tasks', JSON.stringify(tasks.filter((item) => item._id !== id)));
+            setTasks((prev) => prev.filter((item) => item._id !== id));
+            navigate(returnPage ? `/${returnPage}` : '/');
+        })
         .catch(() => {
           toast.error('Make sure this isn\'t used anywhere.');
         })
-        localStorage.setItem('tasks', JSON.stringify(tasks.filter((item) => item._id !== id)));
-        setTasks((prev) => prev.filter((item) => item._id !== id));
-        navigate(returnPage ? `/${returnPage}` : '/');
     }
 
     const onDelete = () => {

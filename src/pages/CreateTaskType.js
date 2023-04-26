@@ -49,7 +49,7 @@ const CreateTaskType = () => {
               },
               icon: {
                   _type: 'reference',
-                  _ref: `${taskIcon ? taskIcon._id : taskCategory.icon._id}`
+                  _ref: `${taskIcon ? taskIcon._id : taskCategory.icon._ref}`
               }
             }
             client.create(doc)

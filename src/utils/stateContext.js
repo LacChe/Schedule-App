@@ -23,6 +23,65 @@ export const StateContext = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState();
     const [idFilters, setIdFilters] = useState([]);
 
+    const sync = () => {
+      if(auth.user){
+        localStorage.clear();
+        let query;
+
+        query = userQuery(auth?.user?.sub.split('|')[1]);
+        client.fetch(query)
+        .then((data) => {
+          //console.log('userQuery', JSON.stringify(data))
+          setUserData(data);
+        })
+
+        query = categoryQuery(auth?.user?.sub.split('|')[1]);
+        client.fetch(query)
+        .then((data) => {
+          //console.log('categoryQuery', JSON.stringify(data))
+          console.log('category', 'sync')
+          setCategories(data);
+          localStorage.setItem('categories', JSON.stringify(data));
+        })
+
+        query = systemCategoryQuery();
+        client.fetch(query)
+        .then((data) => {
+          //console.log('categoryQuery', JSON.stringify(data))
+          console.log('system category', 'sync')
+          setSystemCategories(data);
+          localStorage.setItem('system-categories', JSON.stringify(data));
+        })
+        
+        query = taskTypeQuery(auth?.user?.sub.split('|')[1]);
+        client.fetch(query)
+        .then((data) => {
+          //console.log('taskTypeQuery', JSON.stringify(data))
+          console.log('task type', 'sync')
+          setTaskTypes(data);
+          localStorage.setItem('task-types', JSON.stringify(data));
+        })
+
+        query = taskQuery(auth?.user?.sub.split('|')[1]);
+        client.fetch(query)
+        .then((data) => {
+          //console.log('taskQuery', JSON.stringify(data))
+          console.log('task', 'sync')
+          setTasks(data);
+          localStorage.setItem('tasks', JSON.stringify(data));
+        })
+
+        query = iconQuery();
+        client.fetch(query)
+        .then((data) => {
+          // console.log('iconQuery', JSON.stringify(data))
+          console.log('icon', 'sync')
+          setIconData(data);
+          localStorage.setItem('icons', JSON.stringify(data));
+        })
+      }
+    }
+
     // create user if does not exist
     useEffect(() => {
       if(auth.user){
@@ -162,7 +221,8 @@ export const StateContext = ({ children }) => {
                 searchTerm,
                 setSearchTerm,
                 idFilters,
-                setIdFilters
+                setIdFilters,
+                sync
             }}
         >
             { children }

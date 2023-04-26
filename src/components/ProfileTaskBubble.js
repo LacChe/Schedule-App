@@ -14,11 +14,13 @@ const ProfileTaskBubble = ({task}) => {
     
     const deleteItem = () => {
         client.delete(task._id)
+        .then(() => {
+          localStorage.setItem('task-types', JSON.stringify(taskTypes.filter((item) => item._id !== task._id)));
+          setTaskTypes((prev) => prev.filter((item) => item._id !== task._id));
+        })
         .catch(() => {
           toast.error('Make sure this isn\'t used anywhere.');
         })
-        localStorage.setItem('task-types', JSON.stringify(taskTypes.filter((item) => item._id !== task._id)));
-        setTaskTypes((prev) => prev.filter((item) => item._id !== task._id));
     }
 
     const onDelete = () => {

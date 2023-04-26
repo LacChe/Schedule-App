@@ -10,7 +10,7 @@ const Navbar = () => {
 
     return (
         <div>
-            <button className='nav-close-overlay' onClick={()=>setShowNavbar(false)}></button>
+            <button className={showNavbar?'nav-close-overlay':'nav-close-overlay-hide'} onClick={()=>setShowNavbar(false)}></button>
             <div className={showNavbar?'nav-main nav-show':'nav-main nav-hide'}>
                 <button className='nav-toggle-button' type='button' onClick={() => setShowNavbar((prev) => !prev)}>
                     <AiOutlineMenu color='white' />

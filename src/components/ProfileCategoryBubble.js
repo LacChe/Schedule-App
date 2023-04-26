@@ -16,11 +16,13 @@ const ProfileCategoryBubble = ({ cat }) => {
 
     const deleteItem = () => {
         client.delete(cat._id)
+        .then(() => {
+          localStorage.setItem('categories', JSON.stringify(categories.filter((item) => item._id !== cat._id)));
+          setCategories((prev) => prev.filter((item) => item._id !== cat._id));
+        })
         .catch(() => {
           toast.error('Make sure this isn\'t used anywhere.');
         })
-        localStorage.setItem('categories', JSON.stringify(categories.filter((item) => item._id !== cat._id)));
-        setCategories((prev) => prev.filter((item) => item._id !== cat._id));
     }
 
     const onDelete = () => {
