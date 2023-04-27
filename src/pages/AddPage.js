@@ -11,11 +11,13 @@ const AddPage = () => {
     const { userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
-    const [date, setDate] = useState(dateParam);
+    const [date, setDate] = useState(dateParam ? dateParam : `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`);
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : 1);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
     const [deleteStatus, setDeleteStatus] = useState('none')
+
+    console.log('date', date + ' ' + new Date(date).toLocaleDateString())
     
     const navigate = useNavigate();
     
@@ -114,7 +116,7 @@ const AddPage = () => {
             <h1>Add</h1>
             <div className='create-item-text-input'>
                 <p>Date:</p>
-                <input type='date' value={date} onChange={(e) => setDate(e.target.value)}></input>
+                <input type='date' value={new Date(date).toLocaleDateString('en-CA')} onChange={(e) => setDate(e.target.value)}></input>
             </div>
             <div className='create-item-text-input amount-input'>
                 <p>Amount:</p>

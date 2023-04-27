@@ -18,8 +18,8 @@ const displayComponent = (param) => {
             return (<Week />);
         case 'month':
             return (<Month />);
-        case 'range':
-            return (<Range />);
+        //case 'range':
+            //return (<Range />);
         default: 
             return (<Day />);
     }
