@@ -22,23 +22,15 @@ const Navbar = () => {
                         navigate('/');
                     }}>Today</button>
                     <button type='button' onClick={() =>  {
-                        setStartDate(new Date(`${today.getFullYear()}`, `${today.getMonth()}`, `${today.getDate()-7}`));
                         setEndDate(new Date(`${today.getFullYear()}`, `${today.getMonth()}`, `${today.getDate()}`));
                         setShowNavbar(false);
                         navigate('/week');
                     }}>This Week</button>
                     <button type='button' onClick={() =>  {
-                        setStartDate(new Date(`${today.getFullYear()}`, `${today.getMonth()}`));
-                        setEndDate(new Date(`${today.getFullYear()}`, `${today.getMonth()+1}`));
+                        setEndDate(new Date(`${today.getFullYear()}`, `${today.getMonth()}`));
                         setShowNavbar(false);
                         navigate('/month');
                     }}>This Month</button>
-                    <button type='button' onClick={() =>  {
-                        setStartDate(new Date(`${today.getFullYear()}`));
-                        setEndDate(new Date(`${today.getFullYear()+1}`));
-                        setShowNavbar(false);
-                        navigate('/year');
-                    }}>This Year</button>
                     <button type='button' onClick={() =>  {
                         setShowNavbar(false);
                         navigate('/set-range');

@@ -56,28 +56,73 @@ const Week = () => {
         return bool;
       })
     }
-    setDisplayedTasks(tempTasks);
+
+    // sort by day
+    let tempTasksGroup = [];
+    tempTasksGroup[0] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-6).getDate()
+    )
+    tempTasksGroup[1] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-5).getDate()
+    )
+    tempTasksGroup[2] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-4).getDate()
+    )
+    tempTasksGroup[3] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-3).getDate()
+    )
+    tempTasksGroup[4] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-2).getDate()
+    )
+    tempTasksGroup[5] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-1).getDate()
+    )
+    tempTasksGroup[6] = tempTasks.filter((item) => 
+      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === endDate.getDate()
+    )
+
+    // combine same task types
+    let tempTasksGroupByTasks = [];
+    for(let i = 0; i < tempTasksGroup.length; i++){
+      tempTasksGroupByTasks[i] = {};
+      for(let j = 0; j < tempTasksGroup[i].length; j++){
+        const prevAmt = tempTasksGroupByTasks[i][tempTasksGroup[i][j]?.taskType._ref]?.amount;
+        tempTasksGroupByTasks[i][tempTasksGroup[i][j]?.taskType._ref] = {
+          taskTypeId: tempTasksGroup[i][j]?.taskType._ref,
+          amount: prevAmt ? tempTasksGroup[i][j].amount + prevAmt : tempTasksGroup[i][j].amount,
+          iconId: iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === tempTasksGroup[i][j]?.taskType._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref,
+          date: tempTasksGroup[i][j].date
+        }
+      }
+    }
+
+    setDisplayedTasks(tempTasksGroupByTasks);
   }
 
   useEffect(() => {
     filterAndSearchTasks();
   }, [tasks, startDate.current, endDate, searchTerm, idFilters])
 
-  const taskList = (arr) => {
-    return(
-      arr?.length === 0 ? <div className='empty-week'>E</div> : arr?.map((item) => 
-        <div className='task-wrapper' key={item._id}>
-          <button className='button-task-bubble' onClick={()=>{
-            const dateString = item.date.includes('T') ? JSON.stringify(item.date).split('T')[0].substring(1) : item.date;
-              navigate(`/day/${dateString}`);
-            }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.color.hex}}>
-            <div className='task-bubble-inner-week'>
-              <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
-            </div>
-          </button>
-        </div>
-      )
-    )
+  const taskList = (obj) => {
+    const objKeys = Object.keys(obj);
+    if(objKeys?.length === 0) return <div className='empty-week'></div>
+
+    let jsxArray = [];
+      
+      objKeys.forEach(function(key, index) {
+        jsxArray[index] = (
+          <div className='task-wrapper'>
+            <button className='button-task-bubble' onClick={()=>{
+                navigate(`/day/${obj[key].date}`);
+              }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.category?._ref)[0]?.color.hex}}>
+              <div style={{'paddingTop': '2px', 'height':`${20+15*obj[key].amount}px`}} className='task-bubble-inner-week'>
+                <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+              </div>
+            </button>
+          </div>
+        )
+      });
+      return jsxArray;
   }
 
   return (
@@ -96,69 +141,16 @@ const Week = () => {
         </button>
       </div>
       <div className='week-task-list'>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()).getDate()
-          }</h1>
-            {taskList(displayedTasks?.filter((item) => {
-              const tempDate = new Date(item.date);
-              return startDate.current?.getDate() === tempDate.getDate();
-            }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+1).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+1 === tempDate.getDate();
-          }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+2).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+2 === tempDate.getDate();
-          }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+3).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+3 === tempDate.getDate();
-          }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+4).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+4 === tempDate.getDate();
-          }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+5).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+5 === tempDate.getDate();
-          }))}
-        </div>
-        <div>
-          <h1>{
-            new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+6).getDate()
-          }</h1>
-          {taskList(displayedTasks?.filter((item) => {
-            const tempDate = new Date(item.date);
-            return startDate.current?.getDate()+6 === tempDate.getDate();
-          }))}
-        </div>
+        {displayedTasks?.map((dailyTasks, index) => {
+          return (
+            <div key={index}>
+              <h1>{
+                new Date(startDate.current?.getFullYear(), startDate.current?.getMonth(), startDate.current?.getDate()+index).getDate()
+              }</h1>
+              {taskList(dailyTasks)}
+            </div>
+          )
+        })}
       </div>
     </div>
   )

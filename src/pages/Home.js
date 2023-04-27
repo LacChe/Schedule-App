@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Day from '../components/Day';
 import Week from '../components/Week';
 import Month from '../components/Month';
-import Year from '../components/Year';
 import Range from '../components/Range';
 import Filter from '../components/Filter';
 import { useStateContext } from '../utils/stateContext.js';
@@ -19,8 +18,6 @@ const displayComponent = (param) => {
             return (<Week />);
         case 'month':
             return (<Month />);
-        case 'year':
-            return (<Year />);
         case 'range':
             return (<Range />);
         default: 
@@ -56,7 +53,6 @@ const Home = () => {
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
                     navigate(`/add`);
-                    // navigate(`/add/${param}/${task._id}/${task.date}/${task.taskType}/${task.amount}/${task.notes}`);
                 }}><IoMdAddCircleOutline /></button>
             </div>
         </div>
