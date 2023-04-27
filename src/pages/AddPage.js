@@ -11,7 +11,7 @@ const AddPage = () => {
     const { userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
-    const [date, setDate] = useState(dateParam ? dateParam : new Date());
+    const [date, setDate] = useState(dateParam);
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : 1);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
@@ -33,12 +33,18 @@ const AddPage = () => {
             return;
         }
         toast.success('Success!');
-        const dateString = date.includes('T') ? JSON.stringify(date).split('T')[0].substring(1) : date;
+
+        // check if same task exists on this day
+        let matchingTask = tasks.filter((item) => item.date === date && item.taskType.ref === taskType._id)[0];
+        if(matchingTask) {
+            console.log(matchingTask)
+        }
+
         if(!id){
           const doc = {
               _id: uuidv4(),
               _type: 'task',
-              date: dateString,
+              date: date,
               amount: Number(amount),
               notes: notes,
               user: {
@@ -57,7 +63,7 @@ const AddPage = () => {
           const doc = {
             _id: id,
             _type: 'task',
-            date: dateString,
+            date: date,
             amount: Number(amount),
             notes: notes,
             user: {
@@ -73,7 +79,7 @@ const AddPage = () => {
           localStorage.setItem('tasks', JSON.stringify(tasks.map((item) => item._id === doc._id ? doc : item)));
           setTasks((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
-        navigate(returnPage ? `/${returnPage}/${dateString}` : '/');
+        navigate(returnPage ? `/${returnPage}/${date}` : '/');
     }
 
     const deleteItem = () => {
@@ -108,7 +114,7 @@ const AddPage = () => {
             <h1>Add</h1>
             <div className='create-item-text-input'>
                 <p>Date:</p>
-                <input type='date' value={new Date(date)?.toLocaleDateString('en-CA')} onChange={(e) => setDate(e.target.value)}></input>
+                <input type='date' value={date} onChange={(e) => setDate(e.target.value)}></input>
             </div>
             <div className='create-item-text-input amount-input'>
                 <p>Amount:</p>

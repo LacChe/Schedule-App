@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
 import { useNavigate, useParams } from 'react-router-dom';
