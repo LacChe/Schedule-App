@@ -31,10 +31,12 @@ const Navbar = () => {
                         setShowNavbar(false);
                         navigate('/month');
                     }}>This Month</button>
+                    {/*
                     <button type='button' onClick={() =>  {
                         setShowNavbar(false);
                         navigate('/set-range');
                     }}>Set Range</button>
+                    */}
                     <button className='button-alt-color' type='button' onClick={()=> {
                         setShowNavbar(false);
                         navigate('/profile');

@@ -124,7 +124,7 @@ const AddPage = () => {
             </div>
             <div className='create-item-button-list'>
                 <p>Choose a Task:</p>
-                {!taskTypes ? 
+                {!taskTypes || taskTypes.length===0 ? 
                 <div className='empty-tasks'> 
                     <button className='create-task-redirect-button' type='button' onClick={() => navigate('/task')}>Nothing here.<br/>Create a Task.</button>
                 </div> 
