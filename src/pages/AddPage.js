@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { client, urlFor } from '../utils/client.js';
-import { AiFillDelete, AiOutlineDelete, AiOutlineWarning } from 'react-icons/ai';
+import { AiFillDelete, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
@@ -73,7 +73,7 @@ const AddPage = () => {
           localStorage.setItem('tasks', JSON.stringify(tasks.map((item) => item._id === doc._id ? doc : item)));
           setTasks((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
-        navigate(returnPage ? `/${returnPage}` : '/');
+        navigate(returnPage ? `/${returnPage}/${dateString}` : '/');
     }
 
     const deleteItem = () => {
@@ -124,7 +124,7 @@ const AddPage = () => {
                 taskTypes?.map((item) => 
                     <button className='item-bubble-inner' style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === item?.category?._ref)[0]?.color.hex}} key={item._id} type='button' onClick={() => {setTaskType(item)}}>
                         <img className='icon-image' src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
-                        <p>{item.name} ({item.unit})</p>
+                        <p>{item.name} {item.unit}</p>
                     </button>
                 )}
             </div>
@@ -134,8 +134,14 @@ const AddPage = () => {
             </div>
             <div className='item-bubble-inner' style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter((item) => item?._id === taskType?.category?._ref)[0]?.color.hex : '#666666'}}>
                 {taskType && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />}
-                <p>{taskType ? taskType.name : 'Name'} ({amount} {taskType ? taskType.unit : 'Unit'})</p>
-            </div>
+                <div className='task-text'>
+                    <div>
+                        <h1>{taskType?.name}</h1>
+                        <p>{amount} {taskType?.unit}</p>
+                    </div>
+                    {notes && <p>{notes.substring(0,18)}{notes.length > 18 && '...'}</p>}
+                </div>
+              </div>
             {id && (deleteStatus === 'confirm' ?       
                 <div className='profile-item-bubble'>
                     <button className='button-delete-back' type='button' onClick={() => {setDeleteStatus('none')}}><BsBackspaceFill /></button>

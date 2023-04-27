@@ -30,7 +30,7 @@ const displayComponent = (param) => {
 
 const Home = () => {
     const { showTools, setShowTools, showSearch, setShowSearch, searchTerm, setSearchTerm } = useStateContext();
-    const { param } = useParams();
+    const { pageParam } = useParams();
     const [display, setDisplay] = useState('');
     const navigate = useNavigate();
 
@@ -38,7 +38,7 @@ const Home = () => {
 
     return (
         <div className='home-main'>
-            {displayComponent(param)}
+            {displayComponent(pageParam)}
             <div className={showSearch?'tools-search search-show':'tools-search search-hide'}>
                 <div className='search-bar-icon'><AiOutlineSearch /></div>
                 <input className='search-input' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>

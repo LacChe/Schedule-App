@@ -13,6 +13,8 @@ body{
 button {
     background-color: #002B5B;
     color: white;
+    border-radius: 15px;
+    border-style: none;
 }
 
 button:hover{
@@ -240,7 +242,7 @@ button:active{
     position: fixed;
     width: 50px;
     height: 50px;
-    border-bottom-right-radius: 15px;
+    border-radius: 0px 0px 15px 0px;
     border-style: none;
 }
 
@@ -382,6 +384,17 @@ button:active{
     background-color: #E4DCCF;
 }
 
+.empty-week {
+    padding-top: 10px;
+    text-align: center;
+    height: 45px;
+    width: 45px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #E4DCCF;
+}
+
 .empty-tasks {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -478,6 +491,15 @@ button:active{
     opacity: 70%;
 }
 
+.notes-input {
+    margin-bottom: 10px;
+}
+
+.notes-input > textarea {
+    width: 250px;
+    height: 100px;
+}
+
 .filtered {
     border: 3px dashed #F9F5EB;
     opacity: 30%;
@@ -519,10 +541,87 @@ button:active{
     opacity: 70%;
 }
 
+.task-text {
+    text-align: left;
+}
+
+.task-text > p {
+    margin-left: 10px;
+}
+
+.task-text > div {
+    display: flex;
+    gap: 5px;
+}
+
+.task-bubble-inner {
+    display: flex;
+    align-items: center;
+    width: 280px;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    margin: 5px;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.task-bubble-inner-week {
+    width: 40px;
+    height: 35px;
+}
+
+.button-task-bubble {
+    margin-bottom: 5px;
+    padding: 5px 0px 5px 5px;
+}
+
+.button-task-bubble:active{
+    padding-top: 0px;
+    padding: 5px 0px 5px 5px;
+}
+
+.task-expanded {
+    min-height: 100px;
+    height: 100%;
+}
+
+.task-collapsed {
+    height: 50px;
+}
+
+.button-task-edit {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border-style: none;
+    border-radius: 50%;
+    right: 10px;
+    top: 10px;
+    background-color: #F9F5EB;
+    color: #002B5B;
+}
+
+.task-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
 .day-main {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.week-task-list {
+    display: flex;
+    gap: 5px;
+    text-align: center;
+}
+
+.week-task-list > div > h1 {
+    margin-bottom: 5px;
 }
 
 .home-header {

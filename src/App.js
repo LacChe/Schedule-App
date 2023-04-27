@@ -51,7 +51,7 @@ function App() {
       </div>
       <Navbar />
       <Routes>
-        <Route path='/:param?' element={<Home />}/>
+        <Route path='/:pageParam?/:dateParam?' element={<Home />}/>
         <Route path='/add/:returnPage?/:id?/:dateParam?/:taskParam?/:amountParam?/:notesParam?' element={<Add />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/set-range' element={<SetRange />}/>

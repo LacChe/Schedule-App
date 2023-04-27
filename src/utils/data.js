@@ -33,7 +33,7 @@ export const userQuery = (userId) => {
             _id
         }
     }`;
-    return query; //TODO: get icons as reference id
+    return query;
   };
 
   export const taskTypeQuery = (userId) => {

@@ -18,8 +18,6 @@ const Navbar = () => {
                 {showNavbar ? 
                 <div className='nav-button-list'>
                     <button type='button' onClick={() =>  {
-                        setStartDate(today);
-                        setEndDate(today);
                         setShowNavbar(false);
                         navigate('/');
                     }}>Today</button>
