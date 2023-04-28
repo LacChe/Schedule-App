@@ -4,7 +4,6 @@
     box-sizing: border-box;
     font-family: serif;
     font-size: 1.1rem;
-    overflow: hidden;
 }
 
 img {
@@ -222,6 +221,7 @@ button:active{
     border-style: none;
     border-radius: 15px;
     color: white;
+    overflow: hidden;
 }
 
 .nav-main {
@@ -362,6 +362,7 @@ button:active{
     border-radius: 15px;
     color: white;
     margin: 5px;
+    overflow: hidden;
 }
 
 .item-bubble-inner > * {
@@ -900,6 +901,7 @@ button:active{
             border-style: none;
             border-radius: 5vw;
             color: white;
+            overflow: hidden;
         }
 
         .nav-main {
@@ -1046,6 +1048,7 @@ button:active{
             border-radius: 5vw;
             color: white;
             margin: 1vw;
+            overflow: hidden;
         }
 
         .item-bubble-inner > * {
