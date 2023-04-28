@@ -37,6 +37,9 @@ const Profile = () => {
           <button className='button-alt-color  sync-button' onClick={sync}>
             Sync
           </button>
+          <a href="https://www.flaticon.com/" title="icons">
+            Icons created by Freepik - Flaticon
+          </a>
         </div>
       </div>) :
     <p>Loading...</p>
