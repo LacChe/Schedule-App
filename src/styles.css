@@ -439,6 +439,7 @@ button:active{
 .create-item-icon-list {
     margin: 10px;
     text-align: center;
+    width: 350px;
 }
 
 .create-item-icon-list > button {
@@ -446,6 +447,9 @@ button:active{
     border-style: none;
     border-radius: 5px;
     padding: 2px;
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
 }
 
 .create-item-icon-list > button:active{
@@ -1119,13 +1123,17 @@ button:active{
         .create-item-icon-list {
             margin: 3vw;
             text-align: center;
+            width:70%;
         }
 
         .create-item-icon-list > button {
-            margin: 0.6vw;
+            margin: 0.4vw;
             border-style: none;
             border-radius: 1vw;
             padding: 0.6vw;
+            width: 7vw;
+            height: 7vw;
+            overflow: hidden;
         }
 
         .create-item-icon-list > button:active{
