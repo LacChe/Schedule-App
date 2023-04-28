@@ -13,7 +13,7 @@ const AddPage = () => {
 
     const [date, setDate] = useState(dateParam ? dateParam : `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`);
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
-    const [amount, setAmount] = useState(amountParam ? amountParam : 1);
+    const [amount, setAmount] = useState(amountParam ? amountParam : undefined);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
     const [deleteStatus, setDeleteStatus] = useState('none')
     
