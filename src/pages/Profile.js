@@ -32,10 +32,12 @@ const Profile = () => {
             navigate('/category');
           }}>New Category</button>
         </div>
-        <p className='sync-text'>Something not showing up?</p>
-        <button className='button-alt-color  sync-button' onClick={sync}>
-          Sync
-        </button>
+        <div className='sync-wrapper'>
+          <p className='sync-text'>Something not showing up?</p>
+          <button className='button-alt-color  sync-button' onClick={sync}>
+            Sync
+          </button>
+        </div>
       </div>) :
     <p>Loading...</p>
     }

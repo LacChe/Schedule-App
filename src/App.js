@@ -17,10 +17,10 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem('user-data')) {
+    if (!localStorage.getItem('user-data') && !auth.isAuthenticated && !auth.isLoading) {
       navigate('/login')
     }
-  }, [auth, userData])
+  }, [auth])
 
   return (
     <div>

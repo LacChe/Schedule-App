@@ -8,10 +8,10 @@ const Login = () => {
     const { auth, userData } = useStateContext();
 
     useEffect(() => {
-        if (localStorage.getItem('user-data')) {
+        if (localStorage.getItem('user-data') || auth.isAuthenticated) {
           navigate('/')
         }
-    }, [auth, userData])
+    }, [auth])
 
     return (
         <div className='login' >
