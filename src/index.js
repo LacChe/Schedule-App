@@ -12,6 +12,9 @@ root.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH0_DOMAIN}
     clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+    useRefreshTokens
+    cacheLocation="localstorage"
+    audience={process.env.REACT_APP_AUTH0_AUDIENCE_ID}
     authorizationParams={{
       redirect_uri: window.location.origin
     }}
@@ -21,5 +24,5 @@ root.render(
         <App />
       </BrowserRouter>
     </StateContext>
-  </Auth0Provider>,
+  </Auth0Provider>
 );

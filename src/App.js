@@ -1,5 +1,6 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useStateContext } from './utils/stateContext';
+import Login from './pages/Login.js';
 import Home from './pages/Home.js';
 import Add from './pages/AddPage.js';
 import Profile from './pages/Profile.js';
@@ -8,18 +9,18 @@ import Navbar from './components/Navbar.js';
 import CreateTaskType from './pages/CreateTaskType.js';
 import CreateCategory from './pages/CreateCategory.js';
 import { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 
 function App() {
 
-  const { auth } = useStateContext();
+  const { userData, auth } = useStateContext();
+  const navigate = useNavigate();
 
-  if (!auth.isAuthenticated && !auth.isLoading) {
-    return (
-      <div className='login' >
-        <button onClick={() => auth.loginWithRedirect()}>Log In</button>
-      </div>
-    )
-  }
+  useEffect(() => {
+    if (!localStorage.getItem('user-data')) {
+      navigate('/login')
+    }
+  }, [auth, userData])
 
   return (
     <div>
@@ -49,8 +50,9 @@ function App() {
           }}
         />
       </div>
-      <Navbar />
+      {localStorage.getItem('user-data') && <Navbar />}
       <Routes>
+        <Route path='/login' element={<Login />}/>
         <Route path='/:pageParam?/:dateParam?' element={<Home />}/>
         <Route path='/add/:returnPage?/:id?/:dateParam?/:taskParam?/:amountParam?/:notesParam?' element={<Add />}/>
         <Route path='/profile' element={<Profile />}/>

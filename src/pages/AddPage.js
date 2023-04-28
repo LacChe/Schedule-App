@@ -16,8 +16,6 @@ const AddPage = () => {
     const [amount, setAmount] = useState(amountParam ? amountParam : 1);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
     const [deleteStatus, setDeleteStatus] = useState('none')
-
-    console.log('date', date + ' ' + new Date(date).toLocaleDateString())
     
     const navigate = useNavigate();
     
@@ -35,12 +33,6 @@ const AddPage = () => {
             return;
         }
         toast.success('Success!');
-
-        // check if same task exists on this day
-        let matchingTask = tasks.filter((item) => item.date === date && item.taskType.ref === taskType._id)[0];
-        if(matchingTask) {
-            console.log(matchingTask)
-        }
 
         if(!id){
           const doc = {
