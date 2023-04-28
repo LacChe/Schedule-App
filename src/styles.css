@@ -1021,7 +1021,7 @@ button:active{
             border-style: none;
             border-radius: 5vw;
             color: white;
-            margin: 4vw;
+            margin: 1vw;
         }
 
         .item-bubble-inner > * {
