@@ -88,7 +88,8 @@ const Day = () => {
   
   return (
     <div className='day-main'>
-      <div className='home-header'>
+      <div className='all-title'>
+        <h1>Everything</h1>
       </div>
       {taskList(displayedTasks)}
     </div>

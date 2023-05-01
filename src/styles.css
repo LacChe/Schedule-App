@@ -686,6 +686,15 @@ button:active{
     color: white;
 }
 
+.all-title {
+    text-align: center;
+    background-color: #002B5B;
+    margin: 20px 20px 10px 20px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    color: white;
+}
+
 @media only screen and (max-width: 1024px){
             
         * {
@@ -1364,6 +1373,15 @@ button:active{
             margin: 3vw 3vw 2vw 3vw;
             padding: 1vw;
             border-radius: 4vw;
+            color: white;
+        }
+
+        .all-title {
+            text-align: center;
+            background-color: #002B5B;
+            margin: 3vw 3vw 2vw 3vw;
+            padding: 3vw 6vw;
+            border-radius: 6vw;
             color: white;
         }
 

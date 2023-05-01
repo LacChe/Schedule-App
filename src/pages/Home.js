@@ -19,7 +19,7 @@ const displayComponent = (param) => {
             return (<Week />);
         case 'month':
             return (<Month />);
-        case 'all':
+        case 'everything':
             return (<All />);
         //case 'range':
             //return (<Range />);
