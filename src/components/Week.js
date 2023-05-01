@@ -50,9 +50,9 @@ const Week = () => {
     // filter by search
     if(searchTerm && searchTerm !== ''){
       tempTasks = tempTasks.filter((item) => {
-        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name?.includes(searchTerm) ||
-          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.includes(searchTerm) ||
-          item.notes?.includes(searchTerm)
+        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.notes?.toLowerCase().includes(searchTerm.toLowerCase())
         return bool;
       })
     }
