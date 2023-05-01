@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Day from '../components/Day';
 import Week from '../components/Week';
 import Month from '../components/Month';
+import All from '../components/All';
 import Range from '../components/Range';
 import Filter from '../components/Filter';
 import { useStateContext } from '../utils/stateContext.js';
@@ -18,6 +19,8 @@ const displayComponent = (param) => {
             return (<Week />);
         case 'month':
             return (<Month />);
+        case 'all':
+            return (<All />);
         //case 'range':
             //return (<Range />);
         default: 

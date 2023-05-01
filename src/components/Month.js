@@ -118,7 +118,7 @@ const Month = () => {
                 navigate(`/week/${obj[key].date}`);
               }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.category?._ref)[0]?.color.hex}}>
               <div style={{
-                'height':window.screen.width > 1024 ? `${20+15*obj[key].amount}px` : `${7+4*obj[key].amount}vw`
+                'height':window.innerWidth > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`
                 }} className='task-bubble-inner-week'>
                 <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
               </div>

@@ -59,7 +59,7 @@ const AddPage = () => {
             _type: 'task',
             date: date,
             amount: Number(amount),
-            notes: notes,
+            notes: notes.replace('/', ' '),
             user: {
                 _type: 'reference',
                 _ref: `${userData[0]._id}`

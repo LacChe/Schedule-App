@@ -31,6 +31,10 @@ const Navbar = () => {
                         setShowNavbar(false);
                         navigate('/month');
                     }}>This Month</button>
+                    <button type='button' onClick={() =>  {
+                        setShowNavbar(false);
+                        navigate('/all');
+                    }}>All</button>
                     {/*
                     <button type='button' onClick={() =>  {
                         setShowNavbar(false);
