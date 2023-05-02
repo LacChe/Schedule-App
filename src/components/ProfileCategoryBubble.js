@@ -43,11 +43,21 @@ const ProfileCategoryBubble = ({ cat }) => {
     if(deleteStatus === 'confirm'){
         return (
           <div className='profile-item-bubble'>
-            <button className='button-delete-back' type='button' onClick={() => {setDeleteStatus('none')}}><BsBackspaceFill /></button>
+            <button className='button-delete-back' 
+              type='button' 
+              onClick={() => {setDeleteStatus('none')}}
+            >
+              <BsBackspaceFill />
+            </button>
             <div className='profile-item-delete' >
               <p>Delete?</p>
             </div>
-            <button className='button-delete-confirm' type='button' onClick={() => onDelete()}><AiFillDelete /></button>
+            <button className='button-delete-confirm' 
+              type='button' 
+              onClick={() => onDelete()}
+            >
+              <AiFillDelete />
+            </button>
           </div>
       )
     }
@@ -55,15 +65,24 @@ const ProfileCategoryBubble = ({ cat }) => {
   return (
     <div>
       <div className='profile-item-bubble'>
-        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-delete' type='button' onClick={() => onDelete()}>
-        <AiOutlineDelete /></button>}
+        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && 
+          <button className='button-delete' type='button' onClick={() => onDelete()}>
+            <AiOutlineDelete />
+          </button>
+        }
         <div className='item-bubble-inner' style={{'backgroundColor' : `${cat?.color?.hex}`}}>
-          <img className='icon-image' src={urlFor(iconData?.filter((item)=>cat?.icon?._ref===item?._id)[0]?.image?.asset?._ref)} alt='loading' />
+          <img className='icon-image' 
+            src={urlFor(iconData?.filter((item)=>cat?.icon?._ref===item?._id)[0]?.image?.asset?._ref)} 
+            alt='loading' 
+          />
           <p>{cat?.name}</p>
         </div>
-        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && <button className='button-edit' type='button' onClick={() => {
+        {cat?.user?._id !== process.env.REACT_APP_SANITY_SYSTEM_USER_ID && 
+          <button className='button-edit' type='button' onClick={() => {
           navigate(`/category/${cat?._id}/${cat?.name}/${cat?.color?.hex?.substring(1)}/${cat?.icon?._ref}`);
-        }}><AiOutlineEdit /></button>}
+        }}>
+          <AiOutlineEdit />
+        </button>}
       </div>
     </div>
   )

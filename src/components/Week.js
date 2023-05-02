@@ -33,53 +33,54 @@ const Week = () => {
     // filter by date
     tempTasks = tempTasks.filter((item) => {
       const tempDate = new Date(item.date);
-      const bool = (startDate.current?.getFullYear() === tempDate.getFullYear() || endDate.getFullYear() === tempDate.getFullYear()) &&
-        (startDate.current?.getMonth() === tempDate.getMonth() || endDate.getMonth() === tempDate.getMonth()) &&
-        (startDate.current?.setHours(0,0,0,0) <= tempDate.setHours(0,0,0,0) && endDate.setHours(0,0,0,0) >= tempDate.setHours(0,0,0,0));
-      return bool;
+      return (
+          startDate.current?.getFullYear() === tempDate.getFullYear() || 
+          endDate.getFullYear() === tempDate.getFullYear()
+        ) && (
+          startDate.current?.getMonth() === tempDate.getMonth() || 
+          endDate.getMonth() === tempDate.getMonth()
+        ) && (
+          startDate.current?.setHours(0,0,0,0) <= tempDate.setHours(0,0,0,0) && 
+          endDate.setHours(0,0,0,0) >= tempDate.setHours(0,0,0,0)
+        );
     })
 
     // filter by id
     tempTasks = tempTasks.filter((item) => {
-      const bool = 
+      return (
         !Array.from(idFilters).includes(item.taskType._ref) || 
-        !Array.from(idFilters).includes(taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category._ref);
-      return bool;
+        !Array.from(idFilters).includes(taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+          )[0]?.category._ref)
+      );
     })
 
     // filter by search
     if(searchTerm && searchTerm !== ''){
       tempTasks = tempTasks.filter((item) => {
-        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.notes?.toLowerCase().includes(searchTerm.toLowerCase())
-        return bool;
+        return taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+            )[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+          categories?.concat(systemCategories)?.filter(
+              (cat) => cat?._id === taskTypes?.filter(
+                (taskType) => taskType._id === item?.taskType?._ref
+              )[0]?.category?._ref
+            )[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            
+          item.notes?.toLowerCase().includes(searchTerm.toLowerCase()
+        );
       })
     }
 
     // sort by day
     let tempTasksGroup = [];
-    tempTasksGroup[0] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-6).getDate()
-    )
-    tempTasksGroup[1] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-5).getDate()
-    )
-    tempTasksGroup[2] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-4).getDate()
-    )
-    tempTasksGroup[3] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-3).getDate()
-    )
-    tempTasksGroup[4] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-2).getDate()
-    )
-    tempTasksGroup[5] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-1).getDate()
-    )
-    tempTasksGroup[6] = tempTasks.filter((item) => 
-      new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === endDate.getDate()
-    )
+    for(let i = 0; i < 7; i++){
+      tempTasksGroup[i] = tempTasks.filter((item) => 
+        new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === 
+        new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-(6-i)).getDate()
+      )
+    }
 
     // combine same task types
     let tempTasksGroupByTasks = [];
@@ -90,7 +91,9 @@ const Week = () => {
         tempTasksGroupByTasks[i][tempTasksGroup[i][j]?.taskType._ref] = {
           taskTypeId: tempTasksGroup[i][j]?.taskType._ref,
           amount: prevAmt ? tempTasksGroup[i][j].amount + prevAmt : tempTasksGroup[i][j].amount,
-          iconId: iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === tempTasksGroup[i][j]?.taskType._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref,
+          iconId: iconData?.filter((icon)=> taskTypes?.filter(
+              (taskType) => taskType._id === tempTasksGroup[i][j]?.taskType._ref
+            )[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref,
           date: tempTasksGroup[i][j].date
         }
       }
@@ -112,13 +115,21 @@ const Week = () => {
       objKeys.forEach(function(key, index) {
         jsxArray[index] = (
           <div className='task-wrapper'>
-            <button className='button-task-bubble' onClick={()=>{
-                navigate(`/day/${obj[key].date}`);
-              }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.category?._ref)[0]?.color.hex}}>
+            <button className='button-task-bubble' 
+              onClick={()=>{navigate(`/day/${obj[key].date}`)}} 
+              style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
+                  (cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.category?._ref
+                )[0]?.color.hex}}
+            >
               <div style={{
                 'height':window.innerWidth > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`
                 }} className='task-bubble-inner-week'>
-                <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+                <img className='icon-image' 
+                  src={urlFor(iconData?.filter((icon)=> taskTypes?.filter(
+                    (taskType) => taskType._id === obj[key].taskTypeId
+                    )[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} 
+                  alt='loading' 
+                />
               </div>
             </button>
           </div>

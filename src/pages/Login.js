@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
 
-    const { auth, userData } = useStateContext();
+    const { auth } = useStateContext();
 
     useEffect(() => {
         if (localStorage.getItem('user-data') || auth.isAuthenticated) {
           navigate('/')
         }
-    }, [auth])
+    }, [auth, navigate])
 
     return (
         <div className='login' >

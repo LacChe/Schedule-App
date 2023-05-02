@@ -23,6 +23,7 @@ export const StateContext = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState();
     const [idFilters, setIdFilters] = useState([]);
 
+    // clear storage and get from db
     const sync = () => {
       if(auth.user){
         localStorage.clear();

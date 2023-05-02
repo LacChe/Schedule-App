@@ -7,7 +7,17 @@ import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 const Month = () => {
   const navigate = useNavigate();
   
-  const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories, iconData, endDate, setEndDate } = useStateContext();
+  const { 
+    searchTerm, 
+    idFilters, 
+    tasks, 
+    taskTypes, 
+    categories, 
+    systemCategories, 
+    iconData, 
+    endDate, 
+    setEndDate 
+  } = useStateContext();
   const { dateParam } = useParams();
 
   const [displayedTasks, setDisplayedTasks] = useState();
@@ -47,19 +57,29 @@ const Month = () => {
 
     // filter by id
     tempTasks = tempTasks.filter((item) => {
-      const bool = 
+      return (
         !Array.from(idFilters).includes(item.taskType._ref) || 
-        !Array.from(idFilters).includes(taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category._ref);
-      return bool;
+        !Array.from(idFilters).includes(taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+          )[0]?.category._ref)
+      )
     })
 
     // filter by search
     if(searchTerm && searchTerm !== ''){
       tempTasks = tempTasks.filter((item) => {
-        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.notes?.toLowerCase().includes(searchTerm.toLowerCase())
-        return bool;
+        return taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+            )[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+          categories?.concat(systemCategories)?.filter(
+              (cat) => cat?._id === taskTypes?.filter(
+                (taskType) => taskType._id === item?.taskType?._ref
+              )[0]?.category?._ref
+            )[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            
+          item.notes?.toLowerCase().includes(searchTerm.toLowerCase()
+        );
       })
     }
 
@@ -85,15 +105,22 @@ const Month = () => {
 
     // combine same task types
     let tempTasksGroupByTasks = [];
+
     for(let i = 0; i < tempTasksGroup.length; i++){
       tempTasksGroupByTasks[i] = {};
+
       for(let j = 0; j < tempTasksGroup[i].length; j++){
         const prevAmt = tempTasksGroupByTasks[i][tempTasksGroup[i][j]?.taskType._ref]?.amount;
+
         tempTasksGroupByTasks[i][tempTasksGroup[i][j]?.taskType._ref] = {
+
           taskTypeId: tempTasksGroup[i][j]?.taskType._ref,
           amount: prevAmt ? tempTasksGroup[i][j].amount + prevAmt : tempTasksGroup[i][j].amount,
-          iconId: iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === tempTasksGroup[i][j]?.taskType._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref,
+          iconId: iconData?.filter((icon)=> taskTypes?.filter(
+              (taskType) => taskType._id === tempTasksGroup[i][j]?.taskType._ref
+            )[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref,
           date: tempTasksGroup[i][j].date
+
         }
       }
     }
@@ -114,13 +141,25 @@ const Month = () => {
       objKeys.forEach(function(key, index) {
         jsxArray[index] = (
           <div className='task-wrapper'>
-            <button className='button-task-bubble' onClick={()=>{
-                navigate(`/week/${obj[key].date}`);
-              }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.category?._ref)[0]?.color.hex}}>
-              <div style={{
-                'height':window.innerWidth > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`
-                }} className='task-bubble-inner-week'>
-                <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === obj[key].taskTypeId)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+            <button className='button-task-bubble' 
+              onClick={()=>{navigate(`/week/${obj[key].date}`);}} 
+              style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
+                (cat) => cat?._id === taskTypes?.filter(
+                      (taskType) => taskType._id === obj[key].taskTypeId
+                    )[0]?.category?._ref
+                  )[0]?.color.hex}}>
+              <div 
+                style={{'height':window.innerWidth > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`}}
+                className='task-bubble-inner-week'
+              >
+                <img className='icon-image' 
+                  src={urlFor(iconData?.filter(
+                    (icon)=> taskTypes?.filter(
+                          (taskType) => taskType._id === obj[key].taskTypeId
+                        )[0]?.icon?._ref===icon?._id
+                      )[0]?.image?.asset?._ref)} 
+                  alt='loading' 
+                />
               </div>
             </button>
           </div>

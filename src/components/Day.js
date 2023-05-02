@@ -10,7 +10,9 @@ const Day = () => {
   
   const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories, iconData } = useStateContext();
   const { dateParam } = useParams();
-  const [date, setDate] = useState(dateParam ? new Date(dateParam.split('-')[0], dateParam.split('-')[1]-1, dateParam.split('-')[2]) : new Date())
+  const [date, setDate] = useState(
+    dateParam ? new Date(dateParam.split('-')[0], dateParam.split('-')[1]-1, dateParam.split('-')[2]) : new Date()
+  )
 
   const [displayedTasks, setDisplayedTasks] = useState()
   const [expandedTaskId, setExpandedTaskId] = useState()
@@ -32,19 +34,30 @@ const Day = () => {
     tempTasks = tempTasks.filter((item) => {
       const bool = 
         !Array.from(idFilters).includes(item.taskType._ref) || 
-        !Array.from(idFilters).includes(taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category._ref);
+        !Array.from(idFilters).includes(taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+          )[0]?.category._ref);
       return bool;
     })
 
     // filter by search
     if(searchTerm && searchTerm !== ''){
       tempTasks = tempTasks.filter((item) => {
-        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name.toLowerCase()?.includes(searchTerm.toLowerCase()) ||
-          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.notes?.toLowerCase().includes(searchTerm.toLowerCase())
-        return bool;
+        return taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+            )[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+          categories?.concat(systemCategories)?.filter(
+              (cat) => cat?._id === taskTypes?.filter(
+                (taskType) => taskType._id === item?.taskType?._ref
+              )[0]?.category?._ref
+            )[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            
+          item.notes?.toLowerCase().includes(searchTerm.toLowerCase()
+        );
       })
     }
+
     setDisplayedTasks(tempTasks);
   }
 
@@ -54,34 +67,48 @@ const Day = () => {
 
   const taskList = (arr) => {
     return(
-      arr?.length === 0 ? <div className='empty'>Empty</div> : arr?.map((item) => 
-        <div className='task-wrapper' key={item._id}>
-          <button className='button-task-bubble' onClick={()=>{
-              setExpandedTaskId((prev)=>prev===item._id?'':item._id)
-            }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.color.hex}}>
-            <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
-              <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
-              <div className='task-text'>
-                <div>
-                  <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
-                  <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
+      arr?.length === 0 ? 
+        <div className='empty'>Empty</div> : 
+          arr?.map((item) => 
+          <div className='task-wrapper' key={item._id}>
+            <button className='button-task-bubble' 
+              onClick={()=>{setExpandedTaskId((prev)=>prev===item._id?'':item._id)}} 
+              style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
+              (cat) => cat?._id === taskTypes?.filter(
+                    (taskType) => taskType._id === item?.taskType?._ref
+                  )[0]?.category?._ref
+                )[0]?.color.hex}}
+            >
+              <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
+                <img className='icon-image' 
+                  src={urlFor(iconData?.filter(
+                    (icon)=> taskTypes?.filter(
+                          (taskType) => taskType._id === item?.taskType?._ref
+                        )[0]?.icon?._ref===icon?._id
+                      )[0]?.image?.asset?._ref)} 
+                    alt='loading' 
+                  />
+                <div className='task-text'>
+                  <div>
+                    <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
+                    <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
+                  </div>
+                  {item.notes && (
+                    item._id!==expandedTaskId?
+                    <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
+                    <p>{item.notes}</p>
+                  )}
                 </div>
-                {item.notes && (
-                  item._id!==expandedTaskId?
-                  <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
-                  <p>{item.notes}</p>
-                )}
               </div>
-            </div>
-          </button>
-          {item._id===expandedTaskId && 
-            <button className='button-task-edit' type='button' onClick={(()=>
-              navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
-            )}>
-            <AiOutlineEdit />
-          </button>}
-        </div>
-      )
+            </button>
+            {item._id===expandedTaskId && 
+              <button className='button-task-edit' type='button' onClick={(()=>
+                navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+              )}>
+              <AiOutlineEdit />
+            </button>}
+          </div>
+        )
     )
   }
   

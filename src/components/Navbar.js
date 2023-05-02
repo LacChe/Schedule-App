@@ -4,15 +4,21 @@ import { useStateContext } from '../utils/stateContext.js';
 import { AiOutlineMenu } from 'react-icons/ai';
 
 const Navbar = () => {
-    const { setShowNavbar, showNavbar, setStartDate, setEndDate, auth } = useStateContext();
+    const { setShowNavbar, showNavbar, setEndDate, auth } = useStateContext();
     const navigate = useNavigate();
     const today = new Date();
 
     return (
         <div>
-            <button className={showNavbar?'nav-close-overlay':'nav-close-overlay-hide'} onClick={()=>setShowNavbar(false)}></button>
+            <button className={showNavbar?'nav-close-overlay':'nav-close-overlay-hide'} 
+                onClick={()=>setShowNavbar(false)}
+            >
+            </button>
             <div className={showNavbar?'nav-main nav-show':'nav-main nav-hide'}>
-                <button className='nav-toggle-button' type='button' onClick={() => setShowNavbar((prev) => !prev)}>
+                <button className='nav-toggle-button' 
+                    type='button' 
+                    onClick={() => setShowNavbar((prev) => !prev)}
+                >
                     <AiOutlineMenu color='white' />
                 </button>
                 {showNavbar ? 

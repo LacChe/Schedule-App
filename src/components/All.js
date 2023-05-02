@@ -20,19 +20,30 @@ const All = () => {
     tempTasks = tempTasks.filter((item) => {
       const bool = 
         !Array.from(idFilters).includes(item.taskType._ref) || 
-        !Array.from(idFilters).includes(taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category._ref);
+        !Array.from(idFilters).includes(taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+          )[0]?.category._ref);
       return bool;
     })
 
     // filter by search
     if(searchTerm && searchTerm !== ''){
       tempTasks = tempTasks.filter((item) => {
-        const bool = taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.notes?.toLowerCase().includes(searchTerm.toLowerCase())
-        return bool;
+        return taskTypes?.filter(
+            (taskType) => taskType._id === item?.taskType?._ref
+            )[0]?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+
+          categories?.concat(systemCategories)?.filter(
+              (cat) => cat?._id === taskTypes?.filter(
+                (taskType) => taskType._id === item?.taskType?._ref
+              )[0]?.category?._ref
+            )[0]?.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            
+          item.notes?.toLowerCase().includes(searchTerm.toLowerCase()
+        );
       })
     }
+    
     setDisplayedTasks(tempTasks);
   }
 
@@ -60,11 +71,21 @@ const All = () => {
                 <div className='date-wrapper' key={item._id}>
                     {(!prevDate || prevDate !== item.date) && <h1 className='all-header'>{item.date}</h1>}
                     <div className='task-wrapper' key={item._id}>
-                    <button className='button-task-bubble' onClick={()=>{
-                        setExpandedTaskId((prev)=>prev===item._id?'':item._id)
-                        }} style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.category?._ref)[0]?.color.hex}}>
+                    <button className='button-task-bubble' 
+                      onClick={()=>{setExpandedTaskId((prev)=>prev===item._id?'':item._id)}} 
+                      style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
+                        (cat) => cat?._id === taskTypes?.filter(
+                              (taskType) => taskType._id === item?.taskType?._ref
+                            )[0]?.category?._ref
+                          )[0]?.color.hex}}
+                    >
                         <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
-                        <img className='icon-image' src={urlFor(iconData?.filter((icon)=> taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+                        <img className='icon-image' 
+                          src={urlFor(iconData?.filter((icon)=> taskTypes?.filter(
+                              (taskType) => taskType._id === item?.taskType?._ref
+                            )[0]?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} 
+                          alt='loading' 
+                        />
                         <div className='task-text'>
                             <div>
                             <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>

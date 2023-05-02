@@ -91,13 +91,22 @@ const CreateCategory = () => {
         <div className='create-item-icon-list'>
             <p>Choose a Default Icon:</p>
             {iconData?.map((item) => 
-                <button style={{'backgroundColor' : `${categoryColor}`}} key={item._id} type='button' onClick={() => {setCategoryIcon(item)}}>
+                <button style={{'backgroundColor' : `${categoryColor}`}} 
+                    key={item._id} 
+                    type='button' 
+                    onClick={() => {setCategoryIcon(item)}}
+                >
                     <img className='icon-image' src={urlFor(item.image)} alt='icon' />
                 </button>
             )}
         </div>
         <div className='item-bubble-inner' style={{'backgroundColor' : `${categoryColor}`}}>
-            {categoryIcon && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>categoryIcon?._id===icon?._id)[0]?.image?.asset?._ref)} alt='category' />}
+            {categoryIcon && 
+                <img className='icon-image' 
+                    src={urlFor(iconData?.filter((icon)=>categoryIcon?._id===icon?._id)[0]?.image?.asset?._ref)} 
+                    alt='category' 
+                />
+            }
             <p>{categoryName}</p>
         </div>
         <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>

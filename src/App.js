@@ -1,26 +1,20 @@
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useStateContext } from './utils/stateContext';
-import Login from './pages/Login.js';
-import Home from './pages/Home.js';
-import Add from './pages/AddPage.js';
-import Profile from './pages/Profile.js';
-import SetRange from './pages/SetRange.js';
-import Navbar from './components/Navbar.js';
-import CreateTaskType from './pages/CreateTaskType.js';
-import CreateCategory from './pages/CreateCategory.js';
+import { Login, Home, AddPage, Profile, SetRange, CreateTaskType, CreateCategory } from './pages';
+import { Navbar } from './components';
 import { Toaster } from 'react-hot-toast';
 import { useEffect } from 'react';
 
 function App() {
 
-  const { userData, auth } = useStateContext();
+  const { auth } = useStateContext();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem('user-data') && !auth.isAuthenticated && !auth.isLoading) {
       navigate('/login')
     }
-  }, [auth])
+  }, [auth, navigate])
 
   return (
     <div>
@@ -54,7 +48,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login />}/>
         <Route path='/:pageParam?/:dateParam?' element={<Home />}/>
-        <Route path='/add/:returnPage?/:id?/:dateParam?/:taskParam?/:amountParam?/:notesParam?' element={<Add />}/>
+        <Route path='/add/:returnPage?/:id?/:dateParam?/:taskParam?/:amountParam?/:notesParam?' element={<AddPage />}/>
         <Route path='/profile' element={<Profile />}/>
         <Route path='/set-range' element={<SetRange />}/>
         <Route path='/category/:id?/:name?/:hex?/:iconref?' element={<CreateCategory />}/>

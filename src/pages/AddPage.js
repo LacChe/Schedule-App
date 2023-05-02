@@ -11,7 +11,9 @@ const AddPage = () => {
     const { userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
-    const [date, setDate] = useState(dateParam ? dateParam : `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`);
+    const [date, setDate] = useState(
+        dateParam ? dateParam : `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+    );
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : undefined);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
@@ -108,7 +110,10 @@ const AddPage = () => {
             <h1>Add</h1>
             <div className='create-item-text-input'>
                 <p>Date:</p>
-                <input type='date' value={new Date(date).toLocaleDateString('en-CA')} onChange={(e) => setDate(e.target.value)}></input>
+                <input type='date' 
+                    value={new Date(date).toLocaleDateString('en-CA')} 
+                    onChange={(e) => setDate(e.target.value)}
+                ></input>
             </div>
             <div className='create-item-text-input amount-input'>
                 <p>Amount:</p>
@@ -118,12 +123,26 @@ const AddPage = () => {
                 <p>Choose a Task:</p>
                 {!taskTypes || taskTypes.length===0 ? 
                 <div className='empty-tasks'> 
-                    <button className='create-task-redirect-button' type='button' onClick={() => navigate('/task')}>Nothing here.<br/>Create a Task.</button>
+                    <button className='create-task-redirect-button' 
+                        type='button' 
+                        onClick={() => navigate('/task')}
+                    >
+                        Nothing here.<br/>Create a Task.
+                    </button>
                 </div> 
                 : 
                 taskTypes?.map((item) => 
-                    <button className='item-bubble-inner' style={{'backgroundColor' : categories?.concat(systemCategories)?.filter((cat) => cat?._id === item?.category?._ref)[0]?.color.hex}} key={item._id} type='button' onClick={() => {setTaskType(item)}}>
-                        <img className='icon-image' src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />
+                    <button className='item-bubble-inner' 
+                        style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
+                            (cat) => cat?._id === item?.category?._ref)[0]?.color.hex}} 
+                        key={item._id} 
+                        type='button' 
+                        onClick={() => {setTaskType(item)}}
+                    >
+                        <img className='icon-image' 
+                            src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} 
+                            alt='loading' 
+                        />
                         <p>{item.name} {item.unit}</p>
                     </button>
                 )}
@@ -132,8 +151,16 @@ const AddPage = () => {
                 <p>Notes:</p>
                 <textarea value={notes} onChange={(e) => setNotes(e.target.value)}/>
             </div>
-            <div className='item-bubble-inner' style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter((item) => item?._id === taskType?.category?._ref)[0]?.color.hex : '#666666'}}>
-                {taskType && <img className='icon-image' src={urlFor(iconData?.filter((icon)=>taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} alt='loading' />}
+            <div className='item-bubble-inner' 
+                style={{'backgroundColor' : taskType ? categories?.concat(systemCategories)?.filter(
+                    (item) => item?._id === taskType?.category?._ref)[0]?.color.hex : '#666666'}}
+            >
+                {taskType && 
+                    <img className='icon-image' 
+                        src={urlFor(iconData?.filter((icon)=>taskType?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} 
+                        alt='loading' 
+                    />
+                }
                 <div className='task-text'>
                     <div>
                         <h1>{taskType?.name}</h1>
@@ -144,15 +171,30 @@ const AddPage = () => {
               </div>
             {id && (deleteStatus === 'confirm' ?       
                 <div className='profile-item-bubble'>
-                    <button className='button-delete-back' type='button' onClick={() => {setDeleteStatus('none')}}><BsBackspaceFill /></button>
+                    <button className='button-delete-back' 
+                        type='button' 
+                        onClick={() => {setDeleteStatus('none')}}
+                    >
+                        <BsBackspaceFill />
+                    </button>
                     <div className='add-item-delete' >
                         <p>Delete?</p>
                     </div>
-                    <button className='button-delete-confirm' type='button' onClick={() => onDelete()}><AiFillDelete /></button>
+                    <button className='button-delete-confirm' 
+                        type='button' 
+                        onClick={() => onDelete()}
+                    >
+                        <AiFillDelete />
+                    </button>
                 </div>
                 :
                 <div className='add-with-delete'>
-                    <button className='button-delete' type='button' onClick={() => {setDeleteStatus('confirm')}}><AiOutlineDelete /></button>
+                    <button className='button-delete' 
+                        type='button' 
+                        onClick={() => {setDeleteStatus('confirm')}}
+                    >
+                        <AiOutlineDelete />
+                    </button>
                     <button className='create-confirm-button' type='button' onClick={submit}>Confirm</button>
                 </div>
             )}

@@ -1,8 +1,7 @@
 import React from "react";
 import { useStateContext } from '../utils/stateContext';
 import { useNavigate } from 'react-router-dom';
-import ProfileTaskBubble from '../components/ProfileTaskBubble.js'
-import ProfileCategoryBubble from '../components/ProfileCategoryBubble.js'
+import { ProfileTaskBubble, ProfileCategoryBubble } from '../components'
 
 const Profile = () => {
   const { userData, categories, systemCategories, taskTypes, sync } = useStateContext();
@@ -19,7 +18,9 @@ const Profile = () => {
         </div>
         <div className='profile-item-list'>
           <h1>Tasks</h1>
-          {taskTypes?.length === 0 ? <div className='empty'>Empty</div> : taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
+          {taskTypes?.length === 0 ? 
+          <div className='empty'>Empty</div> : 
+          taskTypes?.map((item) => <ProfileTaskBubble key={item._id} task={item}/>)}
           <button className='profile-new-item-button' type='button' onClick={()=> {
             navigate('/task');
           }}>New Task</button>
