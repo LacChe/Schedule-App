@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
-import { useNavigate, useParams } from 'react-router-dom';
-import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
 
-const Day = () => {
+const All = () => {
   const navigate = useNavigate();
   
   const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories, iconData } = useStateContext();
-  const { dateParam } = useParams();
 
   const [displayedTasks, setDisplayedTasks] = useState()
   const [expandedTaskId, setExpandedTaskId] = useState()
@@ -42,6 +40,14 @@ const Day = () => {
     filterAndSearchTasks();
   }, [tasks, searchTerm, idFilters])
 
+  useEffect(() => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [])
+  
+
   const taskList = (arr) => {
     let prevDate = undefined;
     let currentDate = undefined;
@@ -51,7 +57,7 @@ const Day = () => {
             prevDate = currentDate;
             currentDate = item.date;
             return(
-                <div className='date-wrapper'>
+                <div className='date-wrapper' key={item._id}>
                     {(!prevDate || prevDate !== item.date) && <h1 className='all-header'>{item.date}</h1>}
                     <div className='task-wrapper' key={item._id}>
                     <button className='button-task-bubble' onClick={()=>{
@@ -96,4 +102,4 @@ const Day = () => {
   )
 }
 
-export default Day
+export default All
