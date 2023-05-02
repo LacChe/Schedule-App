@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { IoMdAddCircleOutline } from 'react-icons/io'
 import { AiOutlineSearch, AiOutlineFilter } from 'react-icons/ai'
 import { FiPenTool } from 'react-icons/fi'
@@ -34,6 +34,8 @@ const Home = () => {
     const [display, setDisplay] = useState('');
     const navigate = useNavigate();
 
+    const inputRef = useRef(null);
+
     if(display === 'filter') return (<Filter setDisplay={setDisplay} />);
 
     return (
@@ -41,13 +43,16 @@ const Home = () => {
             {displayComponent(pageParam)}
             <div className={showSearch?'tools-search search-show':'tools-search search-hide'}>
                 <div className='search-bar-icon'><AiOutlineSearch /></div>
-                <input className='search-input' type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+                <input className='search-input' ref={inputRef} type='text' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
             </div>
             <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}><FiPenTool /></button>
             <div className={showTools?'tools-container tools-show':'tools-container tools-hide'}>
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
-                    setShowSearch((prev) => !prev);
+                    setShowSearch((prev) => {
+                        if(!prev) inputRef.current.focus();
+                        return !prev
+                    });
                 }}><AiOutlineSearch /></button>
                 <button type='button' className='button-tool' onClick={()=>{
                     setShowTools(false);
