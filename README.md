@@ -1,12 +1,12 @@
 # Task-Logger
 
-Keep track of stuff you do everyday. [https://tasklogger.netlify.app/](https://tasklogger.netlify.app/)
+Website to keep track of the stuff you do everyday. [https://tasklogger.netlify.app/](https://tasklogger.netlify.app/)
 
-Made with [React](https://react.dev/), [Sanity](https://www.sanity.io/), [Auth0](https://auth0.com/) and [Netlify](https://www.netlify.com/). Icons created by Freepik from [Flaticon](https://www.flaticon.com/).
+Made with [React](https://react.dev/), [Sanity](https://www.sanity.io/), [Auth0](https://auth0.com/), and [Netlify](https://www.netlify.com/). Icons created by Freepik from [Flaticon](https://www.flaticon.com/).
 
 <img src="./pics/day.JPG" width="240" /> <img src="./pics/nav.JPG" width="240" />
 
-See everything you've done by day, week, month, or all at the same time.
+See everything you've done this day, week, month, or all time.
 
 <img src="./pics/week.JPG" width="240" /> <img src="./pics/month.JPG" width="240" />
 
