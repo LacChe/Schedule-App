@@ -51,16 +51,9 @@ const All = () => {
   useEffect(() => {
     filterAndSearchTasks();
   }, [tasks, searchTerm, idFilters])
-
-  useEffect(() => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, [])
   
-
   const taskList = (arr) => {
+    if(arr) arr.reverse();
     let prevDate = undefined;
     let currentDate = undefined;
     return(
