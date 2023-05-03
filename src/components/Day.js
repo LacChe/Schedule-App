@@ -4,6 +4,7 @@ import { urlFor } from '../utils/client.js';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
+import  { IoCopyOutline } from 'react-icons/io5';
 
 const Day = () => {
   const navigate = useNavigate();
@@ -106,6 +107,12 @@ const Day = () => {
                 navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
               )}>
               <AiOutlineEdit />
+            </button>}
+            {item._id===expandedTaskId && 
+              <button className='button-task-duplicate' type='button' onClick={(()=>
+                navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+              )}>
+              <IoCopyOutline />
             </button>}
           </div>
         )

@@ -12,7 +12,7 @@ const AddPage = () => {
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
     const [date, setDate] = useState(
-        dateParam ? dateParam : `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
+        (!dateParam || id === 'duplicate') ? `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}` : dateParam
     );
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : undefined);
@@ -36,7 +36,7 @@ const AddPage = () => {
         }
         toast.success('Success!');
 
-        if(!id){
+        if(!id || id === 'duplicate'){
           const doc = {
               _id: uuidv4(),
               _type: 'task',

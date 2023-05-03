@@ -3,6 +3,7 @@ import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
+import  { IoCopyOutline } from 'react-icons/io5';
 
 const All = () => {
   const navigate = useNavigate();
@@ -88,22 +89,22 @@ const All = () => {
                         />
                         <div className='task-text'>
                             <div>
-                            <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
-                            <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
+                              <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
+                              <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
                             </div>
                             {item.notes && (
-                            item._id!==expandedTaskId?
-                            <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
-                            <p>{item.notes}</p>
+                              item._id!==expandedTaskId?
+                              <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
+                              <p>{item.notes}</p>
                             )}
                         </div>
-                        </div>
+                      </div>
                     </button>
                     {item._id===expandedTaskId && 
                         <button className='button-task-edit' type='button' onClick={(()=>
-                        navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+                          navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                         )}>
-                        <AiOutlineEdit />
+                        <IoCopyOutline />
                     </button>}
                     </div>
                 </div>

@@ -478,7 +478,7 @@ button:active{
 }
 .task-text > p {
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 25px;
 }
 .task-text > div {
     display: flex;
@@ -514,16 +514,21 @@ button:active{
 .task-collapsed {
     height: 50px;
 }
-.button-task-edit {
+.button-task-edit, .button-task-duplicate {
     position: absolute;
     width: 35px;
     height: 35px;
     border-style: none;
     border-radius: 50%;
     right: 10px;
-    top: 10px;
     background-color: #F9F5EB;
     color: #002B5B;
+}
+.button-task-duplicate {
+    top: 55px;
+}
+.button-task-edit {
+    top: 10px;
 }
 .task-wrapper {
     position: relative;
@@ -1074,7 +1079,7 @@ button:active{
     }
     .task-text > p {
         margin-left: 3vw;
-        margin-right: 3vw;
+        margin-right: 10vw;
     }
     .task-text > div {
         display: flex;
@@ -1110,16 +1115,21 @@ button:active{
     .task-collapsed {
         height: 15vw;
     }
-    .button-task-edit {
+    .button-task-edit, .button-task-duplicate {
         position: absolute;
         width: 12vw;
         height: 12vw;
         border-style: none;
         border-radius: 50%;
         right: 3vw;
-        top: 3vw;
         background-color: #F9F5EB;
         color: #002B5B;
+    }
+    .button-task-duplicate {
+        top: 18vw;
+    }
+    .button-task-edit {
+        top: 3vw;
     }
     .task-wrapper {
         position: relative;
