@@ -3,7 +3,7 @@ import { useStateContext } from '../utils/stateContext.js';
 import { urlFor } from '../utils/client.js';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineEdit } from 'react-icons/ai';
-import  { IoCopyOutline } from 'react-icons/io5';
+import { IoCopyOutline } from 'react-icons/io5';
 
 const All = () => {
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ const All = () => {
                             )[0]?.category?._ref
                           )[0]?.color.hex}}
                     >
-                        <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
+                      <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
                         <img className='icon-image' 
                           src={urlFor(iconData?.filter((icon)=> taskTypes?.filter(
                               (taskType) => taskType._id === item?.taskType?._ref
@@ -90,7 +90,7 @@ const All = () => {
                         <div className='task-text'>
                             <div>
                               <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
-                              <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
+                              <p>{item.amount} ({taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit})</p>
                             </div>
                             {item.notes && (
                               item._id!==expandedTaskId?
@@ -102,12 +102,18 @@ const All = () => {
                     </button>
                     {item._id===expandedTaskId && 
                         <button className='button-task-edit' type='button' onClick={(()=>
+                          navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+                        )}>
+                        <AiOutlineEdit />
+                    </button>}
+                    {item._id===expandedTaskId && 
+                        <button className='button-task-duplicate' type='button' onClick={(()=>
                           navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                         )}>
                         <IoCopyOutline />
                     </button>}
-                    </div>
-                </div>
+                  </div>
+              </div>
             )
         }
       )

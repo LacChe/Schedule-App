@@ -143,7 +143,7 @@ const AddPage = () => {
                             src={urlFor(iconData?.filter((icon)=>item?.icon?._ref===icon?._id)[0]?.image?.asset?._ref)} 
                             alt='loading' 
                         />
-                        <p>{item.name} {item.unit}</p>
+                        <p>{item.name} ({item.unit})</p>
                     </button>
                 )}
             </div>
@@ -164,7 +164,7 @@ const AddPage = () => {
                 <div className='task-text'>
                     <div>
                         <h1>{taskType?.name}</h1>
-                        <p>{amount} {taskType?.unit}</p>
+                        <p>{amount} ({taskType?.unit})</p>
                     </div>
                     {notes && <p>{notes.substring(0,18)}{notes.length > 18 && '...'}</p>}
                 </div>

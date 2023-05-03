@@ -1,9 +1,18 @@
 import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { useStateContext } from '../utils/stateContext';
 import { urlFor } from '../utils/client';
+import { CgEditFlipH } from 'react-icons/cg';
 
 const Filter = ({ setDisplay }) => {
     const { categories, systemCategories, taskTypes, idFilters, setIdFilters,iconData } = useStateContext();
+
+    const toggleFilter = () => {
+        if(idFilters.length === 0){
+            setIdFilters(taskTypes.concat(categories.concat(systemCategories)).map((item) => item._id))
+        } else {
+            setIdFilters([])
+        }
+    }
 
     const handleSelect = (id) => {
         if(idFilters.includes(id)){
@@ -54,6 +63,9 @@ const Filter = ({ setDisplay }) => {
                 </button>
             )}
         </div>
+        <button className='button-tool-toggle-filter' type='button' onClick={toggleFilter}>
+            <CgEditFlipH />
+        </button>
         <button className='button-tool-confirm' type='button' onClick={()=>setDisplay('')}>
             <AiOutlineCheckCircle />
         </button>

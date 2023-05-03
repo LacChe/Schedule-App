@@ -87,7 +87,7 @@ button:active{
     border-radius: 15px;
     border-style: none;
 }
-.button-add-item, .button-tool-confirm {
+.button-add-item, .button-tool-confirm, .button-tool-toggle-filter {
     position: fixed;
     bottom: 20px;
     right: 20px;
@@ -97,10 +97,13 @@ button:active{
     border-style: none;
     z-index: 2;
 }
-.button-add-item > * , .button-tool-confirm > * {
+.button-add-item > * , .button-tool-confirm > *, .button-tool-toggle-filter > * {
     margin-top: 3px;
     width: 25px;
     height: 25px;
+}
+.button-tool-toggle-filter{
+    bottom: 80px;
 }
 .tools-container {
     position: fixed;
@@ -687,7 +690,7 @@ button:active{
         border-radius: 5vw;
         border-style: none;
     }
-    .button-add-item, .button-tool-confirm {
+    .button-add-item, .button-tool-confirm, .button-tool-toggle-filter {
         position: fixed;
         bottom: 6vw;
         right: 6vw;
@@ -697,10 +700,13 @@ button:active{
         border-style: none;
         z-index: 2;
     }
-    .button-add-item > * , .button-tool-confirm > * {
+    .button-add-item > * , .button-tool-confirm > *, .button-tool-toggle-filter > * {
         margin-top: 1vw;
         width: 8vw;
         height: 8vw;
+    }
+    .button-tool-toggle-filter{
+        bottom: 25vw;
     }
     .tools-container {
         position: fixed;

@@ -4,7 +4,7 @@ import { urlFor } from '../utils/client.js';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
-import  { IoCopyOutline } from 'react-icons/io5';
+import { IoCopyOutline } from 'react-icons/io5';
 
 const Day = () => {
   const navigate = useNavigate();
@@ -92,7 +92,7 @@ const Day = () => {
                 <div className='task-text'>
                   <div>
                     <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
-                    <p>{item.amount} {taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit}</p>
+                    <p>{item.amount} ({taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit})</p>
                   </div>
                   {item.notes && (
                     item._id!==expandedTaskId?
