@@ -53,17 +53,23 @@ const All = () => {
   }, [tasks, searchTerm, idFilters])
   
   const taskList = (arr) => {
-    if(arr) arr.reverse();
+    let reversedArr = arr ? arr.slice().reverse() : [];
     let prevDate = undefined;
     let currentDate = undefined;
     return(
-      arr?.length === 0 ? <div className='empty'>Empty</div> : arr?.map((item) => 
+      reversedArr?.length === 0 ? <div className='empty'>Empty</div> : reversedArr?.map((item) => 
         {
             prevDate = currentDate;
             currentDate = item.date;
             return(
                 <div className='date-wrapper' key={item._id}>
-                    {(!prevDate || prevDate !== item.date) && <h1 className='all-header'>{item.date}</h1>}
+                    {(!prevDate || 
+                        (
+                          Number(prevDate.split('-')[0]) !== Number(item.date.split('-')[0]) ||
+                          Number(prevDate.split('-')[1]) !== Number(item.date.split('-')[1]) ||
+                          Number(prevDate.split('-')[2]) !== Number(item.date.split('-')[2])
+                        )
+                      ) && <h1 className='all-header'>{item.date}</h1>}
                     <div className='task-wrapper' key={item._id}>
                     <button className='button-task-bubble' 
                       onClick={()=>{setExpandedTaskId((prev)=>prev===item._id?'':item._id)}} 
