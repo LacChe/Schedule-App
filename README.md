@@ -1,4 +1,4 @@
-# Task5Logger
+# Task-Logger
 
 Keep track of stuff you do everyday. [https://tasklogger.netlify.app/](https://tasklogger.netlify.app/)
 
