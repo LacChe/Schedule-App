@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useStateContext } from './utils/stateContext';
 import { Login, Home, AddPage, Profile, SetRange, CreateTaskType, CreateCategory } from './pages';
 import { Navbar } from './components';
