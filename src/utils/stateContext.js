@@ -100,6 +100,7 @@ export const StateContext = ({ children }) => {
 
     // fetch user data
     useEffect(() => {
+          // auth session is short on free plan, skip check if local storage has user data
           setUserData(JSON.parse(localStorage.getItem('user-data')) ? Object.values(JSON.parse(localStorage.getItem('user-data'))) : '');
           if(!localStorage.getItem('user-data')){
             const query = userQuery(auth?.user?.sub.split('|')[1]);
