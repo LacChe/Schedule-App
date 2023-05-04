@@ -23,6 +23,10 @@ export const StateContext = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState();
     const [idFilters, setIdFilters] = useState([]);
 
+    const loaded = () => {
+      return iconData && categories && systemCategories && taskTypes && tasks
+    }
+
     // clear storage and get from db
     const sync = () => {
       if(userData){
@@ -222,7 +226,8 @@ export const StateContext = ({ children }) => {
                 setSearchTerm,
                 idFilters,
                 setIdFilters,
-                sync
+                sync,
+                loaded
             }}
         >
             { children }

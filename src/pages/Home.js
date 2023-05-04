@@ -24,7 +24,7 @@ const displayComponent = (param) => {
 }
 
 const Home = () => {
-    const { showTools, setShowTools, showSearch, setShowSearch, searchTerm, setSearchTerm } = useStateContext();
+    const { loaded, showTools, setShowTools, showSearch, setShowSearch, searchTerm, setSearchTerm } = useStateContext();
     const { pageParam } = useParams();
     const [display, setDisplay] = useState('');
     const navigate = useNavigate();
@@ -32,6 +32,14 @@ const Home = () => {
     const inputRef = useRef(null);
 
     if(display === 'filter') return (<Filter setDisplay={setDisplay} />);
+
+    if(!loaded()) {
+      return (
+        <div>
+          LOADING...
+        </div>
+      )
+    }
 
     return (
         <div className='home-main'>

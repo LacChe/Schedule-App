@@ -4,8 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { ProfileTaskBubble, ProfileCategoryBubble } from '../components'
 
 const Profile = () => {
-  const { userData, categories, systemCategories, taskTypes, sync } = useStateContext();
+  const { userData, categories, systemCategories, taskTypes, sync, loaded } = useStateContext();
   const navigate = useNavigate();
+
+  if(!loaded()) {
+    return (
+      <div>
+        LOADING...
+      </div>
+    )
+  }
 
   return (
     <div className='profile-main'>

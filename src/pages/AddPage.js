@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { BsBackspaceFill } from 'react-icons/bs';
 
 const AddPage = () => {
-    const { userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
+    const { loaded, userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
     const [date, setDate] = useState(
@@ -104,6 +104,15 @@ const AddPage = () => {
           break;
       }
     }
+
+
+    if(!loaded()) {
+        return (
+          <div>
+            LOADING...
+          </div>
+        )
+      }
 
     return (
         <div className='create-item-main'>

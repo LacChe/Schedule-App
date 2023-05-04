@@ -11,7 +11,7 @@ const CreateTaskType = () => {
     const navigate = useNavigate();
 
     const { id, name, unit, categoryref, iconref } = useParams();
-    const { userData, categories, systemCategories, setTaskTypes, taskTypes, iconData } = useStateContext();
+    const { loaded, userData, categories, systemCategories, setTaskTypes, taskTypes, iconData } = useStateContext();
 
     const [taskName, setTaskName] = useState(name);
     const [taskUnit, setTaskUnit] = useState(unit);
@@ -82,6 +82,14 @@ const CreateTaskType = () => {
         navigate('/profile');
     }
     
+  if(!loaded()) {
+    return (
+      <div>
+        LOADING...
+      </div>
+    )
+  }
+
   return (
     <div className='create-item-main'>
         <h1>Create a Task</h1>

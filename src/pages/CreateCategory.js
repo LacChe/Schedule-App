@@ -11,7 +11,7 @@ const CreateCategory = () => {
 
     const { id, name, hex, iconref } = useParams();
 
-    const { userData, setCategories, categories, iconData } = useStateContext();
+    const { loaded, userData, setCategories, categories, iconData } = useStateContext();
 
     const [categoryName, setCategoryName] = useState(name);
     const [categoryColor, setCategoryColor] = useState(hex ? `#${hex}` : '#888888');
@@ -75,6 +75,14 @@ const CreateCategory = () => {
             setCategories((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }
         navigate('/profile');
+    }
+
+    if(!loaded()) {
+      return (
+        <div>
+          LOADING...
+        </div>
+      )
     }
     
   return (

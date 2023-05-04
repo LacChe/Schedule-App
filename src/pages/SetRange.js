@@ -3,10 +3,18 @@ import { useStateContext } from '../utils/stateContext.js';
 import { useNavigate } from 'react-router-dom';
 
 const SetRange = () => {
-    const { setShowNavbar, setStartDate, setEndDate } = useStateContext(); 
+    const { loaded, setShowNavbar, setStartDate, setEndDate } = useStateContext(); 
     const navigate = useNavigate();
     const [tempStartDate, setTempStartDate] = useState(new Date());
     const [tempEndDate, setTempEndDate] = useState(new Date());
+
+    if(!loaded()) {
+      return (
+        <div>
+          LOADING...
+        </div>
+      )
+    }
 
     return (
         <div className='set-range-main'>
