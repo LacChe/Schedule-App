@@ -100,7 +100,6 @@ export const StateContext = ({ children }) => {
 
     // fetch user data
     useEffect(() => {
-        if(auth.user){
           setUserData(JSON.parse(localStorage.getItem('user-data')) ? Object.values(JSON.parse(localStorage.getItem('user-data'))) : '');
           if(!localStorage.getItem('user-data')){
             const query = userQuery(auth?.user?.sub.split('|')[1]);
@@ -111,8 +110,7 @@ export const StateContext = ({ children }) => {
               localStorage.setItem('user-data', JSON.stringify(data));
             })
           }
-        }
-    }, [auth])
+    }, [])
     
     // fetch category data if not in local storage
       useEffect(() => {
