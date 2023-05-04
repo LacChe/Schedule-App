@@ -26,22 +26,13 @@ export const StateContext = ({ children }) => {
     // clear storage and get from db
     const sync = () => {
       if(userData){
-        localStorage.clear();
+        //localStorage.clear();
         let query;
-
-        query = userQuery(userData[0]._id);
-        client.fetch(query)
-        .then((data) => {
-          //console.log('userQuery', JSON.stringify(data))
-          setUserData(data);
-          localStorage.setItem('user-data', JSON.stringify(data));
-        })
 
         query = categoryQuery(userData[0]._id);
         client.fetch(query)
         .then((data) => {
           //console.log('categoryQuery', JSON.stringify(data))
-          console.log('category', 'sync')
           setCategories(data);
           localStorage.setItem('categories', JSON.stringify(data));
         })
