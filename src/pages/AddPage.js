@@ -71,7 +71,7 @@ const AddPage = () => {
                 _ref: `${taskType._id}`
             }
           }
-          client.createOrReplace(doc);
+          client.createOrReplace(doc)
           localStorage.setItem('tasks', JSON.stringify(tasks.map((item) => item._id === doc._id ? doc : item)));
           setTasks((prev) => prev.map((item) => item._id === doc._id ? doc : item));
         }

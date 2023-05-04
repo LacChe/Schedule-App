@@ -25,11 +25,11 @@ export const StateContext = ({ children }) => {
 
     // clear storage and get from db
     const sync = () => {
-      if(auth.user){
+      if(userData){
         localStorage.clear();
         let query;
 
-        query = userQuery(auth?.user?.sub.split('|')[1]);
+        query = userQuery(userData[0]._id);
         client.fetch(query)
         .then((data) => {
           //console.log('userQuery', JSON.stringify(data))
@@ -37,7 +37,7 @@ export const StateContext = ({ children }) => {
           localStorage.setItem('user-data', JSON.stringify(data));
         })
 
-        query = categoryQuery(auth?.user?.sub.split('|')[1]);
+        query = categoryQuery(userData[0]._id);
         client.fetch(query)
         .then((data) => {
           //console.log('categoryQuery', JSON.stringify(data))
@@ -55,7 +55,7 @@ export const StateContext = ({ children }) => {
           localStorage.setItem('system-categories', JSON.stringify(data));
         })
         
-        query = taskTypeQuery(auth?.user?.sub.split('|')[1]);
+        query = taskTypeQuery(userData[0]._id);
         client.fetch(query)
         .then((data) => {
           //console.log('taskTypeQuery', JSON.stringify(data))
@@ -64,7 +64,7 @@ export const StateContext = ({ children }) => {
           localStorage.setItem('task-types', JSON.stringify(data));
         })
 
-        query = taskQuery(auth?.user?.sub.split('|')[1]);
+        query = taskQuery(userData[0]._id);
         client.fetch(query)
         .then((data) => {
           //console.log('taskQuery', JSON.stringify(data))
@@ -103,22 +103,26 @@ export const StateContext = ({ children }) => {
           // auth session is short on free plan, skip check if local storage has user data
           setUserData(JSON.parse(localStorage.getItem('user-data')) ? Object.values(JSON.parse(localStorage.getItem('user-data'))) : '');
           if(!localStorage.getItem('user-data')){
-            const query = userQuery(auth?.user?.sub.split('|')[1]);
-            client.fetch(query)
-            .then((data) => {
-              //console.log('userQuery', JSON.stringify(data))
-              setUserData(data);
-              localStorage.setItem('user-data', JSON.stringify(data));
+            if (auth.isAuthenticated) {
+              // auth.logout({ logoutParams: { returnTo: window.location.origin } });
+              // return;
+              const query = userQuery(auth?.user?.sub.split('|')[1]);
+              client.fetch(query)
+              .then((data) => {
+                //console.log('userQuery', JSON.stringify(data))
+                setUserData(data);
+                localStorage.setItem('user-data', JSON.stringify(data));
             })
           }
-    }, [])
+        }
+    }, [auth])
     
     // fetch category data if not in local storage
       useEffect(() => {
-          if(auth.user){
+          if(userData){
             setCategories(JSON.parse(localStorage.getItem('categories')) ? Object.values(JSON.parse(localStorage.getItem('categories'))) : '');
             if(!localStorage.getItem('categories')){
-              const query = categoryQuery(auth?.user?.sub.split('|')[1]);
+              const query = categoryQuery(userData[0]._id);
               client.fetch(query)
               .then((data) => {
                 //console.log('categoryQuery', JSON.stringify(data))
@@ -128,11 +132,11 @@ export const StateContext = ({ children }) => {
               })
             }
           }
-      }, [auth])
+      }, [userData])
     
       // fetch system category data if not in local storage
         useEffect(() => {
-          if(auth.user){
+          if(userData){
             setSystemCategories(JSON.parse(localStorage.getItem('system-categories')) ? Object.values(JSON.parse(localStorage.getItem('system-categories'))) : '');
             if(!localStorage.getItem('system-categories')){
               const query = systemCategoryQuery();
@@ -145,14 +149,14 @@ export const StateContext = ({ children }) => {
               })
             }
           }
-        }, [auth])
+        }, [userData])
     
     // fetch tasktype data if not in local storage
       useEffect(() => {
-        if(auth.user){
+        if(userData){
           setTaskTypes(JSON.parse(localStorage.getItem('task-types')) ? Object.values(JSON.parse(localStorage.getItem('task-types'))) : '');
           if(!localStorage.getItem('task-types')){
-            const query = taskTypeQuery(auth?.user?.sub.split('|')[1]);
+            const query = taskTypeQuery(userData[0]._id);
             client.fetch(query)
             .then((data) => {
               //console.log('taskTypeQuery', JSON.stringify(data))
@@ -162,14 +166,14 @@ export const StateContext = ({ children }) => {
             })
           }
         }
-      }, [auth])
+      }, [userData])
     
     // fetch task data if not in local storage
       useEffect(() => {
-        if(auth.user){
+        if(userData){
           setTasks(JSON.parse(localStorage.getItem('tasks')) ? Object.values(JSON.parse(localStorage.getItem('tasks'))) : '');
           if(!localStorage.getItem('tasks')){
-            const query = taskQuery(auth?.user?.sub.split('|')[1]);
+            const query = taskQuery(userData[0]._id);
             client.fetch(query)
             .then((data) => {
               //console.log('taskQuery', JSON.stringify(data))
@@ -179,11 +183,11 @@ export const StateContext = ({ children }) => {
             })
           }
         }
-      }, [auth])    
+      }, [userData])    
       
       // fetch icon data if not in local storage
       useEffect(() => {
-        if(auth.user){
+        if(userData){
           setIconData(JSON.parse(localStorage.getItem('icons')) ? Object.values(JSON.parse(localStorage.getItem('icons'))) : '');
           if(!localStorage.getItem('icons')){
             const query = iconQuery();
@@ -196,7 +200,7 @@ export const StateContext = ({ children }) => {
             })
           }
         }
-      }, [auth])
+      }, [userData])
 
     return (
         <Context.Provider
