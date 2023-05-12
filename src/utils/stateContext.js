@@ -37,6 +37,7 @@ export const StateContext = ({ children }) => {
         client.fetch(query)
         .then((data) => {
           //console.log('categoryQuery', JSON.stringify(data))
+          console.log('category', 'sync')
           setCategories(data);
           localStorage.setItem('categories', JSON.stringify(data));
         })

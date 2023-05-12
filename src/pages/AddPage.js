@@ -12,7 +12,9 @@ const AddPage = () => {
     const { returnPage, id, dateParam, taskParam, amountParam, notesParam } = useParams();
 
     const [date, setDate] = useState(
-        (!dateParam || id === 'duplicate') ? `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}` : dateParam
+        (!dateParam || id === 'duplicate') ? 
+        `${new Date().getFullYear()}-${new Date().getMonth()+1<10?'0':''}${new Date().getMonth()+1}-${new Date().getDate()<10?'0':''}${new Date().getDate()}` : 
+        `${dateParam.split('-')[0]}-${dateParam.split('-')[1]<10?'0':''}${dateParam.split('-')[1]}-${dateParam.split('-')[2]<10?'0':''}${dateParam.split('-')[2]}`
     );
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : undefined);
