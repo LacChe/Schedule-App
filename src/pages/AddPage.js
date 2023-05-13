@@ -13,13 +13,13 @@ const AddPage = () => {
 
     const [date, setDate] = useState(
         (!dateParam || id === 'duplicate') ? 
-        `${new Date().getFullYear()}-${new Date().getMonth()+1<10?'0':''}${new Date().getMonth()+1}-${new Date().getDate()<10?'0':''}${new Date().getDate()}` : 
-        `${dateParam.split('-')[0]}-${dateParam.split('-')[1]<10?'0':''}${dateParam.split('-')[1]}-${dateParam.split('-')[2]<10?'0':''}${dateParam.split('-')[2]}`
+        `${new Date().getFullYear()}-${new Date().getMonth()+1<10?'0':''}${Number(new Date().getMonth()+1)}-${new Date().getDate()<10?'0':''}${Number(new Date().getDate())}` : 
+        `${dateParam.split('-')[0]}-${dateParam.split('-')[1]<10?'0':''}${Number(dateParam.split('-')[1])}-${dateParam.split('-')[2]<10?'0':''}${Number(dateParam.split('-')[2])}`
     );
     const [taskType, setTaskType] = useState(taskTypes?.filter((item) => item._id === taskParam)[0]);
     const [amount, setAmount] = useState(amountParam ? amountParam : undefined);
     const [notes, setNotes] = useState(notesParam ? notesParam : '');
-    const [deleteStatus, setDeleteStatus] = useState('none')
+    const [deleteStatus, setDeleteStatus] = useState('none');
     
     const navigate = useNavigate();
     
@@ -55,8 +55,8 @@ const AddPage = () => {
               }
             }
             client.create(doc)
-            localStorage.setItem('tasks', JSON.stringify([doc].concat(tasks)));
-            setTasks((prev) => [doc].concat(prev));
+            localStorage.setItem('tasks', JSON.stringify(tasks.concat([doc])));
+            setTasks((prev) => prev.concat([doc]));
         } else {
           const doc = {
             _id: id,
