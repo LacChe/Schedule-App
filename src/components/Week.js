@@ -122,7 +122,7 @@ const Week = () => {
                 )[0]?.color.hex}}
             >
               <div style={{
-                'height':window.innerWidth > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`
+                'height':window.screen.width > 1024 ? `${20+15*obj[key].amount}px` : `${7+3*obj[key].amount}vw`
                 }} className='task-bubble-inner-week'>
                 <img className='icon-image' 
                   src={urlFor(iconData?.filter((icon)=> taskTypes?.filter(
