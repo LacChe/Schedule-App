@@ -55,8 +55,30 @@ const AddPage = () => {
               }
             }
             client.create(doc)
-            localStorage.setItem('tasks', JSON.stringify(tasks.concat([doc])));
-            setTasks((prev) => prev.concat([doc]));
+            let spliceIndex = tasks.length;
+            for (let i = 0; i < tasks.length; i++) {
+                if(date.split('-')[0] < tasks[i].date.split('-')[0]) {
+                    spliceIndex = i;
+                    break;
+                } else if(date.split('-')[0] === tasks[i].date.split('-')[0] &&
+                        date.split('-')[1] < tasks[i].date.split('-')[1]) {
+                    spliceIndex = i;
+                    break;
+                } else if(date.split('-')[0] === tasks[i].date.split('-')[0] &&
+                        date.split('-')[1] === tasks[i].date.split('-')[1] &&
+                        date.split('-')[2] < tasks[i].date.split('-')[2]) {
+                    spliceIndex = i;
+                    break;
+                }
+            }
+            const arr = [...tasks]
+            arr.splice(spliceIndex, 0, doc)
+            localStorage.setItem('tasks', JSON.stringify(arr));
+            setTasks((prev) => {
+                const newList = [...prev];
+                newList.splice(spliceIndex, 0, doc)
+                return newList;
+            });
         } else {
           const doc = {
             _id: id,
