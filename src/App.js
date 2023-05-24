@@ -19,7 +19,7 @@ function App() {
   return (
     <div>
       <div>
-        <Toaster position="top-center"
+        <Toaster position="top-right"
           toastOptions={{
             success: {
               style: {
