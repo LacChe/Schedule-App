@@ -10,7 +10,13 @@ img {
     filter: invert(1);
 }
 body{
-    background-color: #F9F5EB;
+    background: repeating-linear-gradient(
+    65.4deg,
+    #F9F5EB,
+    #F9F5EB 3px,
+    #ffffff 2px,
+    #ffffff 4px
+  );
 }
 button {
     background-color: #002B5B;
@@ -613,7 +619,13 @@ button:active{
         margin-bottom: 10vw;
     }
     body{
-        background-color: #F9F5EB;
+        background: repeating-linear-gradient(
+        65.4deg,
+        #F9F5EB,
+        #F9F5EB 3px,
+        #ffffff 2px,
+        #ffffff 4px
+      );
     }
     button {
         background-color: #002B5B;
