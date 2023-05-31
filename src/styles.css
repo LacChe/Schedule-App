@@ -490,7 +490,7 @@ button:active{
 .task-bubble-inner {
     display: flex;
     align-items: center;
-    width: 280px;
+    width: 300px;
     border-style: none;
     border-radius: 15px;
     color: white;
