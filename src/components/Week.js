@@ -77,7 +77,7 @@ const Week = () => {
     let tempTasksGroup = [];
     for(let i = 0; i < 7; i++){
       tempTasksGroup[i] = tempTasks.filter((item) => 
-        new Date(item.date.split('-')[0], item.date.split('-')[1], item.date.split('-')[2]).getDate() === 
+        new Date(item.date).getDate() === 
         new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()-(6-i)).getDate()
       )
     }
