@@ -42,6 +42,14 @@ button:active{
     padding-top: 0.1rem;
     padding-left: 0.1rem;
 }
+.spinner * {
+    top: 4rem;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+}
 .login {
     position: fixed;
     height: 100%;

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
+import { Grid } from  'react-loader-spinner'
 
 const CreateTaskType = () => {
 
@@ -84,9 +85,18 @@ const CreateTaskType = () => {
     
   if(!loaded()) {
     return (
-      <div>
-        LOADING...
-      </div>
+        <div className='spinner'>
+          <Grid
+              height="80"
+              width="80"
+              color="#002B5B"
+              ariaLabel="grid-loading"
+              radius="12.5"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+          />
+        </div>
     )
   }
 

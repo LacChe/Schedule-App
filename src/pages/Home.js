@@ -5,6 +5,7 @@ import { FiPenTool } from 'react-icons/fi'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Day, Week, Month, All, Filter } from '../components';
 import { useStateContext } from '../utils/stateContext.js';
+import { Grid } from  'react-loader-spinner'
 
 const displayComponent = (param) => {
     switch (param) {
@@ -35,8 +36,17 @@ const Home = () => {
 
     if(!loaded()) {
       return (
-        <div>
-          LOADING...
+        <div className='spinner'>
+          <Grid
+              height="80"
+              width="80"
+              color="#002B5B"
+              ariaLabel="grid-loading"
+              radius="12.5"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+          />
         </div>
       )
     }

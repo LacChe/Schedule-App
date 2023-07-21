@@ -2,6 +2,7 @@ import React from "react";
 import { useStateContext } from '../utils/stateContext';
 import { useNavigate } from 'react-router-dom';
 import { ProfileTaskBubble, ProfileCategoryBubble } from '../components'
+import { Grid } from  'react-loader-spinner'
 
 const Profile = () => {
   const { userData, categories, systemCategories, taskTypes, sync, loaded } = useStateContext();
@@ -9,8 +10,17 @@ const Profile = () => {
 
   if(!loaded()) {
     return (
-      <div>
-        LOADING...
+      <div className='spinner'>
+        <Grid
+            height="80"
+            width="80"
+            color="#002B5B"
+            ariaLabel="grid-loading"
+            radius="12.5"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+        />
       </div>
     )
   }

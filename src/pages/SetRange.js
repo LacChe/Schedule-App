@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useStateContext } from '../utils/stateContext.js';
 import { useNavigate } from 'react-router-dom';
+import { Grid } from  'react-loader-spinner'
 
 const SetRange = () => {
     const { loaded, setShowNavbar, setStartDate, setEndDate } = useStateContext(); 
@@ -10,8 +11,17 @@ const SetRange = () => {
 
     if(!loaded()) {
       return (
-        <div>
-          LOADING...
+        <div className='spinner'>
+            <Grid
+                height="80"
+                width="80"
+                color="#002B5B"
+                ariaLabel="grid-loading"
+                radius="12.5"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+            />
         </div>
       )
     }
