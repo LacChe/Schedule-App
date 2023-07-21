@@ -22,7 +22,7 @@ img {
     filter: invert(1);
 }
 body{
-    background-color: var(--button-color);
+    background-color: var(--background-color);
 }
 button {
     background-color: var(--button-background-color);
