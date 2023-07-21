@@ -54,7 +54,14 @@ const Home = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}>
                 </input>
             </div>
-            <button type='button' className='button-add-item' onClick={()=>setShowTools((prev)=>!prev)}>
+            <button type='button' className='button-add-item' onClick={()=> {
+                if(showSearch) {
+                    setSearchTerm();
+                    setShowSearch(false);
+                } else {
+                    setShowTools((prev)=>!prev);
+                }
+            }}>
                 <FiPenTool />
             </button>
             <div className={showTools?'tools-container tools-show':'tools-container tools-hide'}>
