@@ -94,11 +94,7 @@ const Day = () => {
                     <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
                     <p>{item.amount} ({taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit})</p>
                   </div>
-                  {item.notes && (
-                    item._id!==expandedTaskId?
-                    <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
-                    <p>{item.notes}</p>
-                  )}
+                  {item.notes && <p>{item.notes}</p>}
                 </div>
               </div>
             </button>

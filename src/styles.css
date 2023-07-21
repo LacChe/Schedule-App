@@ -100,6 +100,7 @@ button:active{
     border-radius: 50%;
     border-style: none;
     z-index: 2;
+    cursor: pointer;
 }
 .button-add-item > * , .button-tool-confirm > *, .button-tool-toggle-filter > * {
     margin-top: 0.3rem;
@@ -124,6 +125,7 @@ button:active{
     height: var(--tool-button-size);
     border-style: none;
     border-radius: 50%;
+    cursor: pointer;
 }
 .button-tool > * {
     margin-top: 3px;
@@ -207,6 +209,7 @@ button:active{
     height: var(--tool-button-size);
     border-radius: 0 0 var(--border-radius) 0;
     border-style: none;
+    cursor: pointer;
 }
 .nav-button-list {
     width: 100%;
@@ -223,6 +226,7 @@ button:active{
     margin: 0.5rem;
     border-style: none;
     border-radius: var(--border-radius);
+    cursor: pointer;
 }
 .set-range-main {
     display: flex;
@@ -263,8 +267,8 @@ button:active{
     filter: invert(0);
 }
 .icon-image {
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 .profile-item-list {
     display: flex;
@@ -279,6 +283,7 @@ button:active{
     height: var(--primary-button-height);
     border-radius: var(--border-radius);
     border-style: none;
+    cursor: pointer;
 }
 .profile-item-bubble {
     display: flex;
@@ -293,6 +298,7 @@ button:active{
     height: var(--small-button-size);
     border-radius: 50%;
     border-style: none;
+    cursor: pointer;
 }
 .item-bubble-inner {
     display: flex;
@@ -463,13 +469,20 @@ button:active{
     border-radius: var(--border-radius);
     border-style: none;
     opacity: 70%;
+    cursor: pointer;
 }
 .task-text {
     text-align: left;
 }
+.task-collapsed > .task-text {
+    overflow: hidden;
+    white-space: nowrap;
+}
 .task-text > p {
     margin-left: 0.5rem;
     margin-right: 0.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .task-text > div {
     display: flex;
@@ -514,6 +527,7 @@ button:active{
     right: 0.5rem;
     background-color: white;
     color: var(--button-background-color);
+    cursor: pointer;
 }
 .button-task-duplicate {
     top: 3rem;
@@ -551,6 +565,7 @@ button:active{
     height: var(--tool-button-size);
     border-style: none;
     border-radius: var(--border-radius);
+    cursor: pointer;
 }
 .home-header > button > * {
     margin-top: 0.2rem;
@@ -588,586 +603,4 @@ button:active{
     padding: 1rem 2rem;
     border-radius: var(--border-radius);
     color: white;
-}
-@media only screen and (max-device-width: 1024px){
-    * {
-        margin: 0px;
-        padding: 0px;
-        box-sizing: border-box;
-        font-family: serif;
-        font-size: 1.7rem;
-    }
-    .sync-wrapper > a {
-        margin-bottom: 10vw;
-    }
-    body{
-        background-color: #F9F5EB;
-    }
-    button {
-        background-color: #002B5B;
-        color: white;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    button:hover{
-        background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
-    }
-    .button-alt-color {
-        background-color: #EA5455;
-    }
-    button:active{
-        box-shadow: inset 0.6vw 0.6vw 0.3vw 0.3vw rgba(0,0,0,0.70);
-        padding-top: 0.6vw;
-        padding-left: 0.6vw;
-    }
-    .login {
-        position: fixed;
-        height: 100%;
-        width: 100%;
-        top: 45%;
-        text-align: center;
-    }
-    .login > button{
-        width: 80vw;
-        height: 20vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .button-edit > * {
-        margin-top: 1vw;
-        margin-left: -0.3vw;
-    }
-    .button-delete {
-        width: 10vw;
-        height: 10vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .button-delete > * {
-        margin-top: 1vw;
-        margin-left: 0.6vw;
-    }
-    .button-delete-back > * {
-        margin-top: 1vw;
-        margin-left: -vw;
-    }
-    .button-delete-confirm > * {
-        margin-top: 1vw;
-        margin-left: 0.6vw;
-    }
-    .button-delete-confirm {
-        background-color: #EA5455;
-    }
-    .add-with-delete {
-        padding-right: 10vw;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 15vw;
-        margin: 1vw;
-        color: white;
-    }
-    .add-item-delete {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #EA5455;
-        margin: 3vw;
-        width: 50vw;
-        height: 15vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .button-add-item, .button-tool-confirm, .button-tool-toggle-filter {
-        position: fixed;
-        bottom: 6vw;
-        right: 6vw;
-        width: 15vw;
-        height: 15vw;
-        border-radius: 50%;
-        border-style: none;
-        z-index: 2;
-    }
-    .button-add-item > * , .button-tool-confirm > *, .button-tool-toggle-filter > * {
-        margin-top: 1vw;
-        width: 8vw;
-        height: 8vw;
-    }
-    .button-tool-toggle-filter{
-        bottom: 25vw;
-    }
-    .tools-container {
-        position: fixed;
-        bottom: 6vw;
-        right: 6vw;
-        border-radius: 8vw;
-        background-color: #002B5B;
-        display: flex;
-        flex-direction: column;
-        overflow: hidden;
-    }
-    .button-tool {
-        width: 15vw;
-        height: 15vw;
-        border-style: none;
-        border-radius: 50%;
-    }
-    .button-tool > * {
-        margin-top: 1vw;
-        width: 8vw;
-        height: 8vw;
-    }
-    .tools-show {
-        transition: height 0.1s;
-        position: fixed;
-        bottom: 6vw;
-        right: 6vw;
-        width: 15vw;
-        height: 60vw;
-    }
-    .tools-hide {
-        transition: height 0.1s;
-        height: 15vw;
-    }
-    .tools-search {
-        position: fixed;
-        bottom: 6vw;
-        right: 6vw;
-        height: 15vw;
-        background-color: #002B5B;
-        border-radius: 8vw;
-        border-style: none;
-        z-index: 2;
-        color: white;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-    }
-    .search-input {
-        margin-left: 3vw;
-        width: 100%;
-    }
-    .search-bar-icon > *{
-        margin-top: 1vw;
-        margin-left: 3vw;
-        width: 8vw;
-        height: 8vw;
-    }
-    .search-show {
-        transition: width 0.1s;
-        width: 70%;
-    }
-    .search-hide {
-        transition: width 0.1s;
-        width: 15vw;
-    }
-    .filter-main {
-        padding-top: 6vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    .filter-item-list {
-        margin-top: 6vw;
-    }
-    .nav-main {
-        background-color: #E4DCCF;
-        position: fixed;
-        display: flex;
-        border-radius: 0vw 0vw 5vw 0vw;
-        z-index: 99;
-    }
-    .nav-show {
-        width: 100%;
-        height: 100%;
-    }
-    .nav-close-overlay {
-        position: fixed;
-        width: 0%;
-        height: 0%;
-        opacity: 100;
-    }
-    .nav-hide {
-        transition: width 0.2s, height 0.1s;
-        width: 15vw;
-        height: 15vw;
-    }
-    .nav-toggle-button {
-        position: fixed;
-        width: 15vw;
-        height: 15vw;
-        border-radius: 0vw 0vw 5vw 0vw;
-        border-style: none;
-    }
-    .nav-button-list {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-x: auto;
-        scrollbar-width: thin;
-        padding-top: 20vw;
-    }
-    .nav-button-list > button {
-        width: 60%;
-        min-height: 15vw;
-        margin: 2vw;
-        border-style: none;
-        border-radius: 5vw;
-    }
-    .set-range-main {
-        display: flex;
-        flex-direction: column;
-        padding-top: 6vw;
-        align-items: center;
-    }
-    .set-range-main > h1 {
-        margin-bottom: 6vw;
-    }
-    .set-range-main > button {
-        width: 50vw;
-        height: 10vw;
-        margin-top: 6vw;
-        border-style: none;
-        border-radius: 5vw;
-    }
-    .set-range-input {
-        display: flex;
-        margin: 1vw;
-    }
-    .set-range-input > p {
-        margin-right: 1vw;
-    }
-    .profile-main {
-        display: flex;
-        flex-direction: column;
-        padding-top: 6vw;
-        align-items: center;
-    }
-    .profile-heading {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    .profile-heading > img {
-        width: 20vw;
-        height: 20vw;
-        border-radius: 50%;
-    }
-    .icon-image {
-        width: 6vw;
-        height: 6vw;
-    }
-    .profile-item-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 6vw;
-    }
-    .profile-new-item-button {
-        margin: 2vw;
-        width: 50vw;
-        height: 15vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .profile-item-bubble {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 15vw;
-        margin: 1vw;
-        color: white;
-    }
-    .profile-item-bubble > button {
-        width: 10vw;
-        height: 10vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .item-bubble-inner {
-        display: flex;
-        align-items: center;
-        width: 70vw;
-        height: 15vw;
-        border-style: none;
-        border-radius: 5vw;
-        color: white;
-        margin: 1vw;
-        overflow: hidden;
-    }
-    .item-bubble-inner > * {
-        margin-left: 5vw;
-    }
-    .profile-item-delete {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 70vw;
-        height: 15vw;
-        border-radius: 5vw;
-        background-color: #EA5455;
-        margin: 1vw;
-    }
-    .empty {
-        margin-top: 2vw;
-        padding-top: 4.5vw;
-        text-align: center;
-        width: 70vw;
-        height: 15vw;
-        border-radius: 5vw;
-        font-size: 1.6rem;
-        color: white;
-        background-color: #E4DCCF;
-    }
-    .empty-week {
-        padding: 4vw 0vw 0vw 0.6vw;
-        text-align: center;
-        height: 13vw;
-        width: 13vw;
-        border-radius: 5vw;
-        font-size: 1.6rem;
-        color: white;
-        background-color: #E4DCCF;
-    }
-    .empty-tasks {
-        margin-top: 3vw;
-        margin-bottom: 6vw;
-        padding-top: 6vw;
-        text-align: center;
-        width: 70vw;
-        height: 40vw;
-        border-radius: 5vw;
-        font-size: 1.6rem;
-        color: white;
-        background-color: #E4DCCF;
-    }
-    .create-item-main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .create-item-main > h1{
-        margin: 6vw;
-        font-size: 2.5rem;
-    }
-    .create-item-button-list {
-        margin-top: 3vw;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-    .create-item-button-list > button {
-        height: 12vw;
-    }
-    .create-item-icon-list {
-        margin: 3vw;
-        text-align: center;
-        width:70%;
-    }
-    .create-item-icon-list > button {
-        margin: 0.4vw;
-        border-style: none;
-        border-radius: 1vw;
-        padding: 0.6vw;
-        width: 7vw;
-        height: 7vw;
-        overflow: hidden;
-    }
-    .create-item-icon-list > button:active{
-        box-shadow: inset 0.6vw 0.6vw 0vw 0.3vw rgba(0,0,0,0.70);
-        padding-top: 0vw;
-        padding-left: 0vw;
-        overflow: hidden;
-        padding: 0.6vw;
-    }
-    .create-item-icon-list > button:active > img{
-        position: relative;
-        top: 0.6vw;
-        left: 0.6vw;
-    }
-    .create-item-text-input, .create-item-color-input {
-        display: flex;
-        margin: 1vw;
-    }
-    .create-item-color-input {
-        align-items: center;
-    }
-    .create-item-text-input > p {
-        margin-right: 1vw;
-    }
-    .create-item-color-input > p {
-        margin-right: 1vw;
-    }
-    .create-item-color-input > input {
-        width: 20vw;
-        height: 6vw;
-    }
-    .create-confirm-button {
-        margin: 4vw;
-        width: 50vw;
-        height: 15vw;
-        border-radius: 5vw;
-        border-style: none;
-    }
-    .create-task-redirect-button {
-        margin: 4vw;
-        width: 50vw;
-        height: 15vw;
-        border-radius: 5vw;
-        border-style: none;
-        margin-bottom: 15vw;
-        opacity: 70%;
-    }
-    .notes-input {
-        margin-bottom: 4vw;
-    }
-    .notes-input > textarea {
-        width: 80vw;
-        height: 30vw;
-    }
-    .filtered {
-        border: 1vw dashed #F9F5EB;
-        opacity: 30%;
-    }
-    .amount-input > input{
-        width: 20vw;
-    }
-    .nav-close-overlay-hide {
-        position: fixed;
-        width: 0%;
-        height: 0%;
-        opacity: 100;
-    }
-    .sync-text {
-        margin-top: 10vw;
-        color: #EA5455;
-        opacity: 70%;
-    }
-    .sync-button {
-        margin: 4vw;
-        width: 25vw;
-        height: 12vw;
-        border-radius: 5vw;
-        border-style: none;
-        margin-bottom: 10vw;
-        opacity: 70%;
-    }
-    .task-text {
-        text-align: left;
-    }
-    .task-text > p {
-        margin-left: 3vw;
-        margin-right: 10vw;
-    }
-    .task-text > div {
-        display: flex;
-        gap: 1vw;
-    }
-    .task-bubble-inner {
-        display: flex;
-        align-items: center;
-        width: 90vw;
-        border-style: none;
-        border-radius: 5vw;
-        color: white;
-        margin: 1vw;
-        overflow: hidden;
-        gap: 6vw;
-    }
-    .task-bubble-inner-week {
-        width: 12vw;
-        height: 13vw;
-    }
-    .button-task-bubble {
-        margin-bottom: 1vw;
-        padding: 1vw 0.5vw 1vw 0.5vw;
-    }
-    .button-task-bubble:active{
-        padding-top: 0vw;
-        padding: 1vw 0.5vw 1vw 0.5vw;
-    }
-    .task-expanded {
-        min-height: 30vw;
-        height: 100%;
-    }
-    .task-collapsed {
-        height: 15vw;
-    }
-    .button-task-edit, .button-task-duplicate {
-        position: absolute;
-        width: 12vw;
-        height: 12vw;
-        border-style: none;
-        border-radius: 50%;
-        right: 3vw;
-        background-color: #F9F5EB;
-        color: #002B5B;
-    }
-    .button-task-duplicate {
-        top: 18vw;
-    }
-    .button-task-edit {
-        top: 3vw;
-    }
-    .task-wrapper {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-    .day-main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .week-task-list {
-        display: flex;
-        gap: 1vw;
-        text-align: center;
-    }
-    .week-task-list > div > h1 {
-        margin-bottom: 1vw;
-    }
-    .home-main {
-        padding-top: 10vw;
-    }
-    .home-header {
-        background-color: #002B5B;
-        display: flex;
-        margin: 6vw;
-        align-items: center;
-        border-radius: 8vw;
-    }
-    .home-header > button {
-        width: 15vw;
-        height: 15vw;
-        border-style: none;
-        border-radius: 50%;
-    }
-    .home-header > button > * {
-        margin-top: 1.3vw;
-        width: 10vw;
-        height: 10vw;
-    }
-    .home-header > h1 {
-        color: white;
-        margin: 4vw;
-    }
-    .all-header {
-        text-align: center;
-        background-color: #002B5B;
-        margin: 3vw 3vw 2vw 3vw;
-        padding: 1vw;
-        border-radius: 4vw;
-        color: white;
-    }
-    .all-title {
-        text-align: center;
-        background-color: #002B5B;
-        margin: 3vw 3vw 2vw 3vw;
-        padding: 3vw 6vw;
-        border-radius: 6vw;
-        color: white;
-    }
 }
