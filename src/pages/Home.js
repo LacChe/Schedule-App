@@ -57,6 +57,7 @@ const Home = () => {
             <button type='button' className='button-add-item' onClick={()=> {
                 if(showSearch) {
                     setSearchTerm();
+                    document.querySelector('.search-input').value = '';
                     setShowSearch(false);
                 } else {
                     setShowTools((prev)=>!prev);
