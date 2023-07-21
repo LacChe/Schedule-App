@@ -356,7 +356,7 @@ button:active{
 .empty-tasks {
     margin-top: 1rem;
     margin-bottom: 2rem;
-    padding-top: 2rem;
+    padding-top: 0.1rem;
     text-align: center;
     width: 16rem;
     height: 4rem;
