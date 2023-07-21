@@ -5,7 +5,7 @@ import { AiFillDelete, AiOutlineDelete } from 'react-icons/ai';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
-import { BsBackspaceFill } from 'react-icons/bs';
+import { BsBackspace } from 'react-icons/bs';
 
 const AddPage = () => {
     const { loaded, userData, categories, systemCategories, taskTypes, setTasks, tasks, iconData } = useStateContext();
@@ -208,7 +208,7 @@ const AddPage = () => {
                         type='button' 
                         onClick={() => {setDeleteStatus('none')}}
                     >
-                        <BsBackspaceFill />
+                        <BsBackspace />
                     </button>
                     <div className='add-item-delete' >
                         <p>Delete?</p>

@@ -61,6 +61,7 @@ button:active{
     border-radius: 50%;
     width: var(--small-button-size);
     height: var(--small-button-size);
+    cursor: pointer;
 }
 .button-delete > *,
 .button-delete-back > *,
@@ -419,6 +420,7 @@ button:active{
     height: var(--primary-button-height);
     border-radius: var(--border-radius);
     border-style: none;
+    cursor: pointer;
 }
 .create-task-redirect-button {
     margin: 0.5rem;

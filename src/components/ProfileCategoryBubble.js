@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { client, urlFor } from '../utils/client.js';
 import { useStateContext } from '../utils/stateContext.js';
 import { AiOutlineEdit, AiOutlineDelete, AiFillDelete } from 'react-icons/ai';
-import { BsBackspaceFill } from 'react-icons/bs'; 
+import { BsBackspace } from 'react-icons/bs'; 
 import { toast } from 'react-hot-toast';
  
 
@@ -47,7 +47,7 @@ const ProfileCategoryBubble = ({ cat }) => {
               type='button' 
               onClick={() => {setDeleteStatus('none')}}
             >
-              <BsBackspaceFill />
+              <BsBackspace />
             </button>
             <div className='profile-item-delete' >
               <p>Delete?</p>
