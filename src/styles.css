@@ -1,33 +1,46 @@
+:root {
+    --background-color: #F9F5EB;
+    --darker-background-color: #E4DCCF;
+    --button-background-color: #002B5B;
+    --button-alt-color: #EA5455;
+    
+    --border-radius: 0.2rem;
+    --primary-button-width: 9rem;
+    --primary-button-height: 3rem;
+
+    --small-button-size: 1.5rem;
+    --tool-button-size: 3rem;
+}
 * {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: serif;
     font-size: 1.1rem;
 }
 img {
-    -webkit-filter: invert(1);
     filter: invert(1);
 }
 body{
-    background-color: #F9F5EB;
+    background-color: var(--button-color);
 }
 button {
-    background-color: #002B5B;
+    background-color: var(--button-background-color);
     color: white;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     border-style: none;
 }
 button:hover{
+    /* darken background but not icons */
     background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
 }
 .button-alt-color {
-    background-color: #EA5455;
+    background-color: var(--button-alt-color);
 }
 button:active{
     box-shadow: inset 2px 2px 1px 1px rgba(0,0,0,0.70);
-    padding-top: 2px;
-    padding-left: 2px;
+    padding-top: 0.1rem;
+    padding-left: 0.1rem;
 }
 .login {
     position: fixed;
@@ -37,114 +50,105 @@ button:active{
     text-align: center;
 }
 .login > button{
-    width: 240px;
-    height: 60px;
-    border-radius: 15px;
-    border-style: none;
+    width: 16rem;
+    height: 4rem;
 }
 .button-edit > * {
-    margin-top: 3px;
-    margin-left: -1px;
+    margin-top: 0.1rem;
+    margin-left: -0.05rem;
 }
 .button-delete {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    border-style: none;
+    border-radius: 50%;
+    width: var(--small-button-size);
+    height: var(--small-button-size);
 }
-.button-delete > * {
-    margin-top: 5px;
-    margin-left: 2px;
-}
-.button-delete-back > * {
-    margin-top: 3px;
-    margin-left: -3px;
-}
+.button-delete > *,
+.button-delete-back > *,
 .button-delete-confirm > * {
-    margin-top: 5px;
-    margin-left: 2px;
+    margin-top: 0.2rem;
+    margin-left: -0.02rem;
 }
 .button-delete-confirm {
-    background-color: #EA5455;
+    background-color: var(--button-alt-color);
 }
 .add-with-delete {
-    padding-right: 30px;
+    padding-right: 1.5rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 70px;
-    margin: 5px;
+    height: var(--primary-button-height);
+    margin: 0.5rem;
     color: white;
 }
 .add-item-delete {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #EA5455;
-    margin: 10px;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
+    background-color: var(--button-alt-color);
+    margin: 0.5rem;
+    width: var(--primary-button-width);
+    height: var(--primary-button-height);
+    border-radius: var(--border-radius);
     border-style: none;
 }
 .button-add-item, .button-tool-confirm, .button-tool-toggle-filter {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
+    bottom: 1rem;
+    right: 1rem;
+    width: var(--tool-button-size);
+    height: var(--tool-button-size);
     border-radius: 50%;
     border-style: none;
     z-index: 2;
 }
 .button-add-item > * , .button-tool-confirm > *, .button-tool-toggle-filter > * {
-    margin-top: 3px;
-    width: 25px;
-    height: 25px;
+    margin-top: 0.3rem;
+    width: calc(var(--tool-button-size) / 2);
+    height: calc(var(--tool-button-size) / 2);
 }
 .button-tool-toggle-filter{
-    bottom: 80px;
+    bottom: 5rem;
 }
 .tools-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    border-radius: 25px;
-    background-color: #002B5B;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: calc(var(--tool-button-size) / 2);
+    background-color: var(--button-background-color);
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 .button-tool {
-    width: 50px;
-    height: 50px;
+    width: var(--tool-button-size);
+    height: var(--tool-button-size);
     border-style: none;
     border-radius: 50%;
 }
 .button-tool > * {
     margin-top: 3px;
-    width: 25px;
-    height: 25px;
+    width: calc(var(--tool-button-size) / 2);
+    height: calc(var(--tool-button-size) / 2);
 }
 .tools-show {
     transition: height 0.1s;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 200px;
+    bottom: 1rem;
+    right: 1rem;
+    width: var(--tool-button-size);
+    height: calc(var(--tool-button-size) * 4);
 }
 .tools-hide {
     transition: height 0.1s;
-    height: 50px;
+    height: var(--tool-button-size);
 }
 .tools-search {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    height: 50px;
-    background-color: #002B5B;
-    border-radius: 25px;
+    bottom: 1rem;
+    right: 1rem;
+    height: var(--tool-button-size);
+    background-color: var(--button-background-color);
+    border-radius: calc(var(--tool-button-size) / 2);
     border-style: none;
     z-index: 2;
     color: white;
@@ -153,14 +157,14 @@ button:active{
     overflow: hidden;
 }
 .search-input {
-    margin-left: 10px;
+    margin-left: 0.5rem;
     width: 100%;
 }
 .search-bar-icon > *{
-    margin-top: 5px;
-    margin-left: 10px;
-    width: 25px;
-    height: 25px;
+    margin-top: 0.4rem;
+    margin-left: 0.7rem;
+    width: calc(var(--tool-button-size) / 2);
+    height: calc(var(--tool-button-size) / 2);
 }
 .search-show {
     transition: width 0.1s;
@@ -168,54 +172,40 @@ button:active{
 }
 .search-hide {
     transition: width 0.1s;
-    width: 50px;
+    width: var(--tool-button-size);
 }
 .filter-main {
-    padding-top: 20px;
+    padding-top: 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 .filter-item-list {
-    margin-top: 20px;
-}
-.filter-choice {
-    border-style: none;
-    border-radius: 25px;
-}
-.filter-item-bubble-inner {
-    display: flex;
-    align-items: center;
-    width: 280px;
-    height: 70px;
-    border-style: none;
-    border-radius: 15px;
-    color: white;
-    overflow: hidden;
+    padding-top: 1.5rem;
 }
 .nav-main {
-    background-color: #E4DCCF;
+    background-color: var(--darker-background-color);
     position: fixed;
     display: flex;
-    border-bottom-right-radius: 15px;
+    border-bottom-right-radius: var(--border-radius);
     z-index: 99;
 }
 .nav-show {
     transition: width 0.1s, height 0.2s;
-    width: 200px;
+    width: 12rem;
     height: 100%;
 }
 .nav-hide {
     transition: width 0.2s, height 0.1s;
-    width: 50px;
-    height: 50px;
+    width: var(--tool-button-size);
+    height: var(--tool-button-size);
 }
 .nav-toggle-button {
     position: fixed;
-    width: 50px;
-    height: 50px;
-    border-radius: 0px 0px 15px 0px;
+    width: var(--tool-button-size);
+    height: var(--tool-button-size);
+    border-radius: 0 0 var(--border-radius) 0;
     border-style: none;
 }
 .nav-button-list {
@@ -225,42 +215,42 @@ button:active{
     align-items: center;
     overflow-x: auto;
     scrollbar-width: thin;
-    padding-top: 45px;
+    padding-top: 4rem;
 }
 .nav-button-list > button {
     width: 60%;
-    min-height: 50px;
-    margin: 10px;
+    min-height: var(--primary-button-height);
+    margin: 0.5rem;
     border-style: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
 }
 .set-range-main {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 2rem;
     align-items: center;
 }
 .set-range-main > h1 {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 .set-range-main > button {
-    width: 150px;
-    height: 30px;
-    margin-top: 20px;
+    width: var(--primary-button-width);
+    height: var(--primary-button-height);
+    margin-top: 2rem;
     border-style: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
 }
 .set-range-input {
     display: flex;
-    margin: 5px;
+    margin: 1rem;
 }
 .set-range-input > p {
-    margin-right: 5px;
+    margin-right: 1rem;
 }
 .profile-main {
     display: flex;
     flex-direction: column;
-    padding-top: 20px;
+    padding-top: 2rem;
     align-items: center;
 }
 .profile-heading {
@@ -270,49 +260,49 @@ button:active{
 }
 .profile-heading > img {
     border-radius: 50%;
-    -webkit-filter: invert(0);
     filter: invert(0);
 }
 .icon-image {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
 }
 .profile-item-list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 2rem;
+    gap: 0.5rem;
 }
 .profile-new-item-button {
-    margin: 10px;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
+    margin: 1rem;
+    width: var(--primary-button-width);
+    height: var(--primary-button-height);
+    border-radius: var(--border-radius);
     border-style: none;
 }
 .profile-item-bubble {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 70px;
-    margin: 5px;
+    height: var(--primary-button-height);
+    margin: 0.5rem;
     color: white;
 }
 .profile-item-bubble > button {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
+    width: var(--small-button-size);
+    height: var(--small-button-size);
+    border-radius: 50%;
     border-style: none;
 }
 .item-bubble-inner {
     display: flex;
     align-items: center;
-    width: 280px;
-    height: 70px;
+    width: 16rem;
+    height: 4rem;
     border-style: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     color: white;
-    margin: 5px;
+    margin: 0 0.5rem;
     overflow: hidden;
 }
 .item-bubble-inner > * {
@@ -322,44 +312,43 @@ button:active{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 280px;
-    height: 70px;
-    border-radius: 15px;
-    background-color: #EA5455;
-    margin: 5px;
+    width: 16rem;
+    height: 4rem;
+    border-radius: var(--border-radius);
+    background-color: var(--button-alt-color);
+    margin: 0.5rem;
 }
 .empty {
-    margin-top: 10px;
-    padding-top: 20px;
+    padding-top: 1.3rem;
     text-align: center;
-    width: 200px;
-    height: 70px;
-    border-radius: 15px;
+    width: 16rem;
+    height: 4rem;
+    border-radius: var(--border-radius);
     font-size: 1.2rem;
     color: white;
-    background-color: #E4DCCF;
+    background-color: var(--darker-background-color);
 }
 .empty-week {
-    padding: 12px 0px 0px 2px;
+    padding: 2rem 0 0 1rem;
     text-align: center;
-    height: 45px;
-    width: 45px;
-    border-radius: 15px;
+    height: var(--tool-button-size);
+    width: var(--tool-button-size);
+    border-radius: var(--border-radius);
     font-size: 1.2rem;
     color: white;
-    background-color: #E4DCCF;
+    background-color: var(--darker-background-color);
 }
 .empty-tasks {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    padding-top: 20px;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding-top: 2rem;
     text-align: center;
-    width: 200px;
-    height: 110px;
-    border-radius: 15px;
+    width: 16rem;
+    height: 4rem;
+    border-radius: var(--border-radius);
     font-size: 1.2rem;
     color: white;
-    background-color: #E4DCCF;
+    background-color: var(--darker-background-color);
 }
 .create-item-main {
     display: flex;
@@ -367,69 +356,69 @@ button:active{
     align-items: center;
 }
 .create-item-main > h1{
-    margin: 20px;
+    margin: 1rem;
     font-size: 1.3rem;
 }
 .create-item-button-list {
-    margin-top: 10px;
+    margin-top: 1rem;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 .create-item-button-list > button {
-    height: 35px;
+    width: 16rem;
+    height: 3rem;
+    margin: 0.1rem;
 }
 .create-item-icon-list {
-    margin: 10px;
     text-align: center;
-    width: 350px;
+    width: 24rem;
 }
 .create-item-icon-list > button {
-    margin: 2px;
+    margin: 0.05rem;
     border-style: none;
-    border-radius: 5px;
-    padding: 2px;
-    width: 38px;
-    height: 38px;
+    border-radius: var(--border-radius);
+    width: 2.5rem;
+    height: 2.5rem;
     overflow: hidden;
 }
 .create-item-icon-list > button:active{
     box-shadow: inset 2px 2px 0px 1px rgba(0,0,0,0.70);
-    padding-top: 0px;
-    padding-left: 0px;
+    padding-top: 0;
+    padding-left: 0;
     overflow: hidden;
-    padding: 2px;
+    padding: 0.05rem;
 }
 .create-item-icon-list > button:active > img{
     position: relative;
-    top: 2px;
-    left: 2px;
+    top: 0.1rem;
+    left: 0.1rem;
 }
 .create-item-text-input, .create-item-color-input {
     display: flex;
-    margin: 5px;
+    margin: 0.2rem;
 }
 .create-item-color-input {
     align-items: center;
 }
 .create-item-text-input > p {
-    margin-right: 5px;
+    margin-right: 0.2rem;
 }
 .create-item-color-input > p {
-    margin-right: 5px;
+    margin-right: 0.2rem;
 }
 .create-confirm-button {
-    margin: 10px;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
+    margin: 0.5rem;
+    width: var(--primary-button-width);
+    height: var(--primary-button-height);
+    border-radius: var(--border-radius);
     border-style: none;
 }
 .create-task-redirect-button {
-    margin: 10px;
-    width: 150px;
-    height: 50px;
-    border-radius: 15px;
+    margin: 0.5rem;
+    width: var(--primary-button-width);
+    height: var(--primary-button-height);
+    border-radius: var(--border-radius);
     border-style: none;
     margin-bottom: 50px;
     opacity: 70%;
@@ -438,100 +427,99 @@ button:active{
     margin-bottom: 10px;
 }
 .notes-input > textarea {
-    width: 250px;
-    height: 100px;
+    width: 16rem;
+    height: 8rem;
 }
 .filtered {
-    border: 3px dashed #F9F5EB;
+    border: 0.2rem dashed #F9F5EB;
     opacity: 30%;
 }
 .amount-input > input{
-    width: 60px;
+    width: 4rem;
 }
 .nav-close-overlay {
     position: fixed;
-    margin: 0px;
+    margin: 0;
     width: 100%;
     height: 100%;
-    border-radius: 0px;
+    border-radius: 0;
     opacity: 0;
 }
 .nav-close-overlay-hide {
     position: fixed;
     width: 0%;
     height: 0%;
-    opacity: 100;
+    opacity: 1;
 }
 .sync-text {
-    margin-top: 30px;
-    color: #EA5455;
+    margin-top: 1rem;
+    color: var(--button-alt-color);
     opacity: 70%;
 }
 .sync-button {
-    margin: 10px;
-    width: 80px;
-    height: 40px;
-    border-radius: 15px;
+    margin: 1rem;
+    width: 4rem;
+    height: 2rem;
+    border-radius: var(--border-radius);
     border-style: none;
-    margin-bottom: 30px;
     opacity: 70%;
 }
 .task-text {
     text-align: left;
 }
 .task-text > p {
-    margin-left: 10px;
-    margin-right: 25px;
+    margin-left: 0.5rem;
+    margin-right: 0.25rem;
 }
 .task-text > div {
     display: flex;
-    gap: 5px;
+    gap: 0.5rem;
 }
 .task-bubble-inner {
     display: flex;
     align-items: center;
-    width: 280px;
+    width: 16rem;
     border-style: none;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     color: white;
-    margin: 5px;
+    margin: 0.2rem 0.5rem;
     overflow: hidden;
-    gap: 20px;
+    gap: 1rem;
 }
 .task-bubble-inner-week {
-    width: 40px;
-    height: 35px;
+    height: var(--tool-button-size);
+    width: var(--tool-button-size);
 }
 .button-task-bubble {
-    margin-bottom: 5px;
-    padding: 5px 5px 5px 5px;
+    margin-bottom: 0.3rem;
+    padding: 0.1rem;
 }
 .button-task-bubble:active{
-    padding-top: 0px;
-    padding: 5px 5px 5px 5px;
+    padding-top: 0;
+    padding: 0.1rem;
 }
 .task-expanded {
-    min-height: 100px;
+    min-height: calc(var(--primary-button-height) * 2);
     height: 100%;
 }
 .task-collapsed {
-    height: 50px;
+    height: var(--primary-button-height);
 }
 .button-task-edit, .button-task-duplicate {
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: var(--small-button-size);
+    height: var(--small-button-size);
     border-style: none;
     border-radius: 50%;
-    right: 10px;
-    background-color: #F9F5EB;
-    color: #002B5B;
+    right: 0.5rem;
+    background-color: white;
+    color: var(--button-background-color);
 }
 .button-task-duplicate {
-    top: 55px;
+    top: 3rem;
 }
 .button-task-edit {
-    top: 10px;
+    top: 0.8rem;
 }
 .task-wrapper {
     position: relative;
@@ -545,60 +533,60 @@ button:active{
 }
 .week-task-list {
     display: flex;
-    gap: 5px;
+    gap: 0.3rem;
     text-align: center;
 }
 .week-task-list > div > h1 {
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 }
 .home-header {
-    background-color: #002B5B;
+    background-color: var(--button-background-color);
     display: flex;
-    margin: 20px;
+    margin: 1rem;
     align-items: center;
-    border-radius: 25px;
+    border-radius: var(--border-radius);
 }
 .home-header > button {
-    width: 50px;
-    height: 50px;
+    width: var(--tool-button-size);
+    height: var(--tool-button-size);
     border-style: none;
-    border-radius: 50%;
+    border-radius: var(--border-radius);
 }
 .home-header > button > * {
-    margin-top: 4px;
-    width: 30px;
-    height: 30px;
+    margin-top: 0.2rem;
+    width: var(--small-button-size);
+    height: var(--small-button-size);
 }
 .home-header > h1 {
     color: white;
-    margin: 10px;
+    margin: 0 1rem;
 }
 .sync-wrapper {
-    color: #EA5455;
+    color: var(--button-alt-color);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .sync-wrapper > a {
-    color: #EA5455;
+    color: var(--button-alt-color);
     opacity: 70%;
     text-decoration: none;
-    margin-bottom: 30px;
+    margin-bottom: 1rem;
 }
 .all-header {
     text-align: center;
-    background-color: #002B5B;
-    margin: 20px 20px 10px 20px;
-    padding: 6px;
-    border-radius: 25px;
+    background-color: var(--button-background-color);
+    margin: 1rem;
+    padding: 0.2rem;
+    border-radius: var(--border-radius);
     color: white;
 }
 .all-title {
     text-align: center;
-    background-color: #002B5B;
-    margin: 20px 20px 10px 20px;
-    padding: 10px 20px;
-    border-radius: 25px;
+    background-color: var(--button-background-color);
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    border-radius: var(--border-radius);
     color: white;
 }
 @media only screen and (max-device-width: 1024px){
@@ -782,20 +770,6 @@ button:active{
     }
     .filter-item-list {
         margin-top: 6vw;
-    }
-    .filter-choice {
-        border-style: none;
-        border-radius: 8vw;
-    }
-    .filter-item-bubble-inner {
-        display: flex;
-        align-items: center;
-        width: 90vw;
-        height: 15vw;
-        border-style: none;
-        border-radius: 5vw;
-        color: white;
-        overflow: hidden;
     }
     .nav-main {
         background-color: #E4DCCF;
