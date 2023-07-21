@@ -30,9 +30,9 @@ button {
     border-radius: var(--border-radius);
     border-style: none;
 }
-button:hover{
+button:hover {
     /* darken background but not icons */
-    background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+    outline: goldenrod 2px solid;
 }
 .button-alt-color {
     background-color: var(--button-alt-color);
@@ -514,11 +514,13 @@ button:active{
     padding: 0.1rem;
 }
 .task-expanded {
+    transition: min-height 0.2s;
     min-height: calc(var(--primary-button-height) * 2);
     height: 100%;
 }
 .task-collapsed {
-    height: var(--primary-button-height);
+    transition: min-height 0.2s;
+    min-height: var(--primary-button-height);
 }
 .button-task-edit, .button-task-duplicate {
     position: absolute;
