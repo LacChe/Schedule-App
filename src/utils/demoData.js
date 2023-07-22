@@ -54,7 +54,7 @@ export const demoTasks = [{
     "_id": "947b6c8e-6b21-4f6b-914e-6c6339f76b4f",
     "date": "2023-07-22",
     "amount": 1,
-    "notes": "Thinning out and transplanting sprouts",
+    "notes": "Thinning out and planting sprouts",
     "taskType": {
         "_ref": "e73bc558-89c6-4dcf-8f6b-69a45527ec01",
         "_type": "reference"
