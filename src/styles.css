@@ -636,3 +636,23 @@ button:active{
     border-radius: var(--border-radius);
     color: white;
 }
+@media only screen and (max-width: 1024px) {
+    html {
+        font-size: 130%;
+    }
+    .task-bubble-inner-week, .empty-week {
+        width: calc(var(--tool-button-size) * 0.7);
+        height: calc(var(--tool-button-size) * 0.7);
+    }
+    .home-header {
+        max-width: 60vw;
+        font-size: 0.8rem;
+    }
+    .home-header > h1{
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+    .nav-show {
+        width: 100vw;
+    }
+}
