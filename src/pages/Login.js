@@ -44,7 +44,7 @@ const Login = () => {
                 <CountUp
                   start={0}
                   end={taskCount}
-                  duration={2.75}
+                  duration={5}
                   separator=","
                 >
                   {({ countUpRef }) => (
