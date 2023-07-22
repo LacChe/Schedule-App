@@ -6,7 +6,7 @@ import { BiSkipPrevious, BiSkipNext } from 'react-icons/bi';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { IoCopyOutline } from 'react-icons/io5';
 
-const Day = () => {
+const Day = ({ isDemo, expandedIndex }) => {
   const navigate = useNavigate();
   
   const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories, iconData } = useStateContext();
@@ -64,6 +64,9 @@ const Day = () => {
 
   useEffect(() => {
     filterAndSearchTasks();
+    if(expandedIndex !== undefined) {
+      setExpandedTaskId(tasks[expandedIndex]._id);
+    }
   }, [tasks, date, searchTerm, idFilters])
 
   const taskList = (arr) => {
@@ -99,15 +102,17 @@ const Day = () => {
               </div>
             </button>
             {item._id===expandedTaskId && 
-              <button className='button-task-edit' type='button' onClick={(()=>
-                navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
-              )}>
+              <button className='button-task-edit' type='button' onClick={(()=> {
+                    if(!isDemo) navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+                  }
+                )}>
               <AiOutlineEdit />
             </button>}
             {item._id===expandedTaskId && 
-              <button className='button-task-duplicate' type='button' onClick={(()=>
-                navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
-              )}>
+              <button className='button-task-duplicate' type='button' onClick={(()=>{
+                    if(!isDemo) navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
+                  }
+                )}>
               <IoCopyOutline />
             </button>}
           </div>
@@ -117,15 +122,18 @@ const Day = () => {
   
   return (
     <div className='day-main'>
-      <div className='home-header'>
-        <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()-1))}}>
-          <BiSkipPrevious />
-        </button>
-        <h1>{date.toLocaleDateString()}</h1>
-        <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()+1))}}>
-          <BiSkipNext />
-        </button>
-      </div>
+      {
+        !isDemo &&
+        <div className='home-header'>
+          <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()-1))}}>
+            <BiSkipPrevious />
+          </button>
+          <h1>{date.toLocaleDateString()}</h1>
+          <button type='button' onClick={()=>{setDate((prev)=>new Date(prev.getFullYear(), prev.getMonth(), prev.getDate()+1))}}>
+            <BiSkipNext />
+          </button>
+        </div>
+      }
       {taskList(displayedTasks)}
     </div>
   )
