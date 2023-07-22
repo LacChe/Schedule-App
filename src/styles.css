@@ -653,6 +653,6 @@ button:active{
         width: 100vw;
     }
     .profile-item-list {
-        max-width: 90vw;
+        max-width: 80vw;
     }
 }
