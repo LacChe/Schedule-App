@@ -68,3 +68,8 @@ export const userQuery = (userId) => {
   export const iconQuery = () => {
     return '*[_type == "iconImage"]';
   }
+
+
+  export const taskCountQuery = () => {
+    return 'count(*[_type == "task"])';
+  }

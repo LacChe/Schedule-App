@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { userQuery, categoryQuery, systemCategoryQuery, taskTypeQuery, taskQuery, iconQuery } from '../utils/data.js';
+import { taskCountQuery, userQuery, categoryQuery, systemCategoryQuery, taskTypeQuery, taskQuery, iconQuery } from '../utils/data.js';
 import { client } from '../utils/client.js';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -22,6 +22,7 @@ export const StateContext = ({ children }) => {
     const [endDate, setEndDate] = useState(new Date());
     const [searchTerm, setSearchTerm] = useState();
     const [idFilters, setIdFilters] = useState([]);
+    const [taskCount, setTaskCount] = useState([]);
 
     const loaded = () => {
       return iconData && categories && systemCategories && taskTypes && tasks
@@ -198,6 +199,15 @@ export const StateContext = ({ children }) => {
         }
       }, [userData])
 
+      useEffect(() => {
+        const query = taskCountQuery();
+        client.fetch(query)
+        .then((data) => {
+          // console.log('iconQuery', JSON.stringify(data))
+          setTaskCount(data);
+        })
+      }, []);
+
     return (
         <Context.Provider
             value={{
@@ -228,7 +238,8 @@ export const StateContext = ({ children }) => {
                 idFilters,
                 setIdFilters,
                 sync,
-                loaded
+                loaded,
+                taskCount
             }}
         >
             { children }
@@ -236,4 +247,4 @@ export const StateContext = ({ children }) => {
     )
 }
 
-export const useStateContext = () => useContext(Context)
+export const useStateContext = () => useContext(Context);
