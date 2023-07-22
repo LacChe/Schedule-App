@@ -638,7 +638,7 @@ button:active{
 }
 @media only screen and (max-width: 1024px) {
     html {
-        font-size: 130%;
+        font-size: 110%;
     }
     .task-bubble-inner-week, .empty-week {
         width: calc(var(--tool-button-size) * 0.7);
