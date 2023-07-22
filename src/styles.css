@@ -652,7 +652,7 @@ button:active{
     .nav-show {
         width: 100vw;
     }
-    .profile-item-list {
-        max-width: 80vw;
+    .profile-item-bubble {
+        max-width: 95vw;
     }
 }
