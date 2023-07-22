@@ -1,6 +1,6 @@
 :root {
     --background-color: #F9F5EB;
-    --darker-background-color: #E4DCCF;
+    --darker-background-color: #9bb2cc;
     --button-background-color: #002B5B;
     --button-alt-color: #EA5455;
     
@@ -22,7 +22,9 @@ img {
     filter: invert(1);
 }
 body{
-    background-color: var(--background-color);
+    background: linear-gradient(180deg, var(--background-color) 0%, var(--darker-background-color) 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 button {
     background-color: var(--button-background-color);
@@ -32,7 +34,7 @@ button {
 }
 button:hover {
     /* darken background but not icons */
-    outline: goldenrod 2px solid;
+    outline: goldenrod 0.15rem solid;
 }
 .button-alt-color {
     background-color: var(--button-alt-color);
@@ -54,6 +56,7 @@ button:active{
     margin: 4rem auto 0 auto;
     text-align: center;
     width: 17.2rem;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
