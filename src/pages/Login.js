@@ -10,17 +10,16 @@ const Login = () => {
 
     const { auth } = useStateContext();
     const { setTasks, setTaskTypes, setCategories, setSystemCategories, setIconData } = useStateContext();
-
-    setTasks(demoTasks);
-    setTaskTypes(demoTaskTypes);
-    setCategories(demoCategories);
-    setSystemCategories(demoSystemCategories);
-    setIconData(demoIcons);
-
+    
     useEffect(() => {
         if (localStorage.getItem('user-data') || auth.isAuthenticated) {
           navigate('/')
         }
+        setTasks(demoTasks);
+        setTaskTypes(demoTaskTypes);
+        setCategories(demoCategories);
+        setSystemCategories(demoSystemCategories);
+        setIconData(demoIcons);
     }, [auth, navigate])
 
     return (

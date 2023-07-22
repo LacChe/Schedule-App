@@ -64,7 +64,7 @@ const Day = ({ isDemo, expandedIndex }) => {
 
   useEffect(() => {
     filterAndSearchTasks();
-    if(expandedIndex !== undefined) {
+    if(tasks && expandedIndex !== undefined) {
       setExpandedTaskId(tasks[expandedIndex]._id);
     }
   }, [tasks, date, searchTerm, idFilters])
