@@ -194,6 +194,9 @@ button:active{
 }
 .filter-item-list {
     padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 .nav-main {
     background-color: var(--darker-background-color);
@@ -388,6 +391,7 @@ button:active{
 .create-item-icon-list {
     text-align: center;
     width: 24rem;
+    margin: 0.5rem;
 }
 .create-item-icon-list > button {
     margin: 0.05rem;
