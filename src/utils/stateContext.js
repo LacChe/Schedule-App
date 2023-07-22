@@ -119,7 +119,7 @@ export const StateContext = ({ children }) => {
           if(userData){
             setCategories(JSON.parse(localStorage.getItem('categories')) ? Object.values(JSON.parse(localStorage.getItem('categories'))) : '');
             if(!localStorage.getItem('categories')){
-              const query = categoryQuery(userData[0]._id);
+              const query = categoryQuery(userData[0]?._id);
               client.fetch(query)
               .then((data) => {
                 //console.log('categoryQuery', JSON.stringify(data))
@@ -153,7 +153,7 @@ export const StateContext = ({ children }) => {
         if(userData){
           setTaskTypes(JSON.parse(localStorage.getItem('task-types')) ? Object.values(JSON.parse(localStorage.getItem('task-types'))) : '');
           if(!localStorage.getItem('task-types')){
-            const query = taskTypeQuery(userData[0]._id);
+            const query = taskTypeQuery(userData[0]?._id);
             client.fetch(query)
             .then((data) => {
               //console.log('taskTypeQuery', JSON.stringify(data))
@@ -170,7 +170,7 @@ export const StateContext = ({ children }) => {
         if(userData){
           setTasks(JSON.parse(localStorage.getItem('tasks')) ? Object.values(JSON.parse(localStorage.getItem('tasks'))) : '');
           if(!localStorage.getItem('tasks')){
-            const query = taskQuery(userData[0]._id);
+            const query = taskQuery(userData[0]?._id);
             client.fetch(query)
             .then((data) => {
               //console.log('taskQuery', JSON.stringify(data))
