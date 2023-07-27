@@ -10,8 +10,9 @@ const All = () => {
   
   const { searchTerm, idFilters, tasks, taskTypes, categories, systemCategories, iconData } = useStateContext();
 
-  const [displayedTasks, setDisplayedTasks] = useState()
-  const [expandedTaskId, setExpandedTaskId] = useState()
+  const [displayedTasks, setDisplayedTasks] = useState();
+  const [expandedTaskId, setExpandedTaskId] = useState();
+  const [expandAll, setExpandAll] = useState(false);
 
   const filterAndSearchTasks = () => {
     if(!tasks) return [];
@@ -51,7 +52,7 @@ const All = () => {
   useEffect(() => {
     filterAndSearchTasks();
   }, [tasks, searchTerm, idFilters])
-  
+
   const taskList = (arr) => {
     let reversedArr = arr ? arr.slice().reverse() : [];
     let prevDate = undefined;
@@ -72,14 +73,20 @@ const All = () => {
                       ) && <h1 className='all-header'>{item.date}</h1>}
                     <div className='task-wrapper' key={item._id}>
                     <button className='button-task-bubble' 
-                      onClick={()=>{setExpandedTaskId((prev)=>prev===item._id?'':item._id)}} 
+                      onClick={(e)=>{
+                        if(e.detail === 2) {
+                          setExpandAll(prev => !prev)
+                        } else {
+                          setExpandedTaskId((prev)=>prev===item._id?'':item._id);
+                        }
+                      }} 
                       style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
                         (cat) => cat?._id === taskTypes?.filter(
                               (taskType) => taskType._id === item?.taskType?._ref
                             )[0]?.category?._ref
                           )[0]?.color.hex}}
                     >
-                      <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
+                      <div className={(expandAll || item._id===expandedTaskId) ? 'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
                         <img className='icon-image' 
                           src={urlFor(iconData?.filter((icon)=> taskTypes?.filter(
                               (taskType) => taskType._id === item?.taskType?._ref
@@ -87,25 +94,21 @@ const All = () => {
                           alt='loading' 
                         />
                         <div className='task-text'>
-                            <div>
-                              <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
-                              <p>{item.amount} ({taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit})</p>
-                            </div>
-                            {item.notes && (
-                              item._id!==expandedTaskId?
-                              <p>{item.notes.substring(0,18)}{item.notes.length > 18 && '...'}</p> : 
-                              <p>{item.notes}</p>
-                            )}
+                          <div>
+                            <h1>{taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.name}</h1>
+                            <p>{item.amount} ({taskTypes?.filter((taskType) => taskType._id === item?.taskType?._ref)[0]?.unit})</p>
+                          </div>
+                          {item.notes && <p>{item.notes}</p>}
                         </div>
                       </div>
                     </button>
-                    {item._id===expandedTaskId && 
+                    {(expandAll || item._id===expandedTaskId) && 
                         <button className='button-task-edit' type='button' onClick={(()=>
                           navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                         )}>
                         <AiOutlineEdit />
                     </button>}
-                    {item._id===expandedTaskId && 
+                    {(expandAll || item._id===expandedTaskId) && 
                         <button className='button-task-duplicate' type='button' onClick={(()=>
                           navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                         )}>

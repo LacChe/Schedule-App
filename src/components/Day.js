@@ -15,8 +15,9 @@ const Day = ({ isDemo, expandedIndex }) => {
     dateParam ? new Date(dateParam.split('-')[0], dateParam.split('-')[1]-1, dateParam.split('-')[2]) : new Date()
   )
 
-  const [displayedTasks, setDisplayedTasks] = useState()
-  const [expandedTaskId, setExpandedTaskId] = useState()
+  const [displayedTasks, setDisplayedTasks] = useState();
+  const [expandedTaskId, setExpandedTaskId] = useState();
+  const [expandAll, setExpandAll] = useState(false);
 
   const filterAndSearchTasks = () => {
     if(!tasks) return [];
@@ -76,14 +77,20 @@ const Day = ({ isDemo, expandedIndex }) => {
           arr?.map((item) => 
           <div className='task-wrapper' key={item._id}>
             <button className='button-task-bubble' 
-              onClick={()=>{setExpandedTaskId((prev)=>prev===item._id?'':item._id)}} 
+              onClick={(e)=>{
+                if(e.detail === 2) {
+                  setExpandAll(prev => !prev)
+                } else {
+                  setExpandedTaskId((prev)=>prev===item._id?'':item._id);
+                }
+              }} 
               style={{'backgroundColor' : categories?.concat(systemCategories)?.filter(
               (cat) => cat?._id === taskTypes?.filter(
                     (taskType) => taskType._id === item?.taskType?._ref
                   )[0]?.category?._ref
                 )[0]?.color.hex}}
             >
-              <div className={item._id===expandedTaskId?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
+              <div className={(expandAll || item._id===expandedTaskId)?'task-bubble-inner task-expanded':'task-bubble-inner task-collapsed'}>
                 <img className='icon-image' 
                   src={urlFor(iconData?.filter(
                     (icon)=> taskTypes?.filter(
@@ -101,14 +108,14 @@ const Day = ({ isDemo, expandedIndex }) => {
                 </div>
               </div>
             </button>
-            {item._id===expandedTaskId && 
+            {(expandAll || item._id===expandedTaskId) && 
               <button className='button-task-edit' type='button' onClick={(()=> {
                     if(!isDemo) navigate(`/add/day/${item._id}/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                   }
                 )}>
               <AiOutlineEdit />
             </button>}
-            {item._id===expandedTaskId && 
+            {(expandAll || item._id===expandedTaskId) && 
               <button className='button-task-duplicate' type='button' onClick={(()=>{
                     if(!isDemo) navigate(`/add/day/duplicate/${item.date}/${item.taskType._ref}/${item.amount}/${item.notes}`)
                   }
